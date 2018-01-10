@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        div {
+            margin-left: 650px;
+            margin-top: 100px;
+        }
+        input {
+            margin-left: 700px;
+            margin-top: 15px;
+            
+        }
+        p {
+            margin-left: 650px;
+            position: absolute;
+            display: block;
+            background-color: white;
+        }
+        #phoneFrame {
+            margin: -350px 0px 0px 500px;
+            border: #808080 solid 250px;
+            border-radius: 75px;
+            position: absolute;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div id="circle1"></div>
+    <p>Green:</p> <input type="range" name="points" value="66" step="1" min="0" max="100" oninput="changeSize1(this)"><span id="Green"></span><br />
+    <p>Red:</p>    <input type="range" name="points" value="66" step="1" min="0" max="100" oninput="changeSize2(this)"><span id="Red"></span><br />
+    <div id="phoneFrame"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
+    <script>
+        var config = {
+            apiKey: "AIzaSyDIMCz-H4Qa6yzO8cOEDDO-_-TNgKRwz40",
+            authDomain: "diversity-icebreaker.firebaseapp.com",
+            databaseURL: "https://diversity-icebreaker.firebaseio.com/",
+            projectId: "diversity-icebreaker",
+            storageBucket: "",
+            messagingSenderId: "829693602828"
+        };
+        firebase.initializeApp(config);
+        var db = firebase.firestore();
+        var designData = db.collection('DesignData');
+
+        var radius = 100;
+        var angleSizeGreen = 120;
+        var angleSizeRed = 120;
+        var angleStart1 = 0;
+        var labelGreen = document.getElementById('Green');
+        var labelRed = document.getElementById('Red');        
+        show();
+
+        /*designData
+
+        */
+        function changeSize1(input) {
+            angleSizeGreen = parseInt(input.value) * 18 / 10;
+            labelGreen.innerText = input.value;
+            show();
+        }
+        function changeSize2(input) {
+            angleSizeRed = parseInt(input.value) * 18 / 10;
+            labelRed.innerText = input.value;
+            show();
+        }
+
+        function show() {
+            var angleSizeBlue = 360 - angleSizeRed - angleSizeGreen;
+            var angleStart2 = angleStart1 + angleSizeGreen;
+            var angleStart3 = angleStart2 + angleSizeRed;
+            var angleEnd1 = angleStart1 + angleSizeGreen;
+            var angleEnd2 = angleStart2 + angleSizeRed;
+            var angleEnd3 = angleStart3 + angleSizeBlue;
+            var angleStartRad1 = Math.PI * angleStart1 / 180;
+            var angleStartRad2 = Math.PI * angleStart2 / 180;
+            var angleStartRad3 = Math.PI * angleStart3 / 180;
+            var angleEndRad1 = Math.PI * angleEnd1 / 180;
+            var angleEndRad2 = Math.PI * angleEnd2 / 180;
+            var angleEndRad3 = Math.PI * angleEnd3 / 180;
+            var startY1 = Math.floor(-Math.cos(angleStartRad1) * radius);
+            var startY2 = Math.floor(-Math.cos(angleStartRad2) * radius);
+            var startY3 = Math.floor(-Math.cos(angleStartRad3) * radius);
+            var startX1 = Math.floor(Math.sin(angleStartRad1) * radius);
+            var startX2 = Math.floor(Math.sin(angleStartRad2) * radius);
+            var startX3 = Math.floor(Math.sin(angleStartRad3) * radius);
+            var EndY1 = Math.floor(-Math.cos(angleEndRad1) * radius);
+            var EndY2 = Math.floor(-Math.cos(angleEndRad2) * radius);
+            var EndY3 = Math.floor(-Math.cos(angleEndRad3) * radius);
+            var EndX1 = Math.floor(Math.sin(angleEndRad1) * radius);
+            var EndX2 = Math.floor(Math.sin(angleEndRad2) * radius);
+            var EndX3 = Math.floor(Math.sin(angleEndRad3) * radius);
+
+            var arc1 = angleSizeGreen > 180 ? 1 : 0;
+            var arc2 = angleSizeRed > 180 ? 1 : 0;
+            var arc3 = angleSizeBlue > 180 ? 1 : 0;
+
+            var svgHtml =
+                '<svg width="200" height="200" viewBox="0 0 200 200">' +
+                getPath(startX1, startY1, EndX1, EndY1, arc1, 1, 'green') +
+                getPath(startX2, startY2, EndX2, EndY2, arc2, 1, 'red') +
+                getPath(startX3, startY3, EndX3, EndY3, arc3, 1, 'blue') +
+                '</svg>';
+            console.log(svgHtml);
+            document.getElementById('circle1').innerHTML = svgHtml;
+        }
+
+        function getPath(startX1, startY1, EndX1, EndY1, arc, sweep, color) {
+            return '<g transform="translate(100,100)" stroke-width="0">' +
+                '<path d="M0 0 ' +
+                startX1 +
+                ' ' +
+                startY1 +
+                'A100 100 0 ' +
+                arc +
+                ' ' +
+                sweep +
+                EndX1 +
+                ' ' +
+                EndY1 +
+                'Z" fill="' + color + '"/>' +
+                '</g>';
+
+        }
+    </script>
+</body>
+</html>
