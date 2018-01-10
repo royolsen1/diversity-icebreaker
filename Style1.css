@@ -1,0 +1,99 @@
+﻿body {
+    background-image: url(https://cdn.discordapp.com/attachments/367238479190687745/400237331371524096/water-blue-ocean.jpg);
+}
+
+div {
+    color: black;
+}
+
+img {
+    float: right;
+}
+
+div1 {
+    float: left;
+}
+
+h1 {
+    font-family: Cambria;
+    color: white;
+    text-align: center;
+    text-shadow: 3px 3px 5px #2b2a2a;
+}
+
+table {
+    width: 100%;
+    margin: auto;
+}
+
+table, th, td {
+    border: #000 solid 4px;
+    border-collapse: collapse;
+    background-color: darkgrey;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+table#t01 th, #t02 th, #t03 th, #t04 th, #t05 th {
+    background-color: black;
+    color: white;
+}
+
+#slidecontainer {
+    width: 100%;
+}
+
+.slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    height: 5px;
+    border-radius: 3px;
+    background: black;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border: 55px;
+        border-color: black;
+        border-radius: 50%;
+        background: blue;
+        cursor: pointer;
+    }
+
+.sliderpink::-webkit-slider-thumb {
+    background: pink;
+}
+
+.slidergreen::-webkit-slider-thumb {
+    background: green;
+}
+
+.sliderred::-webkit-slider-thumb {
+    background: red;
+}
+
+.sliderblue::-webkit-slider-thumb {
+    background: blue;
+}
+
+.sliderpurple::-webkit-slider-thumb {
+    background: purple;
+}
+
+
+/*#colorsliders, #colorsliders1, #colorsliders2, #colorsliders3, #colorsliders4 {
+    text-align: center;
+}*/

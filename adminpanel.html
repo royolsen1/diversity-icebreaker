@@ -1,0 +1,58 @@
+﻿﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Prosjekt</title>
+    <link rel="stylesheet" type="text/css" href="Style1.css" />
+
+</head>
+<body>
+    <img src="logo.png" alt="Logo">
+    <h1>Admin panel</h1>
+    <br />
+    <br />
+    <input type="button" value="Automatic suggestion" onClick="history.go(0)"> <br />
+    <br />
+    <select id="grouplist" onchange="groupdisp()">
+        <option>Number of groups</option>
+        <option title="Blue, Green, Red." value="t01">3</option>
+        <option title="Blue-Red, Blue-Green, Green-Red, Green-Blue, Red-Blue, Red-Green." value="t02">6</option>
+        <option title="Blue-Red, Blue-Green, Green-Red, Green-Blue, Red-Blue, Red-Green, Average." value="t03">7</option>
+        <option title="Blue, Blue-Red, Blue-Green, Green, Green-Red, Green-Blue, Red, Red-Blue, Red-Green." value="t04">9</option>
+        <option title="Blue, Blue-Red, Blue-Green, Green, Green-Red, Green-Blue, Red, Red-Blue, Red-Green, Average." value="t05">10</option>
+    </select>
+
+    <div>
+        3 groups: Blue, Green, Red.
+        <br />
+        6 groups: Blue-Red, Blue-Green, Green-Red, Green-Blue, Red-Blue, Red-Green.
+        <br />
+        7 groups: Blue-Red, Blue-Green, Green-Red, Green-Blue, Red-Blue, Red-Green, Average.
+        <br />
+        9 groups: Blue, Blue-Red, Blue-Green, Green, Green-Red, Green-Blue, Red, Red-Blue, Red-Green.
+        <br />
+        10 groups: Blue, Blue-Red, Blue-Green, Green, Green-Red, Green-Blue, Red, Red-Blue, Red-Green, Average.
+    </div>
+    <pre>
+
+
+
+
+    </pre>
+    <div id="show"></div>
+    <a href="javascript:showView(0)"></a>
+    <a href="javascript:showView(1)"></a>
+    <a href="javascript:showView(2)"></a>
+    <a href="javascript:showView(3)"></a>
+    <a href="javascript:showView(4)"></a>
+
+</body>
+<script src="Script2.js" charset="utf-8"></script>
+</html>
+
+<!--var testData = [
+{red: 50, blue: 30, green: 80},
+{red: 50, blue: 30, green: 80},
+{red: 50, blue: 30, green: 80},
+function getTestdata() {-->
