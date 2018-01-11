@@ -1,22 +1,20 @@
 var db = firebase.firestore();
 var dataCollection = db.collection('Data');
 hexagonBuild();
-var redAmount = document.getElementById('redInput');
-var blueAmount = document.getElementById('blueInput');
-var greenAmount = document.getElementById('greenInput');
 var counter = 0;
 var totalRed = 0;
 var totalBlue = 0;
 var totalGreen = 0;
+
 dataCollection.onSnapshot(
-    function (collectionSnapshot) {
+    function(collectionSnapshot) {
         hexagonBuild();
         counter = 0;
         totalRed = 0;
         totalBlue = 0;
         totalGreen = 0;
         collectionSnapshot.forEach(
-            function (dataSnapshot) {
+            function(dataSnapshot) {
                 var dots = document.getElementById('sekskant');
                 let data = dataSnapshot.data();
                 if (data.red > 0) {
@@ -45,37 +43,8 @@ dataCollection.onSnapshot(
         )
         hexagonMath();
     }
-)
+);
 
-
-function addScore() {
-    var newScore = {};
-    newScore.red = redAmount.value;
-    newScore.blue = blueAmount.value;
-    newScore.green = greenAmount.value;
-    userScores.push(newScore);
-    showScores();
-    hexagonMath();
-}
-function randomScore() {
-    var newScore = {};
-    newScore.red = Math.floor((Math.random() * 99) + 1);
-    newScore.blue = Math.floor((Math.random() * 99) + 1);
-    newScore.green = 150 - (newScore.red + newScore.blue);
-    if (newScore.green < 0 || newScore.green > 100) {
-        randomScore();
-    }
-    else {
-        userScores.push(newScore);
-        showScores();
-        hexagonMath();
-    }
-}
-function randomScore15() {
-    for (var i = 0; i < 15; i++) {
-        randomScore();
-    }
-}
 function hexagonBuild() {
     document.getElementById('sekskant').innerHTML =
         '<defs>' +
@@ -96,6 +65,7 @@ function hexagonBuild() {
         '<polygon points="22.3,60 51.1,10 108.9,10 137.7,60 108.9,110 51.1,110" stroke="black" fill="url(#g)" stroke-width="0.5" />' +
         '<polygon points="22.3,60 51.1,10 108.9,10 137.7,60 108.9,110 51.1,110" stroke="black" fill="url(#b)" stroke-width="0.5" />';
 }
+
 function hexagonMath(red, green, blue) {
     if (counter > 2) {
         var dots = document.getElementById('sekskant');
@@ -118,44 +88,3 @@ function hexagonMath(red, green, blue) {
             '<line x1="123.3" y1="35" x2="' + x + '" y2="' + y + '" stroke="black" stroke-width="0.5" />;'
     }
 }
-//test
-var selectedElement = 0;
-var currentX = 0;
-var currentY = 0;
-var currentMatrix = 0;
-
-function selectElement(evt) {
-    selectedElement = evt.target;
-    currentX = evt.clientX;
-    currentY = evt.clientY;
-    currentMatrix = selectedElement.getAttributeNS(null, "transform").slice(7, -1).split(' ');
-
-    for (var i = 0; i < currentMatrix.length; i++) {
-        currentMatrix[i] = parseFloat(currentMatrix[i]);
-    }
-
-    selectedElement.setAttributeNS(null, "onmousemove", "moveElement(evt)");
-}
-function moveElement(evt) {
-    selectedElement.setAttributeNS(null, "onmouseout", "deselectElement(evt)");
-    selectedElement.setAttributeNS(null, "onmouseup", "deselectElement(evt)");
-    dx = evt.clientX - currentX;
-    dy = evt.clientY - currentY;
-    currentMatrix[4] += dx / 5.95;
-    currentMatrix[5] += dy / 5.95;
-    newMatrix = "matrix(" + currentMatrix.join(' ') + ")";
-
-    selectedElement.setAttributeNS(null, "transform", newMatrix);
-    currentX = evt.clientX;
-    currentY = evt.clientY;
-}
-function deselectElement(evt) {
-    if (selectedElement != 0) {
-        selectedElement.removeAttributeNS(null, "onmousemove");
-        selectedElement.removeAttributeNS(null, "onmouseout");
-        selectedElement.removeAttributeNS(null, "onmouseup");
-        selectedElement = 0;
-    }
-}
-
-            //test end
