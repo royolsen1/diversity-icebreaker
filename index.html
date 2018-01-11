@@ -26,6 +26,8 @@
             <div class="rbgBox" id="blueScore">Blue:<input type="text" id="blueInput" placeholder="0-100" /></div>
             <div class="rbgBox" id="redScore">Red:<input type="text" id="redInput" placeholder="0-100" /></div>
             <div class="rbgBox" id="greenScore">Green:<input type="text" id="greenInput" placeholder="0-100" /></div>
+            <div class="rbgBox" id="ages">Your age:<input type="text" id="ageInput" /></div/>
+            <div class="rbgBox" id="sexes">Your sex:<input type="text" id="sexInput" /><div/>
             <button onclick="addScore()">Legg til</button>
             <button onclick="randomScore()">Random</button>
             <button onclick="randomScore15()">Random15</button>
@@ -63,6 +65,8 @@
         var redAmount = document.getElementById('redInput');
         var blueAmount = document.getElementById('blueInput');
         var greenAmount = document.getElementById('greenInput');
+        var ageAmount = document.getElementById('ageInput')
+        var sexAmount = document.getElementById('sexInput')
 
         ;
 
@@ -71,6 +75,8 @@
             newScore.red = redAmount.value;
             newScore.blue = blueAmount.value;
             newScore.green = greenAmount.value;
+            newScore.age = ageAmount.value;
+            newScore.sex = sexAmount.value;
             dataCollection.add(newScore);
         }
 
@@ -79,6 +85,9 @@
             newScore.red = Math.floor((Math.random() * 99) + 1);
             newScore.blue = Math.floor((Math.random() * 99) + 1);
             newScore.green = 150 - (newScore.red + newScore.blue);
+            newScore.age = Math.floor((Math.random() * 50) + 18);
+            var number = Math.floor((Math.random() * 2));
+            newScore.sex = number == 0 ? 'Male' : 'Female';
             if (newScore.green < 0 || newScore.green > 100) {
                 randomScore();
             }
