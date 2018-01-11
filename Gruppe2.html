@@ -85,7 +85,7 @@
         var angleStart1 = 0;
         var labelGreen = document.getElementById('Green');
         var labelRed = document.getElementById('Red');
-        var alias = prompt("Please enter your name");
+        //var alias = prompt("Please enter your name");
         show();
         
         if (alias != null) {
@@ -98,8 +98,8 @@
             document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
             document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
             document.getElementById("blueSolution").innerHTML = "Blue score = " + (200 - greenInput.value - redInput.value);
-            if (redInput.value + greenInput.value < 5000) {
-                redInput.value++;
+            if (200 - greenInput.value - redInput.value > 99) {
+                redInput.value = 100 - greenInput.value
             }
             show();
         }
@@ -109,8 +109,8 @@
             document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
             document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
             document.getElementById("blueSolution").innerHTML = "Blue score = " + (200 - greenInput.value - redInput.value);
-            if (redInput.value + greenInput.value < 5000) {
-                greenInput.value++;
+            if (200 - greenInput.value - redInput.value > 99) {
+                greenInput.value = 100 - redInput.value
             }
             show();
         }
