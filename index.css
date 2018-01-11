@@ -77,6 +77,20 @@
     text-align: center;
 }
 
+#ages {
+    border: 2px black solid;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+#sexes {
+    border: 2px pink solid;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
 #editableDiv {
     height: 50px;
 }

@@ -9,15 +9,15 @@
 <body>
     <div class="container">
         <div1 id="adminPage">
-            <a href="adminpanel.html" class='button'><b><i> Admin panel</i></b></a>
+            <a href="adminpanel.html" class="button"><b><i> Admin panel</i></b></a>
         </div1>
 
         <div2 id="graficPage">
-            <a href="Gruppe2.html" class='button'><b><i>Graphical visualization</i></b></a>
+            <a href="Gruppe2.html" class="button"><b><i>Graphical visualization</i></b></a>
         </div2>
 
         <div3 id="hexagonPage">
-            <a href="ResultPage.html" class='button'><b><i>Hexagon</i></b></a>
+            <a href="ResultPage.html" class="button"><b><i>Hexagon</i></b></a>
         </div3>
     </div>
 
@@ -26,12 +26,14 @@
             <div class="rbgBox" id="blueScore">Blue:<input type="text" id="blueInput" placeholder="0-100" /></div>
             <div class="rbgBox" id="redScore">Red:<input type="text" id="redInput" placeholder="0-100" /></div>
             <div class="rbgBox" id="greenScore">Green:<input type="text" id="greenInput" placeholder="0-100" /></div>
-            <div class="rbgBox" id="ages">Your age:<input type="text" id="ageInput" /></div/>
-            <div class="rbgBox" id="sexes">Your sex:<input type="text" id="sexInput" /><div/>
-            <button onclick="addScore()">Legg til</button>
+            <div class="rbgBox" id="ages">Your age:<input type="text" id="ageInput" placeholder="18-99+" /></div>
+            <div class="rbgBox" id="sexes">Your sex:<input type="text" id="sexInput" placeholder="Male/Female" /></div>
+
+            <button onclick="addScore()">Add score</button>
             <button onclick="randomScore()">Random</button>
             <button onclick="randomScore15()">Random15</button>
             <button onclick="deleteAll()">Delete all</button>
+
         </div>
     </div>
 
@@ -65,10 +67,29 @@
         var redAmount = document.getElementById('redInput');
         var blueAmount = document.getElementById('blueInput');
         var greenAmount = document.getElementById('greenInput');
-        var ageAmount = document.getElementById('ageInput')
-        var sexAmount = document.getElementById('sexInput')
+        var ageAmount = document.getElementById('ageInput');
+        var sexAmount = document.getElementById('sexInput');
 
-        ;
+        /* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("sexDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
 
         function addScore() {
             var newScore = {};
