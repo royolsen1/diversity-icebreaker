@@ -66,7 +66,3 @@
             flex-wrap: wrap;
             text-align: center;
         }
-
-        .draggable {
-            cursor: move;
-        }

@@ -26,10 +26,18 @@
             <div class="rbgBox" id="blueScore">Blue:<input type="text" id="blueInput" placeholder="0-100" /></div>
             <div class="rbgBox" id="redScore">Red:<input type="text" id="redInput" placeholder="0-100" /></div>
             <div class="rbgBox" id="greenScore">Green:<input type="text" id="greenInput" placeholder="0-100" /></div>
-            <div class="rbgBox" id="ages">Your age:<input type="text" id="ageInput" placeholder="18-99+" /></div>
-            <div class="rbgBox" id="sexes">Your sex:<input type="text" id="sexInput" placeholder="Male/Female" /></div>
+            <div class="rbgBox" id="ages">Your age:<input type="text" id="ageInput" placeholder="15-99+" /></div>
+            <div class="rbgBox" id="sexes">Your sex:
+                <div class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn" id="dropdown">sex</button>
+                    <div id="sexDropdown" class="dropdown-content">
+                        <a href="#" onclick="showPart('Male')">Male</a>
+                        <a href="#" onclick="showPart('Female')">Female</a>
+                    </div>
+                </div>
+            </div>
 
-            <button onclick="addScore()">Add score</button>
+            <button onclick="addScore()">Legg til</button>
             <button onclick="randomScore()">Random</button>
             <button onclick="randomScore15()">Random15</button>
             <button onclick="deleteAll()">Delete all</button>
@@ -68,7 +76,7 @@
         var blueAmount = document.getElementById('blueInput');
         var greenAmount = document.getElementById('greenInput');
         var ageAmount = document.getElementById('ageInput');
-        var sexAmount = document.getElementById('sexInput');
+        var sexAmount;
 
         /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
@@ -90,6 +98,10 @@ toggle between hiding and showing the dropdown content */
                 }
             }
         }
+        function showPart(element) {
+            document.getElementById('dropdown').innerHTML = element;
+            sexAmount = element;
+        }
 
         function addScore() {
             var newScore = {};
@@ -97,7 +109,7 @@ toggle between hiding and showing the dropdown content */
             newScore.blue = blueAmount.value;
             newScore.green = greenAmount.value;
             newScore.age = ageAmount.value;
-            newScore.sex = sexAmount.value;
+            newScore.sex = sexAmount;
             dataCollection.add(newScore);
         }
 
