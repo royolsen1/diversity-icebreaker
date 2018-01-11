@@ -2,9 +2,10 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <link rel="stylesheet" type="text/css" href="StyleSheet1.css">
     <meta charset="utf-8" />
     <title>Diversity Icebreaker</title>
+    <link rel="stylesheet" href="ResultPage.css" />
+    <link rel="stylesheet" type="text/css" href="StyleSheet1.css">
 </head>
 <body>
 
@@ -20,5 +21,119 @@
         <a href="ResultPage.html" class='button'><b><i>Heksagon</i></b></a>
     </div3>
 
+    <div class="container">
+        <div class="list">
+            <div class="rbgBox" id="redScore">Rød:<input type="text" id="redInput" placeholder="0-100" /></div>
+            <div class="rbgBox" id="blueScore">Blå:<input type="text" id="blueInput" placeholder="0-100" /></div>
+            <div class="rbgBox" id="greenScore">Grønn:<input type="text" id="greenInput" placeholder="0-100" /></div>
+            <button onclick="addScore()">Legg til</button>
+            <button onclick="randomScore()">Random</button>
+            <button onclick="randomScore15()">Random15</button>
+            <button onclick="deleteAll()">Delete all</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="list">
+            <div id='editableDiv' contenteditable='true'>Paste: age, sex, blue, red, green.</div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDIMCz-H4Qa6yzO8cOEDDO-_-TNgKRwz40",
+            authDomain: "diversity-icebreaker.firebaseapp.com",
+            databaseURL: "https://diversity-icebreaker.firebaseio.com",
+            projectId: "diversity-icebreaker",
+            storageBucket: "diversity-icebreaker.appspot.com",
+            messagingSenderId: "829693602828"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        var usersScores = [];
+        var db = firebase.firestore();
+        var dataCollection = db.collection('Data');
+        var redAmount = document.getElementById('redInput');
+        var blueAmount = document.getElementById('blueInput');
+        var greenAmount = document.getElementById('greenInput');
+
+        ;
+
+        function addScore() {
+            var newScore = {};
+            newScore.red = redAmount.value;
+            newScore.blue = blueAmount.value;
+            newScore.green = greenAmount.value;
+            dataCollection.add(newScore);
+        }
+
+        function randomScore() {
+            var newScore = {};
+            newScore.red = Math.floor((Math.random() * 99) + 1);
+            newScore.blue = Math.floor((Math.random() * 99) + 1);
+            newScore.green = 150 - (newScore.red + newScore.blue);
+            if (newScore.green < 0 || newScore.green > 100) {
+                randomScore();
+            }
+            else {
+                dataCollection.add(newScore);
+            }
+        }
+
+        function randomScore15() {
+            for (var i = 0; i < 15; i++) {
+                randomScore();
+            }
+        }
+
+        function deleteAll() {
+            dataCollection.get().then(
+                function (collectionSnapshot) {
+                    collectionSnapshot.forEach(
+                        function (dataSnapshot) {
+                            dataSnapshot.data();
+                            var ID = dataSnapshot.id;
+                            dataCollection.doc(ID).delete().then(function () {
+                                console.log("Document successfully deleted!");
+                            }).catch(function (error) {
+                                console.error("Error removing document: ", error);
+                            });
+                        });
+                });
+        }
+
+        function handlePaste(e) {
+            var clipboardData, pastedData;
+
+            // Stop data actually being pasted into div
+            e.stopPropagation();
+            e.preventDefault();
+
+            // Get pasted data via clipboard API
+            clipboardData = e.clipboardData || window.clipboardData;
+            pastedData = clipboardData.getData('Text');
+
+            var lines = pastedData.split('\r\n');
+            for (var i in lines) {
+                let line = lines[i];
+                let parts = line.split('\t');
+                dataCollection.add({
+                    blue: parts[0],
+                    red: parts[1],
+                    green: parts[2],
+                    age: parts[3],
+                    sex: parts[4]
+                });
+            }
+        }
+
+        document.getElementById('editableDiv').addEventListener('paste', handlePaste);
+    </script>
 </body>
 </html>
