@@ -5,21 +5,28 @@
     <meta charset="utf-8" />
     <title></title>
     <style>
+        #nickName {
+            margin-top: -50px;
+            margin-left: 720px;
+        }
         div {
             margin-left: 650px;
             margin-top: 100px;
         }
+
         input {
             margin-left: 700px;
             margin-top: 15px;
-            
         }
+
         p {
             margin-left: 650px;
             position: absolute;
             display: block;
             background-color: white;
+            z-index: 1;
         }
+
         #phoneFrame {
             margin: -350px 0px 0px 500px;
             border: #808080 solid 250px;
@@ -27,12 +34,34 @@
             position: absolute;
             z-index: -1;
         }
+
+        #redSolution {
+            margin: 100px;
+            margin-left: 575px;
+            position: absolute;
+        }
+
+        #greenSolution {
+            margin: 100px;
+            margin-left: 720px;
+            position: absolute;
+        }
+
+        #blueSolution {
+            margin: 100px;
+            margin-left: 875px;
+            position: absolute;
+        }
     </style>
 </head>
 <body>
+    <p id="nickName"></p>
     <div id="circle1"></div>
-    <p>Green:</p> <input type="range" name="points" value="66" step="1" min="0" max="100" oninput="changeSize1(this)"><span id="Green"></span><br />
-    <p>Red:</p>    <input type="range" name="points" value="66" step="1" min="0" max="100" oninput="changeSize2(this)"><span id="Red"></span><br />
+    <p>Green:</p> <input id="greenInput" type="range" name="points" value="66" step="1" min="0" max="100" oninput="changeSize1(this)"><span id="Green"></span><br />
+    <p>Red:</p>    <input id="redInput" type="range" name="points" value="66" step="1" min="0" max="100" oninput="changeSize2(this)"><span id="Red"></span><br />
+    <p id="redSolution">Red</p>
+    <p id="greenSolution">Green</p>
+    <p id="blueSolution">Blue</p>
     <div id="phoneFrame"></div>
 
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
@@ -50,26 +79,43 @@
         firebase.initializeApp(config);
         var db = firebase.firestore();
         var designData = db.collection('DesignData');
-
         var radius = 100;
         var angleSizeGreen = 120;
         var angleSizeRed = 120;
         var angleStart1 = 0;
         var labelGreen = document.getElementById('Green');
-        var labelRed = document.getElementById('Red');        
+        var labelRed = document.getElementById('Red');
+        var alias = prompt("Please enter your name");
         show();
 
-        /*designData
-
+        /*
+        200 * 0,75 = 150
+        150 * 1,334 = 200,1
         */
+        if (alias != null) {
+            document.getElementById("nickName").innerHTML = alias;
+        }
+
         function changeSize1(input) {
             angleSizeGreen = parseInt(input.value) * 18 / 10;
             labelGreen.innerText = input.value;
+            document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
+            document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
+            document.getElementById("blueSolution").innerHTML = "Blue score = " + (200 - greenInput.value - redInput.value);
+            if (redInput.value + greenInput.value < 5000) {
+                redInput.value++;
+            }
             show();
         }
         function changeSize2(input) {
             angleSizeRed = parseInt(input.value) * 18 / 10;
             labelRed.innerText = input.value;
+            document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
+            document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
+            document.getElementById("blueSolution").innerHTML = "Blue score = " + (200 - greenInput.value - redInput.value);
+            if (redInput.value + greenInput.value < 5000) {
+                greenInput.value++;
+            }
             show();
         }
 
