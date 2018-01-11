@@ -36,21 +36,41 @@
         }
 
         #redSolution {
-            margin: 100px;
-            margin-left: 575px;
+            margin: 70px;
+            margin-left: 550px;
             position: absolute;
         }
 
         #greenSolution {
-            margin: 100px;
-            margin-left: 720px;
+            margin: 70px;
+            margin-left: 695px;
             position: absolute;
         }
 
         #blueSolution {
-            margin: 100px;
-            margin-left: 875px;
+            margin: 70px;
+            margin-left: 850px;
             position: absolute;
+        }
+        #redSolution2 {
+            margin: 100px;
+            margin-left: 550px;
+            position: absolute;
+        }
+
+        #greenSolution2 {
+            margin: 100px;
+            margin-left: 695px;
+            position: absolute;
+        }
+
+        #blueSolution2 {
+            margin: 100px;
+            margin-left: 850px;
+            position: absolute;
+        }
+        span {
+            display: none;
         }
     </style>
 </head>
@@ -58,10 +78,13 @@
     <p id="nickName"></p>
     <div id="circle1"></div>
     <p>Green:</p> <input id="greenInput" type="range" name="points" value="66" step="1" min="0" max="100" oninput="changeSize1(this)"><span id="Green"></span><br />
-    <p>Red:</p>    <input id="redInput" type="range" name="points" value="66" step="1" min="0" max="100" oninput="changeSize2(this)"><span id="Red"></span><br />
-    <p id="redSolution">Red</p>
-    <p id="greenSolution">Green</p>
-    <p id="blueSolution">Blue</p>
+    <p>Red:</p>   <input id="redInput" type="range" name="points" value="66" step="1" min="0" max="100" oninput="changeSize2(this)"><span id="Red"></span><br />
+    <p id="redSolution">Red score = </p>
+    <p id="redSolution2">Red calculation = </p>
+    <p id="greenSolution">Green score = </p>
+    <p id="greenSolution2">Green calculation = </p>
+    <p id="blueSolution">Blue score = </p>
+    <p id="blueSolution2">Blue calculation = </p>
     <div id="phoneFrame"></div>
 
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
@@ -98,6 +121,9 @@
             document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
             document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
             document.getElementById("blueSolution").innerHTML = "Blue score = " + (200 - greenInput.value - redInput.value);
+            document.getElementById("redSolution2").innerHTML = "Red calculation = " + Math.round(redInput.value * 0.75);
+            document.getElementById("greenSolution2").innerHTML = "Green calculation = " + Math.round(greenInput.value * 0.75);
+            document.getElementById("blueSolution2").innerHTML = "Blue calculation = " + Math.round((200 * 0.75) - (greenInput.value * 0.75) - (redInput.value * 0.75));
             if (200 - greenInput.value - redInput.value > 99) {
                 redInput.value = 100 - greenInput.value
             }
@@ -109,6 +135,9 @@
             document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
             document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
             document.getElementById("blueSolution").innerHTML = "Blue score = " + (200 - greenInput.value - redInput.value);
+            document.getElementById("redSolution2").innerHTML = "Red calculation = " + Math.round(redInput.value * 0.75);
+            document.getElementById("greenSolution2").innerHTML = "Green calculation = " + Math.round(greenInput.value * 0.75);
+            document.getElementById("blueSolution2").innerHTML = "Blue calculation = " + Math.round((200 * 0.75) - (greenInput.value * 0.75) - (redInput.value * 0.75));
             if (200 - greenInput.value - redInput.value > 99) {
                 greenInput.value = 100 - redInput.value
             }
