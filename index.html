@@ -4,28 +4,28 @@
 <head>
     <meta charset="utf-8" />
     <title>Diversity Icebreaker</title>
-    <link rel="stylesheet" href="ResultPage.css" />
-    <link rel="stylesheet" type="text/css" href="StyleSheet1.css">
+    <link rel="stylesheet" href="index.css" />
 </head>
 <body>
-
-    <div1>
-        <a href="adminpanel.html" class='button'><b><i> Admin panel</i></b></a>
-    </div1>
-
-    <div2>
-        <a href="Gruppe2.html" class='button'><b><i>Graphical visualization</i></b></a>
-    </div2>
-
-    <div3>
-        <a href="ResultPage.html" class='button'><b><i>Heksagon</i></b></a>
-    </div3>
-
     <div class="container">
+        <div1 id="adminPage">
+            <a href="adminpanel.html" class='button'><b><i> Admin panel</i></b></a>
+        </div1>
+
+        <div2 id="graficPage">
+            <a href="Gruppe2.html" class='button'><b><i>Graphical visualization</i></b></a>
+        </div2>
+
+        <div3 id="hexagonPage">
+            <a href="ResultPage.html" class='button'><b><i>Hexagon</i></b></a>
+        </div3>
+    </div>
+
+    <div class="container" id="rbgNumber">
         <div class="list">
-            <div class="rbgBox" id="redScore">Rød:<input type="text" id="redInput" placeholder="0-100" /></div>
-            <div class="rbgBox" id="blueScore">Blå:<input type="text" id="blueInput" placeholder="0-100" /></div>
-            <div class="rbgBox" id="greenScore">Grønn:<input type="text" id="greenInput" placeholder="0-100" /></div>
+            <div class="rbgBox" id="blueScore">Blue:<input type="text" id="blueInput" placeholder="0-100" /></div>
+            <div class="rbgBox" id="redScore">Red:<input type="text" id="redInput" placeholder="0-100" /></div>
+            <div class="rbgBox" id="greenScore">Green:<input type="text" id="greenInput" placeholder="0-100" /></div>
             <button onclick="addScore()">Legg til</button>
             <button onclick="randomScore()">Random</button>
             <button onclick="randomScore15()">Random15</button>
@@ -33,9 +33,10 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="exelPaste">
         <div class="list">
-            <div id='editableDiv' contenteditable='true'>Paste: age, sex, blue, red, green.</div>
+            <div><b>Paste: blue, red, green, age, sex.</b></div>
+            <div id='editableDiv' contenteditable='true'></div>
         </div>
     </div>
 
