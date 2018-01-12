@@ -9,6 +9,7 @@
             margin-top: -50px;
             margin-left: 720px;
         }
+
         div {
             margin-left: 650px;
             margin-top: 100px;
@@ -52,6 +53,7 @@
             margin-left: 850px;
             position: absolute;
         }
+
         #redSolution2 {
             margin: 100px;
             margin-left: 550px;
@@ -69,8 +71,26 @@
             margin-left: 850px;
             position: absolute;
         }
+
         span {
             display: none;
+        }
+
+        button {
+            font-family: Verdana;
+            background-color: limegreen;
+            color: white;
+            border-color: black;
+            border-style: solid;
+            border-width: 3px;
+            text-decoration: none;
+            padding: 20px 30px;
+            border-radius: 40px;
+            margin: 150px 700px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 16px;
+            flex-wrap: nowrap;
         }
     </style>
 </head>
@@ -86,6 +106,7 @@
     <p id="blueSolution">Blue score = </p>
     <p id="blueSolution2">Blue calculation = </p>
     <div id="phoneFrame"></div>
+    <button onclick="addScore()">Add score</button>
 
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
@@ -96,12 +117,12 @@
             authDomain: "diversity-icebreaker.firebaseapp.com",
             databaseURL: "https://diversity-icebreaker.firebaseio.com/",
             projectId: "diversity-icebreaker",
-            storageBucket: "",
+            storageBucket: "diversity-icebreaker.appspot.com",
             messagingSenderId: "829693602828"
         };
         firebase.initializeApp(config);
         var db = firebase.firestore();
-        var designData = db.collection('DesignData');
+        var dataCollection = db.collection('Data');
         var radius = 100;
         var angleSizeGreen = 120;
         var angleSizeRed = 120;
@@ -109,10 +130,23 @@
         var labelGreen = document.getElementById('Green');
         var labelRed = document.getElementById('Red');
         var alias = prompt("Please enter your nickname");
+        var redAmount;
+        var blueAmount;
+        var greenAmount;
+
         show();
-        
+
         if (alias != null) {
             document.getElementById("nickName").innerHTML = alias;
+        }
+
+        function addScore() {  
+            var newScore = {};
+            newScore.red = redAmount;
+            newScore.blue = blueAmount;
+            newScore.green = greenAmount;
+            newScore.name = alias;
+            dataCollection.add(newScore);
         }
 
         function changeSize1(input) {
@@ -121,13 +155,21 @@
             document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
             document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
             document.getElementById("blueSolution").innerHTML = "Blue score = " + (200 - greenInput.value - redInput.value);
-            document.getElementById("redSolution2").innerHTML = "Red calculation = " + Math.round(redInput.value * 0.75);
-            document.getElementById("greenSolution2").innerHTML = "Green calculation = " + Math.round(greenInput.value * 0.75);
-            document.getElementById("blueSolution2").innerHTML = "Blue calculation = " + Math.round((200 * 0.75) - (greenInput.value * 0.75) - (redInput.value * 0.75));
+            redAmount = Math.round(redInput.value * 0.75);
+            greenAmount = Math.round(greenInput.value * 0.75);
+            blueAmount = Math.round((200 * 0.75) - redAmount - greenAmount);
+            document.getElementById("redSolution2").innerHTML = "Red calculation = " + redAmount;
+            document.getElementById("greenSolution2").innerHTML = "Green calculation = " + greenAmount;
+            document.getElementById("blueSolution2").innerHTML = "Blue calculation = " + blueAmount;
             if (200 - greenInput.value - redInput.value > 99) {
                 redInput.value = 100 - greenInput.value
             }
-            show();
+            if (redAmount + greenAmount + blueAmount == 150) {
+                show();
+            } else {
+                redInput.value -= 1;
+                show();
+            }
         }
         function changeSize2(input) {
             angleSizeRed = parseInt(input.value) * 18 / 10;
@@ -135,13 +177,22 @@
             document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
             document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
             document.getElementById("blueSolution").innerHTML = "Blue score = " + (200 - greenInput.value - redInput.value);
-            document.getElementById("redSolution2").innerHTML = "Red calculation = " + Math.round(redInput.value * 0.75);
-            document.getElementById("greenSolution2").innerHTML = "Green calculation = " + Math.round(greenInput.value * 0.75);
-            document.getElementById("blueSolution2").innerHTML = "Blue calculation = " + Math.round((200 * 0.75) - (greenInput.value * 0.75) - (redInput.value * 0.75));
+            redAmount = Math.round(redInput.value * 0.75);
+            greenAmount = Math.round(greenInput.value * 0.75);
+            blueAmount = Math.round((200 * 0.75) - redAmount - greenAmount);
+            document.getElementById("redSolution2").innerHTML = "Red calculation = " + redAmount;
+            document.getElementById("greenSolution2").innerHTML = "Green calculation = " + greenAmount;
+            document.getElementById("blueSolution2").innerHTML = "Blue calculation = " + blueAmount;
             if (200 - greenInput.value - redInput.value > 99) {
                 greenInput.value = 100 - redInput.value
             }
-            show();
+            if (redAmount + greenAmount + blueAmount == 150) {
+                show();
+            } else {
+                greenInput.value -= 1;
+                show();
+            }
+
         }
 
         function show() {
@@ -180,7 +231,7 @@
                 getPath(startX2, startY2, EndX2, EndY2, arc2, 1, 'red') +
                 getPath(startX3, startY3, EndX3, EndY3, arc3, 1, 'blue') +
                 '</svg>';
-            console.log(svgHtml);
+            // console.log(svgHtml);
             document.getElementById('circle1').innerHTML = svgHtml;
         }
 
