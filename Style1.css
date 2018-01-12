@@ -1,9 +1,10 @@
-﻿body {
-    background-image: url(https://cdn.discordapp.com/attachments/367238479190687745/400237331371524096/water-blue-ocean.jpg);
+body {
+    background-image: url(dark_wood_2x.png);
+    /*https: //cdn.discordapp.com/attachments/367238479190687745/400237331371524096/water-blue-ocean.jpg*/
 }
 
 div {
-    color: black;
+    color: white;
 }
 
 img {
@@ -29,7 +30,7 @@ table {
 table, th, td {
     border: #000 solid 4px;
     border-collapse: collapse;
-    background-color: darkgrey;
+    background-color: #e6e6e6;
 }
 
 th, td {
@@ -38,7 +39,7 @@ th, td {
 }
 
 table#t01 th, #t02 th, #t03 th, #t04 th, #t05 th {
-    background-color: black;
+    background-color: #595959;
     color: white;
 }
 
