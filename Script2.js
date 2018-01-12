@@ -9,16 +9,16 @@ var LayoutModel = [
             limit1: 70
         },
         {
-            title1: 'Green',
-            color1: 'Green',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 69
-        },
-        {
             title1: 'Red',
             color1: 'Red',
             text1: 'Red: 24, Blue: 49, Green: 71',
             limit1: 68
+        },
+        {
+            title1: 'Green',
+            color1: 'Green',
+            text1: 'Red: 24, Blue: 49, Green: 71',
+            limit1: 69
         },
     ],
     [   // Index 1 = 6 groups
