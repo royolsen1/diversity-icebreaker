@@ -7,14 +7,14 @@ var totalBlue = 0;
 var totalGreen = 0;
 
 dataCollection.onSnapshot(
-    function(collectionSnapshot) {
+    function (collectionSnapshot) {
         hexagonBuild();
         counter = 0;
         totalRed = 0;
         totalBlue = 0;
         totalGreen = 0;
         collectionSnapshot.forEach(
-            function(dataSnapshot) {
+            function (dataSnapshot) {
                 var dots = document.getElementById('sekskant');
                 let data = dataSnapshot.data();
                 if (data.red > 0) {
@@ -28,11 +28,13 @@ dataCollection.onSnapshot(
                     var dx = Math.sqrt(dy * dy / 3);
                     var y = relRed + 10;
                     var x = Math.round(redScore > rest / 2 ? gx - dx - 6.6025 : gx + dx - 6.6025);
-                    dots.innerHTML += '<circle class="draggable" cx="' +
+                    dots.innerHTML += '<circle class="tooltip" cx="' +
                         x +
                         '" cy="' +
                         y +
-                        '" r="1" stroke= "black" fill="black" transform="matrix(1 0 0 1 0 0)" onmousedown="selectElement(evt)"/>';
+                        '" r="1" stroke= "black" fill="black"><title>Name: ' + data.name +
+                        '<br/>Blue: ' + data.blue + '<br/>Red: ' + data.red + '<br/>Green: ' +
+                        data.green + '</title ></circle > ';
                     totalRed += parseInt(data.red);
                     totalBlue += parseInt(data.blue);
                     totalGreen += parseInt(data.green);
