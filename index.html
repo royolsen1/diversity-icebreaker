@@ -26,18 +26,20 @@
             <div class="rbgBox" id="blueScore">Blue:<input type="text" id="blueInput" placeholder="0-100" /></div>
             <div class="rbgBox" id="redScore">Red:<input type="text" id="redInput" placeholder="0-100" /></div>
             <div class="rbgBox" id="greenScore">Green:<input type="text" id="greenInput" placeholder="0-100" /></div>
-            <div class="rbgBox" id="ages">Your age:<input type="text" id="ageInput" placeholder="15-99+" /></div>
-            <div class="rbgBox" id="sexes">Your sex:
+            <div class="rbgBox" id="ages">Your age:<input type="text" id="ageInput" placeholder="18-99+" /></div>
+            <div class="rbgBox" id="sexes">
+                Your sex:
                 <div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn" id="dropdown">M/F</button>
+                    <button onclick="myFunction()" class="dropbtn" id="dropdown">sex</button>
                     <div id="sexDropdown" class="dropdown-content">
                         <a href="#" onclick="showPart('Male')">Male</a>
                         <a href="#" onclick="showPart('Female')">Female</a>
                     </div>
                 </div>
             </div>
+            <div class="rbgBox" id="nickName">Your name:<input type="text" id="nameInput" placeholder="Nickname" /></div>
 
-            <button onclick="addScore()">Legg til</button>
+            <button onclick="addScore()">Add score</button>
             <button onclick="randomScore()">Random</button>
             <button onclick="randomScore15()">Random15</button>
             <button onclick="deleteAll()">Delete all</button>
@@ -47,7 +49,7 @@
 
     <div class="container" id="exelPaste">
         <div class="list">
-            <div><b>Paste: blue, red, green, age, sex.</b></div>
+            <div><b>Paste: blue, red, green, age, sex, name.</b></div>
             <div id='editableDiv' contenteditable='true'></div>
         </div>
     </div>
@@ -77,6 +79,7 @@
         var greenAmount = document.getElementById('greenInput');
         var ageAmount = document.getElementById('ageInput');
         var sexAmount;
+        var nameAmount = document.getElementById('nameInput');
 
         /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
@@ -87,7 +90,6 @@ toggle between hiding and showing the dropdown content */
         // Close the dropdown menu if the user clicks outside of it
         window.onclick = function (event) {
             if (!event.target.matches('.dropbtn')) {
-
                 var dropdowns = document.getElementsByClassName("dropdown-content");
                 var i;
                 for (i = 0; i < dropdowns.length; i++) {
@@ -98,6 +100,7 @@ toggle between hiding and showing the dropdown content */
                 }
             }
         }
+
         function showPart(element) {
             document.getElementById('dropdown').innerHTML = element;
             sexAmount = element;
@@ -110,6 +113,7 @@ toggle between hiding and showing the dropdown content */
             newScore.green = greenAmount.value;
             newScore.age = ageAmount.value;
             newScore.sex = sexAmount;
+            newScore.name = nameAmount.value;
             dataCollection.add(newScore);
         }
 
@@ -121,6 +125,7 @@ toggle between hiding and showing the dropdown content */
             newScore.age = Math.floor((Math.random() * 50) + 18);
             var number = Math.floor((Math.random() * 2));
             newScore.sex = number == 0 ? 'Male' : 'Female';
+            newScore.name = newScore.sex + newScore.age;
             if (newScore.green < 0 || newScore.green > 100) {
                 randomScore();
             }
@@ -171,7 +176,8 @@ toggle between hiding and showing the dropdown content */
                     red: parts[1],
                     green: parts[2],
                     age: parts[3],
-                    sex: parts[4]
+                    sex: parts[4],
+                    name: parts[5]
                 });
             }
         }
