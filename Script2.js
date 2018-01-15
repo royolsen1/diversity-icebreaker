@@ -6,19 +6,16 @@ var LayoutModel = [
             title1: 'Blue',
             color1: 'Blue',
             text1: 'Red: 25, Blue: 71 Green: 54',
-            limit1: 70
         },
         {
             title1: 'Red',
             color1: 'Red',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 68
         },
         {
             title1: 'Green',
             color1: 'Green',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 69
         },
     ],
     [   // Index 1 = 6 groups
@@ -26,37 +23,31 @@ var LayoutModel = [
             title1: 'Blue/Red',
             color1: 'Purple',
             text1: 'Red: 25, Blue: 71 Green: 54',
-            limit1: 70
         },
         {
             title1: 'Blue/Green',
             color1: 'Green',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 69
         },
         {
             title1: 'Green/Red',
             color1: 'Red',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 68
         },
         {
             title1: 'Green/Blue',
             color1: 'DodgerBlue',
             text1: 'Red: 25, Blue: 71 Green: 54',
-            limit1: 70
         },
         {
             title1: 'Red/Blue',
             color1: 'Green',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 69
         },
         {
             title1: 'Red/Green',
             color1: 'Red',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 68
         },
     ],
     [   // Index 2 = 7 groups
@@ -64,43 +55,36 @@ var LayoutModel = [
             title1: 'Blue/Red',
             color1: 'DodgerBlue',
             text1: 'Red: 25, Blue: 71, Green: 54',
-            limit1: 70
         },
         {
             title1: 'Blue/Green',
             color1: 'Green',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 69
         },
         {
             title1: 'Green/Red',
             color1: 'Red',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 68
         },
         {
             title1: 'Green/Blue',
             color1: 'DodgerBlue',
             text1: 'Red: 25, Blue: 71 Green: 54',
-            limit1: 70
         },
         {
             title1: 'Red/Blue',
             color1: 'Green',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 69
         },
         {
             title1: 'Red/Green',
             color1: 'Red',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 68
         },
         {
             title1: 'Average',
             color1: 'Pink',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 68
         },
     ],
     [   // Index 3 = 9 groups
@@ -108,55 +92,46 @@ var LayoutModel = [
             title1: 'Blue',
             color1: 'Blue',
             text1: 'Red: 25, Blue: 71 Green: 54',
-            limit1: 70
         },
         {
             title1: 'Blue/Red',
             color1: 'DodgerBlue',
             text1: 'Red: 25, Blue:71 Green: 54',
-            limit1: 70
         },
         {
             title1: 'Blue/Green',
             color1: 'Green',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 69
         },
         {
             title1: 'Green',
             color1: 'Green',
             text1: 'Red: 25, Blue:71 Green: 54',
-            limit1: 70
         },
         {
             title1: 'Green/Red',
             color1: 'Red',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 68
         },
         {
             title1: 'Green/Blue',
             color1: 'DodgerBlue',
             text1: 'Red: 25, Blue: 71 Green: 54',
-            limit1: 70
         },
         {
             title1: 'Red',
             color1: 'Red',
             text1: 'Red: 25, Blue: 71 Green: 54',
-            limit1: 70
         },
         {
             title1: 'Red/Blue',
             color1: 'Green',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 69
         },
         {
             title1: 'Red/Green',
             color1: 'Red',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 68
         },
     ],
     [   // Index 4 = 10 groups
@@ -164,61 +139,51 @@ var LayoutModel = [
             title1: 'Blue',
             color1: 'Blue',
             text1: 'Red: 25, Blue: 71 Green: 54',
-            limit1: 70
         },
         {
             title1: 'Blue/Red',
             color1: 'DodgerBlue',
             text1: 'Red: 25, Blue: 71 Green: 54',
-            limit1: 70
         },
         {
             title1: 'Blue/Green',
             color1: 'Green',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 69
         },
         {
             title1: 'Green',
             color1: 'Green',
             text1: 'Red: 25, Blue: 71 Green: 54',
-            limit1: 70
         },
         {
             title1: 'Green/Red',
             color1: 'Red',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 68
         },
         {
             title1: 'Green/Blue',
             color1: 'DodgerBlue',
             text1: 'Red: 25, Blue: 71 Green: 54',
-            limit1: 70
         },
         {
             title1: 'Red',
             color1: 'Red',
             text1: 'Red: 25, Blue: 71 Green: 54',
-            limit1: 70
         },
         {
             title1: 'Red/Blue',
             color1: 'Green',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 69
         },
         {
             title1: 'Red/Green',
             color1: 'Red',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 68
         },
         {
             title1: 'Average',
             color1: 'Pink',
             text1: 'Red: 24, Blue: 49, Green: 71',
-            limit1: 68
         },
     ],
 ];
@@ -244,12 +209,6 @@ function showView(showIndex) {
     for (i in groups) {
         group = groups[i];
         var tmp = '<td>&gt;' + group.limit1
-            + '<br /><input class="slider slider' + group.color1 + '" oninput="changelimit1(this,'
-            + showIndex + ','
-            + i + ')" min="0" max="100" step="1" type="range" value="'
-            + group.limit1 + '"'
-            + '/></td>';
-        html += tmp;
     }
     document.getElementById('show').innerHTML = html;
 }
