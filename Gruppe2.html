@@ -92,9 +92,16 @@
             font-size: 16px;
             flex-wrap: nowrap;
         }
+
+        img {
+            position: absolute;
+            margin-top: -100px;
+            left: 10px;
+        }
     </style>
 </head>
 <body>
+    <img src="logo.png" alt="Logo">
     <p id="nickName"></p>
     <div id="circle1"></div>
     <p>Green:</p> <input id="greenInput" type="range" name="points" value="66" step="1" min="0" max="100" oninput="changeSize1(this)"><span id="Green"></span><br />
@@ -129,18 +136,15 @@
         var angleStart1 = 0;
         var labelGreen = document.getElementById('Green');
         var labelRed = document.getElementById('Red');
-        var alias = prompt("Please enter your nickname");
         var redAmount;
         var blueAmount;
         var greenAmount;
-
+        //var alias = prompt("Please enter your nickname");
         show();
-
         if (alias != null) {
             document.getElementById("nickName").innerHTML = alias;
         }
-
-        function addScore() {  
+        function addScore() {
             var newScore = {};
             newScore.red = redAmount;
             newScore.blue = blueAmount;
@@ -148,7 +152,6 @@
             newScore.name = alias;
             dataCollection.add(newScore);
         }
-
         function changeSize1(input) {
             angleSizeGreen = parseInt(input.value) * 18 / 10;
             labelGreen.innerText = input.value;
@@ -192,9 +195,7 @@
                 greenInput.value -= 1;
                 show();
             }
-
         }
-
         function show() {
             var angleSizeBlue = 360 - angleSizeRed - angleSizeGreen;
             var angleStart2 = angleStart1 + angleSizeGreen;
@@ -220,11 +221,9 @@
             var EndX1 = Math.floor(Math.sin(angleEndRad1) * radius);
             var EndX2 = Math.floor(Math.sin(angleEndRad2) * radius);
             var EndX3 = Math.floor(Math.sin(angleEndRad3) * radius);
-
             var arc1 = angleSizeGreen > 180 ? 1 : 0;
             var arc2 = angleSizeRed > 180 ? 1 : 0;
             var arc3 = angleSizeBlue > 180 ? 1 : 0;
-
             var svgHtml =
                 '<svg width="200" height="200" viewBox="0 0 200 200">' +
                 getPath(startX1, startY1, EndX1, EndY1, arc1, 1, 'green') +
@@ -234,7 +233,6 @@
             // console.log(svgHtml);
             document.getElementById('circle1').innerHTML = svgHtml;
         }
-
         function getPath(startX1, startY1, EndX1, EndY1, arc, sweep, color) {
             return '<g transform="translate(100,100)" stroke-width="0">' +
                 '<path d="M0 0 ' +
@@ -250,7 +248,6 @@
                 EndY1 +
                 'Z" fill="' + color + '"/>' +
                 '</g>';
-
         }
     </script>
 </body>
