@@ -1,9 +1,9 @@
-body {
+﻿body {
     background-color: #ebe0eb;
 }
 
 div {
-    color: white;
+    color: #333333;
 }
 
 img {
@@ -16,9 +16,9 @@ div1 {
 
 h1 {
     font-family: Cambria;
-    color: white;
+    color: black;
     text-align: center;
-    text-shadow: 3px 3px 5px #2b2a2a;
+    
 }
 
 table {
