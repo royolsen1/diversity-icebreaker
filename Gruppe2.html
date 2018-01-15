@@ -3,12 +3,9 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="clean-button-set/css/style.css">
     <title></title>
     <style>
-        #nickName {
-            margin-top: -50px;
-            margin-left: 720px;
-        }
 
         div {
             margin-left: 650px;
@@ -58,6 +55,7 @@
             margin: 100px;
             margin-left: 550px;
             position: absolute;
+            
         }
 
         #greenSolution2 {
@@ -98,22 +96,39 @@
             margin-top: -100px;
             left: 10px;
         }
+        rip {
+            position: absolute;
+            left: -5px;
+            top: 350px;
+        }
+        rip1 {
+            position: absolute;
+            left: 0px;
+            top: 350px;
+        }
     </style>
+
 </head>
 <body>
-    <img src="logo.png" alt="Logo">
+
+    <img src="https://i.imgur.com/PAKp0aQ.png" alt="Logo">
     <p id="nickName"></p>
     <div id="circle1"></div>
     <p>Green:</p> <input id="greenInput" type="range" name="points" value="66" step="1" min="0" max="100" oninput="changeSize1(this)"><span id="Green"></span><br />
     <p>Red:</p>   <input id="redInput" type="range" name="points" value="66" step="1" min="0" max="100" oninput="changeSize2(this)"><span id="Red"></span><br />
-    <p id="redSolution">Red score = </p>
-    <p id="redSolution2">Red calculation = </p>
-    <p id="greenSolution">Green score = </p>
-    <p id="greenSolution2">Green calculation = </p>
-    <p id="blueSolution">Blue score = </p>
-    <p id="blueSolution2">Blue calculation = </p>
+    <rip class='set red'>
+        <p class="btn pri" id="redSolution">Red score = </p>
+        <p class="btn pri" id="redSolution2">Red calculation = </p>
+    </rip>
+    <rip1 class='set green'>
+        <p class="btn pri" id="greenSolution">Green score = </p>
+        <p class="btn pri" id="greenSolution2">Green calculation = </p>
+    </rip1>
+    <rip class='set blue'>
+        <p class="btn pri" id="blueSolution">Blue score = </p>
+        <p class="btn pri" id="blueSolution2">Blue calculation = </p>
+    </rip>
     <div id="phoneFrame"></div>
-    <button onclick="addScore()">Add score</button>
 
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
@@ -139,7 +154,7 @@
         var redAmount;
         var blueAmount;
         var greenAmount;
-        var alias = prompt("Please enter your nickname");
+        //var alias = prompt("Please enter your nickname");
         show();
         if (alias != null) {
             document.getElementById("nickName").innerHTML = alias;
