@@ -42,7 +42,7 @@ table#t01 th, #t02 th, #t03 th, #t04 th, #t05 th {
     color: white;
 }
 
-#slidecontainer {
+/*#slidecontainer {
     width: 100%;
 }
 
@@ -91,7 +91,7 @@ table#t01 th, #t02 th, #t03 th, #t04 th, #t05 th {
 
 .sliderpurple::-webkit-slider-thumb {
     background: purple;
-}
+}*/
 
 
 /*#colorsliders, #colorsliders1, #colorsliders2, #colorsliders3, #colorsliders4 {
