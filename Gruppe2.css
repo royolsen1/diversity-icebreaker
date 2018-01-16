@@ -1,0 +1,274 @@
+﻿@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:700");
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+body {
+    background: #eee;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+
+
+.btn {
+    display: inline-block;
+    min-width: 110px;
+    padding: 8px 8px 8px;
+    font: 700 12px/1 'Open Sans', sans-serif;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 1px rgba(0, 0, 0, 0.1), inset 0 -10px 20px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+    .btn.sec1 {
+        color: green;
+        background: #fff;
+        left: -100px;
+        text-align: center;
+    }
+
+    .btn.sec2 {
+        color: red;
+        background: #fff;
+        left: -100px;
+        text-align: center;
+    }
+
+
+
+    .btn.pri {
+        color: #fff;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+    }
+
+.set.blue .btn.pri {
+    background: #59d;
+}
+
+.set.green .btn.pri {
+    background: #6b6;
+}
+
+.set.red .btn.pri {
+    background: #d33;
+}
+
+.set.black .btn.pri {
+    background: #555;
+}
+
+
+
+.btn.sec.ico,
+.btn.pri.ico {
+}
+
+    .btn.sec.ico:before,
+    .btn.pri.ico:before {
+        display: block;
+        width: 30px;
+        padding: 10px 0 12px;
+        font-family: fontawesome;
+        border-radius: 3px 0 0 3px;
+        background: rgba(0, 0, 0, 0.15);
+    }
+
+    .btn.sec.ico:before {
+        background: rgba(0, 0, 0, 0.08);
+    }
+
+.set.blue .btn.sec.ico:before {
+    content: "";
+}
+
+.set.green .btn.sec.ico:before {
+    content: "";
+}
+
+.set.red .btn.sec.ico:before {
+    content: "";
+}
+
+.set.black .btn.sec.ico:before {
+    content: "";
+}
+
+.set.blue .btn.pri.ico:before {
+    content: "";
+}
+
+.set.green .btn.pri.ico:before {
+    content: "";
+}
+
+.set.red .btn.pri.ico:before {
+    content: "";
+}
+
+.set.black .btn.pri.ico:before {
+    content: "";
+}
+
+
+.slider {
+    -webkit-appearance: none;
+    width: 20%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    color: #979797
+}
+
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: black;
+        cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: black;
+        cursor: pointer;
+    }
+
+div {
+    margin-left: 650px;
+    margin-top: 100px;
+}
+
+input {
+    margin-left: 685px;
+    margin-top: 18px;
+}
+
+p {
+    margin-left: 650px;
+    position: absolute;
+    display: block;
+    background-color: white;
+    z-index: 1;
+}
+
+#phoneFrame {
+    margin: -350px 0px 0px 500px;
+    border: #808080 solid 250px;
+    border-radius: 75px;
+    position: absolute;
+    z-index: -1;
+}
+
+#redSolution {
+    margin: 70px;
+    margin-left: 550px;
+    position: absolute;
+}
+
+#greenSolution {
+    margin: 70px;
+    margin-left: 695px;
+    position: absolute;
+}
+
+#blueSolution {
+    margin: 70px;
+    margin-left: 850px;
+    position: absolute;
+}
+
+#redSolution2 {
+    margin: 100px;
+    margin-left: 550px;
+    position: absolute;
+}
+
+#greenSolution2 {
+    margin: 100px;
+    margin-left: 695px;
+    position: absolute;
+}
+
+#blueSolution2 {
+    margin: 100px;
+    margin-left: 850px;
+    position: absolute;
+}
+
+span {
+    display: none;
+}
+
+button {
+    font-family: Verdana;
+    background-color: limegreen;
+    color: white;
+    border-color: black;
+    border-style: solid;
+    border-width: 3px;
+    text-decoration: none;
+    padding: 20px 30px;
+    border-radius: 40px;
+    margin: 150px 700px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+    flex-wrap: nowrap;
+}
+
+.button {
+    font-family: Verdana;
+    background-color: limegreen;
+    color: white;
+    border-color: black;
+    border-style: solid;
+    border-width: 3px;
+    text-decoration: none;
+    padding: 20px 30px;
+    border-radius: 40px;
+    margin: 150px 700px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+    flex-wrap: nowrap;
+}
+
+img {
+    position: absolute;
+    margin-top: -100px;
+    left: 10px;
+}
+
+rip {
+    position: absolute;
+    left: -5px;
+    top: 350px;
+}
+
+rip1 {
+    position: absolute;
+    left: 0px;
+    top: 350px;
+}
+
+#group1 {
+    position: absolute;
+    margin-top: 0px;
+    left: -45%;
+}
+
+#group3 {
+    position: absolute;
+    margin-top: 0px;
+    left: 40%;
+}
