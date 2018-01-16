@@ -3,36 +3,196 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="Gruppe2.css">
+    <link rel="stylesheet" href="clean-button-set/css/style.css">
     <title></title>
     <style>
-        #nickName {
-            margin-top: -50px;
-            margin-left: 720px;
+
+        .slider {
+            -webkit-appearance: none;
+            width: 60%;
+            height: 15px;
+            border-radius: 8px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.5;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+            color: #979797;
+            display: flex;
+            flex: auto;
         }
+
+            .slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background-color: darkmagenta;
+                cursor: pointer;
+            }
+
+            .slider::-moz-range-thumb {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background-color: black;
+                cursor: pointer;
+            }
+
+
+        p {
+            margin-left: 650px;
+            position: absolute;
+            display: block;
+            background-color: white;
+            z-index: 1;
+        }
+
+        #phoneFrame {
+            background-color: #808080;
+            border: #808080 solid 250px;
+            border-radius: 75px;
+            position: absolute;
+            z-index: -1;
+        }
+
+        #redSolution {
+            margin: 70px;
+            margin-left: 550px;
+            position: absolute;
+        }
+
+        #greenSolution {
+            margin: 70px;
+            margin-left: 695px;
+            position: absolute;
+        }
+
+        #blueSolution {
+            margin: 70px;
+            margin-left: 850px;
+            position: absolute;
+        }
+
+        #redSolution2 {
+            margin: 100px;
+            margin-left: 550px;
+            position: absolute;
+            
+        }
+
+        #greenSolution2 {
+            margin: 100px;
+            margin-left: 695px;
+            position: absolute;
+        }
+
+        #blueSolution2 {
+            margin: 100px;
+            margin-left: 850px;
+            position: absolute;
+        }
+
+        span {
+            display: none;
+        }
+
+        button {
+            font-family: Verdana;
+            background-color: limegreen;
+            color: white;
+            border-color: black;
+            border-style: solid;
+            border-width: 3px;
+            text-decoration: none;
+            padding: 20px 30px;
+            border-radius: 40px;
+            margin: 150px 700px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 16px;
+            flex-wrap: nowrap;
+        }
+
+        img {
+            position: absolute;
+            top: -70%;
+            right: 70%;
+        }
+        rip {
+            position: absolute;
+            left: -1050px;
+            top: 300px;
+        }
+        rip1 {
+            position: absolute;
+            left: -520px;
+            top: 300px;
+        }
+        rip2 {
+            position: absolute;
+            left: -420px;
+            top: 300px;
+        }
+        gruppe {
+            position: absolute;
+            left: 40%;
+            top: 5%;
+        }
+
+        #heya {
+            left: 67%;
+            top: 7%
+        }
+        #blueInput {
+            position: absolute;
+            left: -100%;
+            top: 130%;
+        }
+        #redInput {
+            position: absolute;
+            left: 16%;
+            top: 130%;
+        }
+        #greenInput {
+            position: absolute;
+            left: 138%;
+            top: 130%;
+        }
+        YG {
+        position: absolute;
+        left: 15%
+        }
+
     </style>
+
 </head>
 <body>
-    <img src="https://i.imgur.com/PAKp0aQ.png" alt="Logo">
-    <p id="nickName"></p>
-    <div id="circle1"></div>
-    <rekt class="slidecontainer">
-    <p class="btn sec1">Green</p> <input class="slider" id="greenInput" type="range" name="points" value="66" step="1" min="0" max="100" oninput="changeSize1(this)"><span id="Green"></span><br />
-    <p class="btn sec2">Red</p>   <input class="slider"  id="redInput" type="range" name="points" value="66" step="1" min="0" max="100" oninput="changeSize2(this)"><span id="Red"></span><br />
-    </rekt>
-    <rip class='set red'>
-        <p class="btn pri" id="redSolution">Red score = </p>
-        <p class="btn pri" id="redSolution2">Red calculation = </p>
-    </rip>
-    <rip1 class='set green'>
-        <p class="btn pri" id="greenSolution">Green score = </p>
-        <p class="btn pri" id="greenSolution2">Green calculation = </p>
-    </rip1>
-    <rip class='set blue'>
-        <p class="btn pri" id="blueSolution">Blue score = </p>
-        <p class="btn pri" id="blueSolution2">Blue calculation = </p>
-    </rip>
-    <div id="phoneFrame"></div>    
+    <BG id="phoneFrame">
+        <img src="https://i.imgur.com/PAKp0aQ.png" alt="Logo">
+        <p id="nickName"></p>
+        <div id="circle1"></div>
+        <rekt class="slidecontainer">
+            <input class="slider" id="blueInput" type="text" name="points" value="66" step="1" min="0" max="100" oninput="changeSize1(this)"><span id="Green"></span><br />
+            <input class="slider" id="redInput" type="text" name="points" value="66" step="1" min="0" max="100" oninput="changeSize2(this)"><span id="Red"></span><br />
+            <input class="slider" id="greenInput" type="text" name="points" value="66" step="1" min="0" max="100" oninput="changeSize3(this)"><span id="Blue"></span><br />
+        </rekt>
+        <rip class='set blue'>
+            <p class="btn pri" id="blueSolution">Blue score = </p>
+            <p class="btn pri" id="blueSolution2">Blue calculation = </p>
+        </rip>
+        <rip1 class='set red'>
+            <p class="btn pri" id="redSolution">Red score = </p>
+            <p class="btn pri" id="redSolution2">Red calculation = </p>
+        </rip1>
+        <rip2 class='set green'>
+            <p class="btn pri" id="greenSolution">Green score = </p>
+            <p class="btn pri" id="greenSolution2">Green calculation = </p>
+        </rip2>
+        <YG class="btn pri">You are:</YG>
+    </BG>
+
     <a href="adminpanel.html" class="button" id="group1"><b><i> Admin panel</i></b></a>
     <a href="ResultPage.html" class="button" id="group3"><b><i>Hexagon</i></b></a>
     <button onclick="addScore()">Add score</button>
@@ -61,7 +221,7 @@
         var redAmount;
         var blueAmount;
         var greenAmount;
-        var alias = prompt("Please enter your nickname");
+        //var alias = prompt("Please enter your nickname");
         show();
         if (alias != null) {
             document.getElementById("nickName").innerHTML = alias;
@@ -97,6 +257,28 @@
             }
         }
         function changeSize2(input) {
+            angleSizeRed = parseInt(input.value) * 18 / 10;
+            labelRed.innerText = input.value;
+            document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
+            document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
+            document.getElementById("blueSolution").innerHTML = "Blue score = " + (200 - greenInput.value - redInput.value);
+            redAmount = Math.round(redInput.value * 0.75);
+            greenAmount = Math.round(greenInput.value * 0.75);
+            blueAmount = Math.round((200 * 0.75) - redAmount - greenAmount);
+            document.getElementById("redSolution2").innerHTML = "Red calculation = " + redAmount;
+            document.getElementById("greenSolution2").innerHTML = "Green calculation = " + greenAmount;
+            document.getElementById("blueSolution2").innerHTML = "Blue calculation = " + blueAmount;
+            if (200 - greenInput.value - redInput.value > 99) {
+                greenInput.value = 100 - redInput.value
+            }
+            if (redAmount + greenAmount + blueAmount == 150) {
+                show();
+            } else {
+                greenInput.value -= 1;
+                show();
+            }
+        }
+        function changeSize3(input) {
             angleSizeRed = parseInt(input.value) * 18 / 10;
             labelRed.innerText = input.value;
             document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
