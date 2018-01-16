@@ -1,0 +1,13 @@
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js%22%3E</script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDIMCz-H4Qa6yzO8cOEDDO-_-TNgKRwz40",
+    authDomain: "diversity-icebreaker.firebaseapp.com",
+    databaseURL: "https://diversity-icebreaker.firebaseio.com/",
+    projectId: "diversity-icebreaker",
+    storageBucket: "",
+    messagingSenderId: "829693602828"
+  };
+  firebase.initializeApp(config);
+</script>
