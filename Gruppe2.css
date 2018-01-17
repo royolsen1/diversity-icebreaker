@@ -2,15 +2,6 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:700");
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 
-body {
-  background: #eee;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-
-
-
 
 .btn {
   display: inline-block;
@@ -98,7 +89,7 @@ body {
 .slider {
     -webkit-appearance: none;
     padding-left: 7px;
-    width: 60%;
+    width: 57%;
     height: 15px;
     border-radius: 8px;
     background: #d3d3d3;
@@ -141,7 +132,6 @@ p {
     border: #808080 solid 250px;
     border-radius: 75px;
     position: absolute;
-    z-index: -1;
 }
 
 #redSolution {
@@ -186,8 +176,8 @@ span {
 
 img {
     position: absolute;
-    top: -70%;
-    right: 70%;
+    top: -90%;
+    right: 90%;
 }
 
 rip {
@@ -227,13 +217,13 @@ gruppe {
 
 #redInput {
     position: absolute;
-    left: 16%;
+    left: 15%;
     top: 130%;
 }
 
 #greenInput {
     position: absolute;
-    left: 138%;
+    left: 137%;
     top: 130%;
 }
 
@@ -248,15 +238,17 @@ YG {
     color: white;
     border-color: black;
     border-style: solid;
-    border-width: 3px;
+    border-width: 2px;
+    border-radius: 15px;
+    padding: 4px 4px;
     text-decoration: none;
     cursor: pointer;
     text-align: center;
     font-size: 16px;
     flex-wrap: nowrap;
     position: absolute;
-    top: 4%;
-    left: 3%;
+    top: -78%;
+    left: 90%;
 }
 
 .hexagon {
@@ -265,15 +257,17 @@ YG {
     color: white;
     border-color: black;
     border-style: solid;
-    border-width: 3px;
+    border-width: 2px;
+    border-radius: 15px;
+    padding: 4px 4px;
     text-decoration: none;
     cursor: pointer;
     text-align: center;
     font-size: 16px;
     flex-wrap: nowrap;
     position: absolute;
-    top: 4%;
-    left: 38%;
+    top: -75%;
+    left: 150%;
 }
 
 .addScore {
@@ -291,6 +285,6 @@ YG {
     font-size: 16px;
     flex-wrap: nowrap;
     position: absolute;
-    top: 91%;
-    left: 18%;
+    top: 160%;
+    left: 9.5%;
 }
