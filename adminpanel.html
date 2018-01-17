@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -13,6 +13,10 @@
     <br />
     <br />
     <input type="button" value="Automatic suggestion" onClick="history.go(0)"> <br />
+    <br />
+    <input type="button" value="Antall deltakere" onClick="candidatecount()"> <br />
+    <br />
+    <div id="candicount">Antall deltakere</div>
     <br />
     <select id="grouplist" onchange="groupdisp()">
         <option>Number of groups</option>
@@ -49,19 +53,31 @@
 
 </body>
 <script src="Script2.js" charset="utf-8"></script>
-<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js%22%3E</script>
 <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
 <script>
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyDIMCz-H4Qa6yzO8cOEDDO-_-TNgKRwz40",
         authDomain: "diversity-icebreaker.firebaseapp.com",
-        databaseURL: "https://diversity-icebreaker.firebaseio.com/",
+        databaseURL: "https://diversity-icebreaker.firebaseio.com",
         projectId: "diversity-icebreaker",
-        storageBucket: "",
+        storageBucket: "diversity-icebreaker.appspot.com",
         messagingSenderId: "829693602828"
     };
     firebase.initializeApp(config);
+    var db = firebase.firestore();
+
+    function candidatecount() {
+    db.collection('Data').get().then(function (querySnapshot) {
+        document.getElementById('candicount').innerHTML = (querySnapshot.size);
+    });
+    }
+    //Data.name
+    //Data.blue
+    //Data.green
+    //Data.red
+
 </script>
 </html>
