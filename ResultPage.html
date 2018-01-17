@@ -3,34 +3,36 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>Results</title>
-    <link rel="stylesheet" href="ResultPage.css"/>
+    <title>Resultat</title>
+    <link rel="stylesheet" href="ResultPage.css" />
 </head>
 <body>
-    <div class="header">Results</div>
+    <div class="header">Resultat</div>
 
 
     <div class="hexagon">
-        <svg id="sekskant" viewBox="20 5 120 110">
+        <svg id="drawing" viewBox="20 5 120 110">
 
         </svg>
     </div>
 
-<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
-<script>
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyDIMCz-H4Qa6yzO8cOEDDO-_-TNgKRwz40",
-        authDomain: "diversity-icebreaker.firebaseapp.com",
-        databaseURL: "https://diversity-icebreaker.firebaseio.com",
-        projectId: "diversity-icebreaker",
-        storageBucket: "diversity-icebreaker.appspot.com",
-        messagingSenderId: "829693602828"
-    };
-    firebase.initializeApp(config);
-</script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.6.3/svg.min.js"></script>
+    <script src="svg.draggable.min.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDIMCz-H4Qa6yzO8cOEDDO-_-TNgKRwz40",
+            authDomain: "diversity-icebreaker.firebaseapp.com",
+            databaseURL: "https://diversity-icebreaker.firebaseio.com",
+            projectId: "diversity-icebreaker",
+            storageBucket: "diversity-icebreaker.appspot.com",
+            messagingSenderId: "829693602828"
+        };
+        firebase.initializeApp(config);
+    </script>
     <script src="Hexagon.js"></script>
 
 </body>

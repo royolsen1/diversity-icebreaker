@@ -15,7 +15,7 @@ dataCollection.onSnapshot(
         totalGreen = 0;
         collectionSnapshot.forEach(
             function (dataSnapshot) {
-                var dots = document.getElementById('sekskant');
+                var dots = document.getElementById('drawing');
                 let data = dataSnapshot.data();
                 if (data.red > 0) {
                     var redScore = parseInt(data.red);
@@ -48,7 +48,7 @@ dataCollection.onSnapshot(
 );
 
 function hexagonBuild() {
-    document.getElementById('sekskant').innerHTML =
+    document.getElementById('drawing').innerHTML =
         '<defs>' +
         '<linearGradient id="r" x1="80" y1="10" x2="80" y2="110" gradientUnits="userSpaceOnUse">' +
         '<stop stop-color="red" stop-opacity="1" offset="0" />' +
@@ -70,7 +70,7 @@ function hexagonBuild() {
 
 function hexagonMath(red, green, blue) {
     if (counter > 2) {
-        var dots = document.getElementById('sekskant');
+        var dots = document.getElementById('drawing');
         totalRed = totalRed / counter;
         totalGreen = totalGreen / counter;
         totalBlue = totalBlue / counter;
@@ -84,9 +84,71 @@ function hexagonMath(red, green, blue) {
         var dx = Math.sqrt(dy * dy / 3);
         var y = relRed + 10;
         var x = Math.round(redScore > rest / 2 ? gx - dx - 6.6025 : gx + dx - 6.6025);
-        dots.innerHTML +=
-            '<line x1="' + x + '" y1="' + y + '" x2="80" y2="110" stroke="black" stroke-width="0.5" />' +
-            '<line x1="36.7" y1="35" x2="' + x + '" y2="' + y + '" stroke="black" stroke-width="0.5" />' +
-            '<line x1="123.3" y1="35" x2="' + x + '" y2="' + y + '" stroke="black" stroke-width="0.5" />;'
+        //dots.innerHTML +=
+        //    '<line x1="' + x + '" y1="' + y + '" x2="80" y2="110" stroke="black" stroke-width="0.5" />' +
+        //    '<line x1="36.7" y1="35" x2="' + x + '" y2="' + y + '" stroke="black" stroke-width="0.5" />';
+        //    '<line x1="123.3" y1="35" x2="' + x + '" y2="' + y + '" stroke="black" stroke-width="0.5" />;'
+        var draw = SVG('drawing');
+        var circleA = draw.circle(2).center(x, y).fill('green');
+        var circleB = draw.circle(2).center(123.3, 35).fill('blue');
+        var circleC = draw.circle(2).center(36.7, 35).fill('blue');
+        var circleD = draw.circle(2).center(80, 110).fill('blue');
+        circleA.attr({ class: 'draggable' });
+        circleB.attr({ class: 'draggable' });
+        circleC.attr({ class: 'draggable' });
+        circleD.attr({ class: 'draggable' });
+        circleA.draggable();
+        circleB.draggable();
+        circleC.draggable();
+        circleD.draggable();
+        var lineB = draw.line(circleA.cx(), circleA.cy(), circleB.cx(), circleB.cy()).stroke({ width: 0.5 });
+        var lineC = draw.line(circleA.cx(), circleA.cy(), circleC.cx(), circleC.cy()).stroke({ width: 0.5 });
+        var lineD = draw.line(circleA.cx(), circleA.cy(), circleD.cx(), circleD.cy()).stroke({ width: 0.5 });
+        circleA.on('dragmove',
+            function (event) {
+                lineB.attr({ x1: event.detail.p.x });
+                lineB.attr({ y1: event.detail.p.y });
+                lineC.attr({ x1: event.detail.p.x });
+                lineC.attr({ y1: event.detail.p.y });
+                lineD.attr({ x1: event.detail.p.x });
+                lineD.attr({ y1: event.detail.p.y });
+            });
+
+        circleB.on('dragmove',
+            function (event) {
+                if (event.detail.p.x < 108.9) {
+                    lineB.attr({ x2: 108.9 });
+                    lineB.attr({ y2: 10 });
+                } else if (event.detail.p.x > 137.7) {
+                    lineB.attr({ x2: 137.7 });
+                    lineB.attr({ y2: 60 });
+                } else {
+                    lineB.attr({ x2: event.detail.p.x });
+                    lineB.attr({ y2: event.detail.p.x * 1.74 - 179.76 });
+                }
+            });
+        circleC.on('dragmove',
+            function (event) {
+                if (event.detail.p.x > 51.1) {
+                    lineC.attr({ x2: 51.1 });
+                    lineC.attr({ y2: 10 });
+                } else if (event.detail.p.x < 22.3) {
+                    lineC.attr({ x2: 22.3 });
+                    lineC.attr({ y2: 60 });
+                } else {
+                    lineC.attr({ x2: event.detail.p.x });
+                    lineC.attr({ y2: event.detail.p.x * (-1.74) + 98.72 });
+                }
+            });
+        circleD.on('dragmove',
+            function (event) {
+                if (event.detail.p.x > 108.9){
+                    lineD.attr({ x2: 108.9 });
+                } else if (event.detail.p.x < 51.1){
+                    lineD.attr({ x2: 51.1 });
+                } else {
+                    lineD.attr({ x2: event.detail.p.x });
+                }
+            });
     }
 }
