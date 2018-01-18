@@ -8,29 +8,46 @@
 
 </head>
 <body>
-    <BG id="phoneFrame">
-        <img src="https://i.imgur.com/PAKp0aQ.png" alt="Logo">
-        <p id="nickName"></p>
-        <div id="circle1"></div>
-        <rekt class="slidecontainer">
-            <input class="slider" id="blueInput" type="text" name="points" value="50" step="1" min="0" max="100" oninput="changeSize1(this)"><span id="Green"></span><br />
-            <input class="slider" id="redInput" type="text" name="points" value="50" step="1" min="0" max="100" oninput="changeSize2(this)"><span id="Red"></span><br />
-            <input class="slider" id="greenInput" type="text" name="points" value="50" step="1" min="0" max="100" oninput="changeSize3(this)"><span id="Blue"></span><br />
-        </rekt>
-        <rip class='set blue'>
-            <p class="btn pri" id="blueSolution">Blue score = </p>
-        </rip>
-        <rip1 class='set red'>
-            <p class="btn pri" id="redSolution">Red score = </p>
-        </rip1>
-        <rip2 class='set green'>
-            <p class="btn pri" id="greenSolution">Green score = </p>
-        </rip2>
-        <YG class="btn pri">You are:</YG>
-        <a href="adminpanel.html" class="adminPanel" id="group1"><b><i> Admin panel</i></b></a>
-        <a href="ResultPage.html" class="hexagon" id="group3"><b><i>Hexagon</i></b></a>
-        <button class="addScore" onclick="addScore()">Add score</button>
-    </BG>
+    <div class="mainContainer">
+        <div class="mainPart" style="background-color: antiquewhite;">
+            <div class="rowContainer">
+                <img src="https://i.imgur.com/PAKp0aQ.png" alt="Logo">
+                <a href="adminpanel.html" class="adminPanel" id="group1"><b><i> Admin panel</i></b></a>
+                <a href="ResultPage.html" class="hexagon" id="group3"><b><i>Hexagon</i></b></a>
+                
+            </div>
+        </div>
+        <div class="mainPart" style="background-color: antiquewhite">
+            <div id="nickName">Nickname</div>
+        </div>
+        <div class="mainPart" style="background-color: antiquewhite;">
+            <div id="circle1"></div>
+            <div></div>
+        </div>
+        <div class="mainPart" style="background-color: antiquewhite;">
+            <div class="btn pri" id="groupAllocation">You are:</div>
+            <div></div>
+        </div>
+        <div class="mainPart" style="background-color: antiquewhite;">
+            <div class="rowContainer">
+                <div class="part columnContainer">
+                    <div><input class="slider" id="blueInput" type="text" name="points" value="50" step="1" min="0" max="100" oninput="changeSize3(this)"><span id="Blue"></span></div>
+                    <div class="btn pri" id="blueSolution">Blue score = </div>
+                </div>
+                <div class="part columnContainer">
+                    <div><input class="slider" id="redInput" type="text" name="points" value="50" step="1" min="0" max="100" oninput="changeSize2(this)"><span id="Red"></span></div>
+                    <div class="btn pri" id="redSolution">Red score = </div>
+                </div>
+                <div class="part columnContainer">
+                    <div><input class="slider" id="greenInput" type="text" name="points" value="50" step="1" min="0" max="100" oninput="changeSize1(this)"><span id="Green"></span></div>
+                    <div class="btn pri" id="greenSolution">Green score = </div>
+                </div>
+                <div>
+                    <button class="addScore" onclick="addScore()">Add score</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
@@ -75,7 +92,7 @@
             labelGreen.innerText = input.value;
             document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
             document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
-            document.getElementById("blueSolution").innerHTML = "Blue score = " + blueInput.value;
+            document.getElementById("blueSolution").innerHTML = "Blue score = " + (150 - (greenInput.value - redInput.value));
             redAmount = Math.round(redInput.value);
             greenAmount = Math.round(greenInput.value);
             blueAmount = Math.round((150) - redAmount - greenAmount);
@@ -85,7 +102,7 @@
             if (redAmount + greenAmount + blueAmount == 150) {
                 show();
             } else {
-                blueInput.value -= 1;
+                redInput.value -= 1;
                 show();
             }
         }
@@ -94,7 +111,7 @@
             labelRed.innerText = input.value;
             document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
             document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
-            document.getElementById("blueSolution").innerHTML = "Blue score = " + (200 - greenInput.value - redInput.value);
+            document.getElementById("blueSolution").innerHTML = "Blue score = " + (150 - greenInput.value - redInput.value);
             redAmount = Math.round(redInput.value);
             greenAmount = Math.round(greenInput.value);
             blueAmount = Math.round((150) - redAmount - greenAmount);
@@ -113,7 +130,7 @@
             labelBlue.innerText = input.value;
             document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
             document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
-            document.getElementById("blueSolution").innerHTML = "Blue score = " + blueAmount;
+            document.getElementById("blueSolution").innerHTML = "Blue score = " + (150 - greenInput.value - redInput.value);
             redAmount = Math.round(redInput.value);
             greenAmount = Math.round(greenInput.value);
             blueAmount = Math.round((150) - redAmount - greenAmount);
@@ -123,7 +140,7 @@
             if (redAmount + greenAmount + blueAmount == 150) {
                 show();
             } else {
-                greenInput.value -= 1;
+                blueInput.value -= 1;
                 show();
             }
         }
