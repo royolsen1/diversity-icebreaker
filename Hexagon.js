@@ -97,10 +97,30 @@ function hexagonMath(red, green, blue) {
         circleB.attr({ class: 'draggable' });
         circleC.attr({ class: 'draggable' });
         circleD.attr({ class: 'draggable' });
-        circleA.draggable();
-        circleB.draggable();
-        circleC.draggable();
-        circleD.draggable();
+        circleA.draggable({
+            minX: 21.3,
+            minY: 9,
+            maxX: 138.7,
+            maxY: 101,
+        });
+        circleB.draggable({
+            minX: 107.9,
+            minY: 9,
+            maxX: 138.7,
+            maxY: 61
+        });
+        circleC.draggable({
+            minX: 21.3,
+            minY: 9,
+            maxX: 52.1,
+            maxY: 61
+        });
+        circleD.draggable({
+            minX: 50.1,
+            minY: 109,
+            maxX: 109.9,
+            maxY: 111
+        });
         var lineB = draw.line(circleA.cx(), circleA.cy(), circleB.cx(), circleB.cy()).stroke({ width: 0.5 });
         var lineC = draw.line(circleA.cx(), circleA.cy(), circleC.cx(), circleC.cy()).stroke({ width: 0.5 });
         var lineD = draw.line(circleA.cx(), circleA.cy(), circleD.cx(), circleD.cy()).stroke({ width: 0.5 });
@@ -142,9 +162,9 @@ function hexagonMath(red, green, blue) {
             });
         circleD.on('dragmove',
             function (event) {
-                if (event.detail.p.x > 108.9){
+                if (event.detail.p.x > 108.9) {
                     lineD.attr({ x2: 108.9 });
-                } else if (event.detail.p.x < 51.1){
+                } else if (event.detail.p.x < 51.1) {
                     lineD.attr({ x2: 51.1 });
                 } else {
                     lineD.attr({ x2: event.detail.p.x });
