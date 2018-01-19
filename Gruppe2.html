@@ -10,25 +10,29 @@
 <body>
     <div class="mainContainer">
         <div class="mainPart" style="background-color: antiquewhite;">
-            <div class="rowContainer">
-                <img src="https://i.imgur.com/PAKp0aQ.png" alt="Logo">
-                <a href="adminpanel.html" class="adminPanel" id="group1"><b><i> Admin panel</i></b></a>
-                <a href="ResultPage.html" class="hexagon" id="group3"><b><i>Hexagon</i></b></a>
-                
+            <div class="rowContainer"
+                 style="align-items: center;">
+                <div class="part">
+                    <img src="https://i.imgur.com/PAKp0aQ.png" alt="Logo">
+                </div>
+                <div class="part rowContainer" style="justify-content: flex-end">
+                    <a href="adminpanel.html" class="button" id="group1"><b><i> Admin panel</i></b></a>
+                    <a href="ResultPage.html" class="button" id="group3"><b><i>Hexagon</i></b></a>
+                </div>
+
             </div>
         </div>
-        <div class="mainPart" style="background-color: antiquewhite">
+        <div class="mainPart rowContainer" style="background-color: antiquewhite">
             <div id="nickName">Nickname</div>
         </div>
-        <div class="mainPart" style="background-color: antiquewhite;">
+        <div class="mainPart rowContainer" style="flex-grow: 3">
             <div id="circle1"></div>
-            <div></div>
         </div>
         <div class="mainPart" style="background-color: antiquewhite;">
             <div class="btn pri" id="groupAllocation">You are:</div>
             <div></div>
         </div>
-        <div class="mainPart" style="background-color: antiquewhite;">
+        <div class="mainPart" style="background-color: antiquewhite; flex-grow: 2;">
             <div class="rowContainer">
                 <div class="part columnContainer">
                     <div><input class="slider" id="blueInput" type="text" name="points" value="50" step="1" min="0" max="100" oninput="changeSize3(this)"><span id="Blue"></span></div>
@@ -45,6 +49,10 @@
                 <div>
                     <button class="addScore" onclick="addScore()">Add score</button>
                 </div>
+            </div>
+        </div>
+        <div class="mainPart" style="background-color: antiquewhite; flex-grow: 2;">
+            <div class="rowContainer">
             </div>
         </div>
     </div>
@@ -92,7 +100,7 @@
             labelGreen.innerText = input.value;
             document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
             document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
-            document.getElementById("blueSolution").innerHTML = "Blue score = " + (150 - (greenInput.value - redInput.value));
+            document.getElementById("blueSolution").innerHTML = "Blue score = " + (150 - greenInput.value - redInput.value);
             redAmount = Math.round(redInput.value);
             greenAmount = Math.round(greenInput.value);
             blueAmount = Math.round((150) - redAmount - greenAmount);
@@ -173,7 +181,7 @@
             var arc2 = angleSizeRed > 180 ? 1 : 0;
             var arc3 = angleSizeBlue > 180 ? 1 : 0;
             var svgHtml =
-                '<svg width="200" height="200" viewBox="0 0 200 200">' +
+                '<svg viewBox="0 0 200 200">' +
                 getPath(startX1, startY1, EndX1, EndY1, arc1, 1, 'green') +
                 getPath(startX2, startY2, EndX2, EndY2, arc2, 1, 'red') +
                 getPath(startX3, startY3, EndX3, EndY3, arc3, 1, 'blue') +
