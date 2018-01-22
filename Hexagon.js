@@ -39,7 +39,6 @@ dataCollection.onSnapshot(
                     totalBlue += parseInt(data.blue);
                     totalGreen += parseInt(data.green);
                     counter++;
-
                 }
             }
         )
@@ -65,9 +64,40 @@ function hexagonBuild() {
         '</defs>' +
         '<polygon points="22.3,60 51.1,10 108.9,10 137.7,60 108.9,110 51.1,110" stroke="black" fill="url(#r)" stroke-width="0.5" />' +
         '<polygon points="22.3,60 51.1,10 108.9,10 137.7,60 108.9,110 51.1,110" stroke="black" fill="url(#g)" stroke-width="0.5" />' +
-        '<polygon points="22.3,60 51.1,10 108.9,10 137.7,60 108.9,110 51.1,110" stroke="black" fill="url(#b)" stroke-width="0.5" />';
-}
+        '<polygon points="22.3,60 51.1,10 108.9,10 137.7,60 108.9,110 51.1,110" stroke="black" fill="url(#b)" stroke-width="0.5" />' +
+        // Red lines 
+        '<line x1="45.5" y1="20" x2="114.66" y2="20" stroke="black" stroke-width="0.1" />' +
+        '<line x1="39.58" y1="30" x2="120.42" y2="30" stroke="black" stroke-width="0.1" />' +
+        '<line x1="33.82" y1="40" x2="126.18" y2="40" stroke="black" stroke-width="0.1" />' +
+        '<line x1="28.06" y1="50" x2="131.94" y2="50" stroke="black" stroke-width="0.1" />' +
+        '<line x1="22.3" y1="60" x2="137.7" y2="60" stroke="black" stroke-width="0.1" />' +
+        '<line x1="28.06" y1="70" x2="131.94" y2="70" stroke="black" stroke-width="0.1" />' +
+        '<line x1="33.82" y1="80" x2="126.18" y2="80" stroke="black" stroke-width="0.1" />' +
+        '<line x1="39.58" y1="90" x2="120.42" y2="90" stroke="black" stroke-width="0.1" />' +
+        '<line x1="45.5" y1="100" x2="114.66" y2="100" stroke="black" stroke-width="0.1" />' +
+        // Green lines
+        '<line x1="28.06" y1="50" x2="62.64" y2="110" stroke="black" stroke-width="0.1" />' +
+        '<line x1="33.82" y1="40" x2="74.18" y2="110" stroke="black" stroke-width="0.1" />' +
+        '<line x1="39.58" y1="30" x2="85.72" y2="110" stroke="black" stroke-width="0.1" />' +
+        '<line x1="45.5" y1="20" x2="97.26" y2="110" stroke="black" stroke-width="0.1" />' +
+        '<line x1="51.1" y1="10" x2="108.9" y2="110" stroke="black" stroke-width="0.1" />' +
+        '<line x1="62.74" y1="10" x2="114.66" y2="100" stroke="black" stroke-width="0.1" />' +
+        '<line x1="74.28" y1="10" x2="120.42" y2="90" stroke="black" stroke-width="0.1" />' +
+        '<line x1="85.82" y1="10" x2="126.18" y2="80" stroke="black" stroke-width="0.1" />' +
+        '<line x1="97.36" y1="10" x2="131.94" y2="70" stroke="black" stroke-width="0.1" />' +
+        // Blue lines
+        '<line x1="28.06" y1="70" x2="62.64" y2="10" stroke="black" stroke-width="0.1" />' +
+        '<line x1="33.82" y1="80" x2="74.28" y2="10" stroke="black" stroke-width="0.1" />' +
+        '<line x1="39.58" y1="90" x2="85.82" y2="10" stroke="black" stroke-width="0.1" />' +
+        '<line x1="45.5" y1="100" x2="97.36" y2="10" stroke="black" stroke-width="0.1" />' +
+        '<line x1="51.1" y1="110" x2="108.9" y2="10" stroke="black" stroke-width="0.1" />' +
+        '<line x1="62.64" y1="110" x2="114.66" y2="20" stroke="black" stroke-width="0.1" />' +
+        '<line x1="74.18" y1="110" x2="120.42" y2="30" stroke="black" stroke-width="0.1" />' +
+        '<line x1="85.72" y1="110" x2="126.18" y2="40" stroke="black" stroke-width="0.1" />' +
+        '<line x1="97.26" y1="110" x2="131.94" y2="50" stroke="black" stroke-width="0.1" />' ;
 
+
+}
 function hexagonMath(red, green, blue) {
     if (counter > 2) {
         var dots = document.getElementById('drawing');
