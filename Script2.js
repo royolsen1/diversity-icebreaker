@@ -18,67 +18,20 @@ var LayoutModel = [
             text1: 'Red: 24, Blue: 49, Green: 71',
         },
     ],
-    [   // Index 1 = 6 groups
+    [   // Index 1 = 4 groups
         {
-            title1: 'Blue/Red',
-            color1: 'Purple',
+            title1: 'Blue',
+            color1: 'Blue',
             text1: 'Red: 25, Blue: 71 Green: 54',
         },
         {
-            title1: 'Blue/Green',
-            color1: 'Green',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-        {
-            title1: 'Green/Red',
+            title1: 'Red',
             color1: 'Red',
             text1: 'Red: 24, Blue: 49, Green: 71',
         },
         {
-            title1: 'Green/Blue',
-            color1: 'DodgerBlue',
-            text1: 'Red: 25, Blue: 71 Green: 54',
-        },
-        {
-            title1: 'Red/Blue',
+            title1: 'Green',
             color1: 'Green',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-        {
-            title1: 'Red/Green',
-            color1: 'Red',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-    ],
-    [   // Index 2 = 7 groups
-        {
-            title1: 'Blue/Red',
-            color1: 'DodgerBlue',
-            text1: 'Red: 25, Blue: 71, Green: 54',
-        },
-        {
-            title1: 'Blue/Green',
-            color1: 'Green',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-        {
-            title1: 'Green/Red',
-            color1: 'Red',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-        {
-            title1: 'Green/Blue',
-            color1: 'DodgerBlue',
-            text1: 'Red: 25, Blue: 71 Green: 54',
-        },
-        {
-            title1: 'Red/Blue',
-            color1: 'Green',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-        {
-            title1: 'Red/Green',
-            color1: 'Red',
             text1: 'Red: 24, Blue: 49, Green: 71',
         },
         {
@@ -87,53 +40,10 @@ var LayoutModel = [
             text1: 'Red: 24, Blue: 49, Green: 71',
         },
     ],
+    [   // Index 2 = 7 groups
+
     [   // Index 3 = 9 groups
-        {
-            title1: 'Blue',
-            color1: 'Blue',
-            text1: 'Red: 25, Blue: 71 Green: 54',
-        },
-        {
-            title1: 'Blue/Red',
-            color1: 'DodgerBlue',
-            text1: 'Red: 25, Blue:71 Green: 54',
-        },
-        {
-            title1: 'Blue/Green',
-            color1: 'Green',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-        {
-            title1: 'Green',
-            color1: 'Green',
-            text1: 'Red: 25, Blue:71 Green: 54',
-        },
-        {
-            title1: 'Green/Red',
-            color1: 'Red',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-        {
-            title1: 'Green/Blue',
-            color1: 'DodgerBlue',
-            text1: 'Red: 25, Blue: 71 Green: 54',
-        },
-        {
-            title1: 'Red',
-            color1: 'Red',
-            text1: 'Red: 25, Blue: 71 Green: 54',
-        },
-        {
-            title1: 'Red/Blue',
-            color1: 'Green',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-        {
-            title1: 'Red/Green',
-            color1: 'Red',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-    ],
+
     [   // Index 4 = 10 groups
         {
             title1: 'Blue',

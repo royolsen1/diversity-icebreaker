@@ -8,8 +8,14 @@
 
 </head>
 <body>
+    <br />
+    <div1>
+        <a href="https://royolsen1.github.io/diversity-icebreaker/" class='button'><b><i>Tilbake til Portalen</i></b></a>
+    </div1>
     <img src="https://i.imgur.com/PAKp0aQ.png" alt="Logo">
     <h1>Admin panel</h1>
+
+
     <br />
     <br />
     <input type="button" value="Refresh siden" onClick="history.go(0)"> <br />
@@ -21,20 +27,44 @@
     <select id="grouplist" onchange="groupdisp()">
         <option>Number of groups</option>
         <option title="Blue, Red, Green." value="t01">3</option>
-        <option title="Blue-Red, Blue-Green, Green-Red, Green-Blue, Red-Blue, Red-Green." value="t02">6</option>
-        <option title="Blue-Red, Blue-Green, Green-Red, Green-Blue, Red-Blue, Red-Green, Average." value="t03">7</option>
-        <option title="Blue, Blue-Red, Blue-Green, Green, Green-Red, Green-Blue, Red, Red-Blue, Red-Green." value="t04">9</option>
-        <option title="Blue, Blue-Red, Blue-Green, Green, Green-Red, Green-Blue, Red, Red-Blue, Red-Green, Average." value="t05">10</option>
     </select>
+
+    <!--<select id="grouplist" onchange="groupdisp()">
+        <option>Number of groups</option>
+        <option title="Blue, Red, Green." value="t01">3</option>
+    </select>-->
+
+    <div>
+        <br />
+    </div>
+    <label class="container">
+        Blue
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+    <label class="container">
+        Red
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+    <label class="container">
+        Green
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+    <label class="container">
+        Average
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+    <div>
+        <br />
+    </div>
 
     <div>
         3 groups: Blue, Red, Green.
         <br />
-        6 groups: Blue-Red, Blue-Green, Green-Red, Green-Blue, Red-Blue, Red-Green.
-        <br />
-        7 groups: Blue-Red, Blue-Green, Green-Red, Green-Blue, Red-Blue, Red-Green, Average.
-        <br />
-        9 groups: Blue, Blue-Red, Blue-Green, Green, Green-Red, Green-Blue, Red, Red-Blue, Red-Green.
+        4 groups: Blue, Red, Green, Average.
         <br />
         10 groups: Blue, Blue-Red, Blue-Green, Green, Green-Red, Green-Blue, Red, Red-Blue, Red-Green, Average.
     </div>
@@ -70,9 +100,9 @@
     var db = firebase.firestore();
 
     function candidatecount() {
-    db.collection('Data').get().then(function (querySnapshot) {
-        document.getElementById('candicount').innerHTML = (querySnapshot.size);
-    });
+        db.collection('Data').get().then(function (querySnapshot) {
+            document.getElementById('candicount').innerHTML = (querySnapshot.size);
+        });
     }
     //Data.name
     //Data.blue
