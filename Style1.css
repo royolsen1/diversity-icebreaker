@@ -50,6 +50,7 @@ table, th, td {
 th, td {
     padding: 10px;
     text-align: center;
+    white-space: nowrap;
 }
 
 table#t01 th, #t02 th, #t03 th, #t04 th, #t05 th {
