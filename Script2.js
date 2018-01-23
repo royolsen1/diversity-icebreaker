@@ -138,52 +138,52 @@ var LayoutModel = [
         {
             title1: 'Blue',
             color1: 'Blue',
-            text1: 'Red: 25, Blue: 71 Green: 54',
+            text1: '|🌑| R: 25, G: 54, B: 71 ',
         },
         {
             title1: 'Blue/Red',
             color1: 'DodgerBlue',
-            text1: 'Red: 25, Blue: 71 Green: 54',
+            text1: '|🍗| R: 25, G: 54, B: 71',
         },
         {
             title1: 'Blue/Green',
             color1: 'Green',
-            text1: 'Red: 24, Blue: 49, Green: 71',
+            text1: '|🎮| R: 25, G: 54, B: 71',
         },
         {
             title1: 'Green',
             color1: 'Green',
-            text1: 'Red: 25, Blue: 71 Green: 54',
+            text1: '|🌏| R: 20, G: 80, B: 50',
         },
         {
             title1: 'Green/Red',
             color1: 'Red',
-            text1: 'Red: 24, Blue: 49, Green: 71',
+            text1: '|🎲| R: 25, G: 54, B: 71',
         },
         {
             title1: 'Green/Blue',
             color1: 'DodgerBlue',
-            text1: 'Red: 25, Blue: 71 Green: 54',
+            text1: '|🐢| R: 30, G: 60, B: 60',
         },
         {
             title1: 'Red',
             color1: 'Red',
-            text1: 'Red: 25, Blue: 71 Green: 54',
+            text1: '|🍉| R: 80, G: 20, B: 50',
         },
         {
             title1: 'Red/Blue',
             color1: 'Green',
-            text1: 'Red: 24, Blue: 49, Green: 71',
+            text1: '|🍓| R: 60, G: 30, B: 60',
         },
         {
             title1: 'Red/Green',
             color1: 'Red',
-            text1: 'Red: 24, Blue: 49, Green: 71',
+            text1: '|🐼| R: 60, G: 70, B: 20',
         },
         {
             title1: 'Average',
             color1: 'Pink',
-            text1: 'Red: 24, Blue: 49, Green: 71',
+            text1: '|🔥| R: 50, G: 51, B: 49',
         },
     ],
 ];
