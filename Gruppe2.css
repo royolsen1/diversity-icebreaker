@@ -4,12 +4,12 @@
 
 
 .btn {
-  display: inline-block;
-  min-width: 110px;
-  padding: 8px 8px 8px;
-  font: 700 12px/1 'Open Sans', sans-serif;
-  border-radius: 10px;
-  box-shadow: inset 0 -1px 0 1px rgba(0, 0, 0, 0.1), inset 0 -10px 20px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    min-width: 110px;
+    padding: 8px 8px 8px;
+    font: 700 12px/1 'Open Sans', sans-serif;
+    border-radius: 10px;
+    box-shadow: inset 0 -1px 0 1px rgba(0, 0, 0, 0.1), inset 0 -10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .slider {
@@ -26,7 +26,7 @@
     display: flex;
     flex: auto;
 }
-        
+
 span {
     display: none;
 }
@@ -59,7 +59,8 @@ gruppe {
 
 #nickName {
     position: absolute;
-    left: 45%;
+    left: 47%;
+    top: 20%;
     font-family: Sylfaen;
     font-size: 24px;
     background: 5px;
@@ -70,13 +71,14 @@ gruppe {
 
 #groupAllocation {
     position: absolute;
-    left: 45%;
+    left: 47%;
+    top: 55%;
     font-size: 20px;
 }
 
 YG {
     position: absolute;
-    left: 15%
+    left: 15%;
 }
 
 .button {
@@ -108,14 +110,15 @@ YG {
     text-align: center;
     font-size: 16px;
     flex-wrap: nowrap;
+    position: absolute;
     top: 80%;
-    left: 45%;
+    left: 46.2%;
 }
 
 .mainContainer {
     flex-direction: column;
     display: flex;
-    height: 97vh;
+    height: 100vh;
 }
 
 .rowContainer {
@@ -138,4 +141,203 @@ YG {
     flex-grow: 1;
     flex-basis: auto;
     border: 1px solid gray;
+}
+
+.container1 {
+    width: 400px;
+    height: 200px;
+    position: absolute;
+    top: 40%;
+    left: 15%;
+    overflow: hidden;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+.container2 {
+    width: 400px;
+    height: 200px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    overflow: hidden;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+.container3 {
+    width: 400px;
+    height: 200px;
+    position: absolute;
+    top: 40%;
+    left: 85%;
+    overflow: hidden;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+
+.gauge-a1 {
+    z-index: 1;
+    position: absolute;
+    background-color: rgba(255,255,255,.2);
+    width: 400px;
+    height: 200px;
+    top: 0%;
+    border-radius: 250px 250px 0px 0px;
+}
+
+.gauge-b1 {
+    z-index: 3;
+    position: absolute;
+    background-color: #222;
+    width: 250px;
+    height: 125px;
+    top: 75px;
+    margin-left: 75px;
+    margin-right: auto;
+    border-radius: 250px 250px 0px 0px;
+}
+
+.gauge-c1 {
+    z-index: 2;
+    position: absolute;
+    background-color: rgb(0, 38, 255);
+    width: 400px;
+    height: 200px;
+    top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0px 0px 200px 200px;
+    transform-origin: center top;
+    transition: all 1.3s ease-in-out;
+}
+.gauge-a2 {
+    z-index: 1;
+    position: absolute;
+    background-color: rgba(255,255,255,.2);
+    width: 400px;
+    height: 200px;
+    top: 0%;
+    border-radius: 250px 250px 0px 0px;
+}
+
+.gauge-b2 {
+    z-index: 3;
+    position: absolute;
+    background-color: #222;
+    width: 250px;
+    height: 125px;
+    top: 75px;
+    margin-left: 75px;
+    margin-right: auto;
+    border-radius: 250px 250px 0px 0px;
+}
+
+.gauge-c2 {
+    z-index: 2;
+    position: absolute;
+    background-color: red;
+    width: 400px;
+    height: 200px;
+    top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0px 0px 200px 200px;
+    transform-origin: center top;
+    transition: all 1.3s ease-in-out;
+}
+.gauge-a3 {
+    z-index: 1;
+    position: absolute;
+    background-color: rgba(255,255,255,.2);
+    width: 400px;
+    height: 200px;
+    top: 0%;
+    border-radius: 250px 250px 0px 0px;
+}
+
+.gauge-b3 {
+    z-index: 3;
+    position: absolute;
+    background-color: #222;
+    width: 250px;
+    height: 125px;
+    top: 75px;
+    margin-left: 75px;
+    margin-right: auto;
+    border-radius: 250px 250px 0px 0px;
+}
+
+.gauge-c3 {
+    z-index: 2;
+    position: absolute;
+    background-color: limegreen;
+    width: 400px;
+    height: 200px;
+    top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0px 0px 200px 200px;
+    transform-origin: center top;
+    transition: all 1.3s ease-in-out;
+}
+
+.container1:hover .gauge-c1 {
+    transform: rotate(.375turn);
+}
+
+.container1:hover .gauge-data1 {
+    color: rgb(0, 38, 255);
+}
+.container2:hover .gauge-c2 {
+    transform: rotate(.125turn);
+}
+
+.container2:hover .gauge-data2 {
+    color: rgb(255, 0, 0);
+}
+.container3:hover .gauge-c3 {
+    transform: rotate(.250turn);
+}
+
+.container3:hover .gauge-data3 {
+    color: limegreen;
+}
+
+.gauge-data1 {
+    z-index: 4;
+    color: rgba(255,255,255,.2);
+    font-size: 1.5em;
+    line-height: 25px;
+    position: absolute;
+    width: 400px;
+    height: 200px;
+    top: 90px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 1s ease-out;
+}
+.gauge-data2 {
+    z-index: 4;
+    color: rgba(255,255,255,.2);
+    font-size: 1.5em;
+    line-height: 25px;
+    position: absolute;
+    width: 400px;
+    height: 200px;
+    top: 90px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 1s ease-out;
+}
+.gauge-data3 {
+    z-index: 4;
+    color: rgba(255,255,255,.2);
+    font-size: 1.5em;
+    line-height: 25px;
+    position: absolute;
+    width: 400px;
+    height: 200px;
+    top: 90px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 1s ease-out;
 }
