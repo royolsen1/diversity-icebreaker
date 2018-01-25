@@ -25,6 +25,15 @@ img {
     text-align: center;
     font-size: 16px;
 }
+#checkBoxes{
+    display: flex;   
+    flex-wrap: wrap;
+    padding-left: 10px;
+}
+label{
+    padding-left: 5px;
+    margin: 10px;
+}
 
 div1 {
     float: left;
@@ -42,20 +51,29 @@ table {
 }
 
 table, th, td {
-    border: #000 solid 4px;
-    border-collapse: collapse;
-    background-color: #e6e6e6;
+    
+    border-collapse: separate;
+    background-color: #e6e6e6;    
+    margin: 4px;
+    border-spacing: 3px 0px;
+    padding-left: 10px;
+    /*display: flex;
+    flex-wrap: nowrap;*/
 }
 
 th, td {
-    padding: 10px;
+    border: #000 solid 4px;
+    padding: 10px;   
     text-align: center;
     white-space: nowrap;
+    /*padding-right: 10px;*/
+   
 }
 
 table#t01 th, #t02 th, #t03 th, #t04 th, #t05 th {
     background-color: #737373;
     color: white;
+    
 }
 
 /* The container */

@@ -1,5 +1,36 @@
 ﻿﻿"use strict";
 
+//var LayoutModel = [
+//    [   // Index 0 = Blue
+//        {
+//            title1: 'Blue',
+//            color1: 'Blue',
+//            text1: 'Red: 25, Blue: 71 Green: 54',
+//        },
+//    ],
+//    [   // Index 1 = Red
+//        {
+//            title1: 'Red',
+//            color1: 'Red',
+//            text1: 'Red: 25, Blue: 71 Green: 54',
+//        },
+//    ],
+//    [   // Index 2 = Green
+//        {
+//            title1: 'Green',
+//            color1: 'Green',
+//            text1: 'Red: 25, Blue: 71, Green: 54',
+//        },
+//    ],
+//    [   // Index 3 = Average
+//        {
+//            title1: 'Average',
+//            color1: 'Purple',
+//            text1: 'Red: 25, Blue: 71 Green: 54',
+//        },
+//    ],
+//];
+
 var LayoutModel = [
     [   // Index 0 = 3 groups
         {
@@ -186,7 +217,21 @@ var LayoutModel = [
             text1: '|🔥| R: 50, G: 51, B: 49',
         },
     ],
-];
+ ];
+
+function check01() {
+    // Get the checkbox
+    var checkBox01 = document.getElementById("c1");
+    // Get the output text
+    var Text01 = document.getElementById("Text01");
+
+    // If the checkbox is checked, display the output text
+    if (checkBox01.checked == true) {
+        Text01.style.display = "block";
+    } else {
+        Text01.style.display = "none";
+    }
+}
 
 function showView(showIndex) {
     var html =

@@ -24,48 +24,70 @@
     <br />
     <div id="candicount">Antall deltakere</div>
     <br />
- 
+
     <select id="grouplist" onchange="groupdisp()">
         <option>Number of groups</option>
         <option title="Blue, Red, Green." value="t01">3</option>
         <option title="Blue, Blue-Red, Blue-Green, Green, Green-Red, Green-Blue, Red, Red-Blue, Red-Green, Average." value="t05">10</option>
-    </select>
-
-    <div>
-        <br />
-    </div>
-    <label class="container">
-        Blue
-        <input type="checkbox">
-        <span class="checkmark"></span>
-    </label>
-    <label class="container">
-        Red
-        <input type="checkbox">
-        <span class="checkmark"></span>
-    </label>
-    <label class="container">
-        Green
-        <input type="checkbox">
-        <span class="checkmark"></span>
-    </label>
-    <label class="container">
-        Average
-        <input type="checkbox">
-        <span class="checkmark"></span>
-    </label>
-    <div>
-        <br />
-    </div>
-
-    <div>
+    </select> <div>
         3 groups: Blue, Red, Green.
         <br />
         4 groups: Blue, Red, Green, Average.
         <br />
         10 groups: Blue, Blue-Red, Blue-Green, Green, Green-Red, Green-Blue, Red, Red-Blue, Red-Green, Average.
     </div>
-    <pre>
+
+    <div>
+        <br />
+    </div>
+
+    <div id="checkBoxes">
+        <label class="container" id="c1" onchange="check01()">
+            Blue, Red, Green
+            <input type="checkbox"> <!--checked="checked"-->
+            <span class="checkmark"></span>
+        </label>
+        <label class="container">
+            Average
+            <input type="checkbox">
+            <span class="checkmark"></span>
+        </label>
+        <label class="container">
+            Blue-Red
+            <input type="checkbox">
+            <span class="checkmark"></span>
+        </label>
+        <label class="container">
+            Blue-Green
+            <input type="checkbox">
+            <span class="checkmark"></span>
+        </label>
+        <label class="container">
+            Green-Red
+            <input type="checkbox">
+            <span class="checkmark"></span>
+        </label>
+        <label class="container">
+            Green-Blue
+            <input type="checkbox">
+            <span class="checkmark"></span>
+        </label>
+        <label class="container">
+            Red-Blue
+            <input type="checkbox">
+            <span class="checkmark"></span>
+        </label>
+        <label class="container">
+            Red-Green
+            <input type="checkbox">
+            <span class="checkmark"></span>
+        </label>
+    </div>
+    <div>
+        <br />
+    </div>
+    <p id="Text01" style="display:none">Checkbox is CHECKED!</p>
+
 
 
 
