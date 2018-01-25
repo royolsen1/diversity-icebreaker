@@ -5,6 +5,7 @@ var counter = 0;
 var totalRed = 0;
 var totalBlue = 0;
 var totalGreen = 0;
+var radius = 10;
 
 dataCollection.onSnapshot(
     function (collectionSnapshot) {
@@ -114,15 +115,13 @@ function hexagonMath(red, green, blue) {
         var dx = Math.sqrt(dy * dy / 3);
         var y = relRed + 10;
         var x = Math.round(redScore > rest / 2 ? gx - dx - 6.6025 : gx + dx - 6.6025);
-        //dots.innerHTML +=
-        //    '<line x1="' + x + '" y1="' + y + '" x2="80" y2="110" stroke="black" stroke-width="0.5" />' +
-        //    '<line x1="36.7" y1="35" x2="' + x + '" y2="' + y + '" stroke="black" stroke-width="0.5" />';
-        //    '<line x1="123.3" y1="35" x2="' + x + '" y2="' + y + '" stroke="black" stroke-width="0.5" />;'
         var draw = SVG('drawing');
-        var circleA = draw.circle(2).center(x, y).fill('green');
-        var circleB = draw.circle(2).center(123.3, 35).fill('blue');
-        var circleC = draw.circle(2).center(36.7, 35).fill('blue');
-        var circleD = draw.circle(2).center(80, 110).fill('blue');
+        document.getElementById('radius').value = radius;
+        var circleA = draw.circle(2).center(x, y).fill('green').id('circleA');
+        var circleB = draw.circle(2).center(123.3, 35).fill('blue').id('circleB');
+        var circleC = draw.circle(2).center(36.7, 35).fill('blue').id('circleC');
+        var circleD = draw.circle(2).center(80, 110).fill('blue').id('circleD');
+        var circleE = draw.circle(radius).center(x, y).stroke({ width: 0.5 }).fill('none').id('middleCircle');
         circleA.attr({ class: 'draggable' });
         circleB.attr({ class: 'draggable' });
         circleC.attr({ class: 'draggable' });
@@ -131,7 +130,7 @@ function hexagonMath(red, green, blue) {
             minX: 21.3,
             minY: 9,
             maxX: 138.7,
-            maxY: 101,
+            maxY: 111,
         });
         circleB.draggable({
             minX: 107.9,
@@ -151,17 +150,29 @@ function hexagonMath(red, green, blue) {
             maxX: 109.9,
             maxY: 111
         });
-        var lineB = draw.line(circleA.cx(), circleA.cy(), circleB.cx(), circleB.cy()).stroke({ width: 0.5 });
-        var lineC = draw.line(circleA.cx(), circleA.cy(), circleC.cx(), circleC.cy()).stroke({ width: 0.5 });
-        var lineD = draw.line(circleA.cx(), circleA.cy(), circleD.cx(), circleD.cy()).stroke({ width: 0.5 });
+        var lineB = draw.line(circleA.cx(), circleA.cy(), circleB.cx(), circleB.cy()).stroke({ width: 0.5 }).id('lineB');
+        var lineC = draw.line(circleA.cx(), circleA.cy(), circleC.cx(), circleC.cy()).stroke({ width: 0.5 }).id('lineC');
+        var lineD = draw.line(circleA.cx(), circleA.cy(), circleD.cx(), circleD.cy()).stroke({ width: 0.5 }).id('lineD');
         circleA.on('dragmove',
             function (event) {
-                lineB.attr({ x1: event.detail.p.x });
-                lineB.attr({ y1: event.detail.p.y });
-                lineC.attr({ x1: event.detail.p.x });
-                lineC.attr({ y1: event.detail.p.y });
-                lineD.attr({ x1: event.detail.p.x });
-                lineD.attr({ y1: event.detail.p.y });
+                circleE.attr({ cx: event.detail.p.x });
+                circleE.attr({ cy: event.detail.p.y });
+                var deltaYA = event.detail.p.y - circleB.cy();
+                var deltaXA = circleB.cx() - event.detail.p.x;
+                var angleA = Math.atan2(deltaYA, deltaXA);
+                lineB.attr({ x1: radius * Math.cos(angleA) + event.detail.p.x });
+                lineB.attr({ y1: -radius * Math.sin(angleA) + event.detail.p.y });
+                var deltaYB = event.detail.p.y - circleC.cy();
+                var deltaXB = circleC.cx() - event.detail.p.x;
+                var angleB = Math.atan2(deltaYB, deltaXB);
+                lineC.attr({ x1: radius * Math.cos(angleB) + event.detail.p.x });
+                lineC.attr({ y1: -radius * Math.sin(angleB) + event.detail.p.y });
+                var deltaYC = event.detail.p.y - circleD.cy();
+                var deltaXC = circleD.cx() - event.detail.p.x;
+                var angleC = Math.atan2(deltaYC, deltaXC);
+                lineD.attr({ x1: radius * Math.cos(angleC) + event.detail.p.x });
+                lineD.attr({ y1: -radius * Math.sin(angleC) + event.detail.p.y });
+
             });
 
         circleB.on('dragmove',
@@ -201,4 +212,39 @@ function hexagonMath(red, green, blue) {
                 }
             });
     }
+}
+function circleSize() {
+    radius = document.getElementById('radius').value;
+    document.getElementById('middleCircle').style.r = radius;
+    //lineFix();
+}
+function lineFix() {
+    var circleAX = document.getElementById('circleA').getAttribute('cx');
+    var circleBX = document.getElementById('circleB').getAttribute('cx');
+    var circleCX = document.getElementById('circleC').getAttribute('cx');
+    var circleDX = document.getElementById('circleD').getAttribute('cx');
+    var circleAY = document.getElementById('circleA').getAttribute('cy');
+    var circleBY = document.getElementById('circleB').getAttribute('cy');
+    var circleCY = document.getElementById('circleC').getAttribute('cy');
+    var circleDY = document.getElementById('circleD').getAttribute('cy');
+    var lineB = document.getElementById('lineB');
+    var lineC = document.getElementById('lineC');
+    var lineD = document.getElementById('lineD');
+    var deltaYA = circleAY - circleBY;
+    var deltaXA = circleBX - circleAX;
+    var angleA = Math.atan2(deltaYA, deltaXA);
+    var lineBPointX = radius * Math.cos(angleA) + circleAX;
+    var lineBPointY = -radius * Math.sin(angleA) + circleAY;
+    lineB.setAttribute( 'x1', lineBPointX, 'y1', lineBPointY );
+    //lineB.setAttribute();
+    var deltaYB = circleAY - circleCY;
+    var deltaXB = circleCX - circleAX;
+    var angleB = Math.atan2(deltaYB, deltaXB);
+    //lineC.setAttribute('x1', radius * Math.cos(angleB) + circleAX);
+    //lineC.setAttribute('y1', (-radius * Math.sin(angleB) + circleAY));
+    var deltaYC = circleAY - circleDY;
+    var deltaXC = circleDX - circleAX;
+    var angleC = Math.atan2(deltaYC, deltaXC);
+//    lineD.setAttribute('x1', radius * Math.cos(angleC) + circleAX);
+//    lineD.setAttribute('y1', (-radius * Math.sin(angleC) + circleAY));
 }
