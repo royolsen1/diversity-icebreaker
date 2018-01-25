@@ -25,7 +25,7 @@
         <div class="mainPart rowContainer" style="background-color: antiquewhite">
             <div id="nickName">Nickname</div>
         </div>
-        <div class="RowContainer container1" style="background-color: antiquewhite; flex-grow: 1;">
+        <div class="container1" style="background-color: antiquewhite; flex-grow: 1;">
             <div class="gauge-a1"></div>
             <div class="gauge-b1"></div>
             <div class="gauge-c1"></div>
@@ -33,7 +33,7 @@
                 <h1 id="percent">75%</h1>
             </div>
         </div>
-        <div class="RowContainer container2" style="background-color: antiquewhite; flex-grow: 1;">
+        <div class="container2" style="background-color: antiquewhite; flex-grow: 1;">
             <div class="gauge-a2"></div>
             <div class="gauge-b2"></div>
             <div class="gauge-c2"></div>
@@ -41,7 +41,7 @@
                 <h1 id="percent">25%</h1>
             </div>
         </div>
-        <div class="RowContainer container3" style="background-color: antiquewhite; flex-grow: 1;">
+        <div class="container3" style="background-color: antiquewhite; flex-grow: 1;">
             <div class="gauge-a3"></div>
             <div class="gauge-b3"></div>
             <div class="gauge-c3"></div>
@@ -76,101 +76,100 @@
     </div>
 
 
-            <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
-            <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
-            <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
-            <script>
-                var config = {
-                    apiKey: "AIzaSyDIMCz-H4Qa6yzO8cOEDDO-_-TNgKRwz40",
-                    authDomain: "diversity-icebreaker.firebaseapp.com",
-                    databaseURL: "https://diversity-icebreaker.firebaseio.com/",
-                    projectId: "diversity-icebreaker",
-                    storageBucket: "diversity-icebreaker.appspot.com",
-                    messagingSenderId: "829693602828"
-                };
-                firebase.initializeApp(config);
-                var db = firebase.firestore();
-                var dataCollection = db.collection('Data');
-                var radius = 100;
-                var angleSizeGreen = 120;
-                var angleSizeRed = 120;
-                var angleStart1 = 0;
-                var labelGreen = document.getElementById('Green');
-                var labelRed = document.getElementById('Red');
-                var redAmount;
-                var blueAmount;
-                var greenAmount;
-                //var alias = prompt("Please enter your nickname");
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
+    <script>
+        var config = {
+            apiKey: "AIzaSyDIMCz-H4Qa6yzO8cOEDDO-_-TNgKRwz40",
+            authDomain: "diversity-icebreaker.firebaseapp.com",
+            databaseURL: "https://diversity-icebreaker.firebaseio.com/",
+            projectId: "diversity-icebreaker",
+            storageBucket: "diversity-icebreaker.appspot.com",
+            messagingSenderId: "829693602828"
+        };
+        firebase.initializeApp(config);
+        var db = firebase.firestore();
+        var dataCollection = db.collection('Data');
+        var radius = 100;
+        var angleSizeGreen = 120;
+        var angleSizeRed = 120;
+        var angleStart1 = 0;
+        var labelGreen = document.getElementById('Green');
+        var labelRed = document.getElementById('Red');
+        var redAmount;
+        var blueAmount;
+        var greenAmount;
+       var alias = prompt("Please enter your nickname");
+        if (alias != null) {
+            document.getElementById("nickName").innerHTML = "Nickname: " + alias;
+        }
+        function addScore() {
+            var newScore = {};
+            newScore.red = redAmount;
+            newScore.blue = blueAmount;
+            newScore.green = greenAmount;
+            newScore.name = alias;
+            dataCollection.add(newScore);
+        }
+        function changeSize1(input) {
+            angleSizeGreen = parseInt(input.value) * 18 / 10;
+            labelGreen.innerText = input.value;
+            document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
+            document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
+            document.getElementById("blueSolution").innerHTML = "Blue score = " + (150 - greenInput.value - redInput.value);
+            redAmount = Math.round(redInput.value);
+            greenAmount = Math.round(greenInput.value);
+            blueAmount = Math.round((150) - redAmount - greenAmount);
+            if (150 - greenInput.value - redInput.value > 99) {
+                blueInput.value = 150 - greenInput.value - redInput.value;
+            }
+            if (redAmount + greenAmount + blueAmount == 150) {
                 show();
-                if (alias != null) {
-                    document.getElementById("nickName").innerHTML = alias;
-                }
-                function addScore() {
-                    var newScore = {};
-                    newScore.red = redAmount;
-                    newScore.blue = blueAmount;
-                    newScore.green = greenAmount;
-                    newScore.name = alias;
-                    dataCollection.add(newScore);
-                }
-                function changeSize1(input) {
-                    angleSizeGreen = parseInt(input.value) * 18 / 10;
-                    labelGreen.innerText = input.value;
-                    document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
-                    document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
-                    document.getElementById("blueSolution").innerHTML = "Blue score = " + (150 - greenInput.value - redInput.value);
-                    redAmount = Math.round(redInput.value);
-                    greenAmount = Math.round(greenInput.value);
-                    blueAmount = Math.round((150) - redAmount - greenAmount);
-                    if (150 - greenInput.value - redInput.value > 99) {
-                        blueInput.value = 150 - greenInput.value - redInput.value;
-                    }
-                    if (redAmount + greenAmount + blueAmount == 150) {
-                        show();
-                    } else {
-                        redInput.value -= 1;
-                        show();
-                    }
-                }
-                function changeSize2(input) {
-                    angleSizeRed = parseInt(input.value) * 18 / 10;
-                    labelRed.innerText = input.value;
-                    document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
-                    document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
-                    document.getElementById("blueSolution").innerHTML = "Blue score = " + (150 - greenInput.value - redInput.value);
-                    redAmount = Math.round(redInput.value);
-                    greenAmount = Math.round(greenInput.value);
-                    blueAmount = Math.round((150) - redAmount - greenAmount);
-                    if (150 - blueInput.value - redInput.value > 99) {
-                        greenInput.value = 150 - redInput.value - blueInput.value;
-                    }
-                    if (redAmount + greenAmount + blueAmount == 150) {
-                        show();
-                    } else {
-                        greenInput.value -= 1;
-                        show();
-                    }
-                }
-                function changeSize3(input) {
-                    angleSizeBlue = parseInt(input.value) * 18 / 10;
-                    labelBlue.innerText = input.value;
-                    document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
-                    document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
-                    document.getElementById("blueSolution").innerHTML = "Blue score = " + (150 - greenInput.value - redInput.value);
-                    redAmount = Math.round(redInput.value);
-                    greenAmount = Math.round(greenInput.value);
-                    blueAmount = Math.round((150) - redAmount - greenAmount);
-                    if (150 - greenInput.value - blueInput.value > 99) {
-                        redInput.value = 150 - greenInput.value - blueInput.value;
-                    }
-                    if (redAmount + greenAmount + blueAmount == 150) {
-                        show();
-                    } else {
-                        blueInput.value -= 1;
-                        show();
-                    }
-                }
+            } else {
+                redInput.value -= 1;
+                show();
+            }
+        }
+        function changeSize2(input) {
+            angleSizeRed = parseInt(input.value) * 18 / 10;
+            labelRed.innerText = input.value;
+            document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
+            document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
+            document.getElementById("blueSolution").innerHTML = "Blue score = " + (150 - greenInput.value - redInput.value);
+            redAmount = Math.round(redInput.value);
+            greenAmount = Math.round(greenInput.value);
+            blueAmount = Math.round((150) - redAmount - greenAmount);
+            if (150 - blueInput.value - redInput.value > 99) {
+                greenInput.value = 150 - redInput.value - blueInput.value;
+            }
+            if (redAmount + greenAmount + blueAmount == 150) {
+                show();
+            } else {
+                greenInput.value -= 1;
+                show();
+            }
+        }
+        function changeSize3(input) {
+            angleSizeBlue = parseInt(input.value) * 18 / 10;
+            labelBlue.innerText = input.value;
+            document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
+            document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
+            document.getElementById("blueSolution").innerHTML = "Blue score = " + (150 - greenInput.value - redInput.value);
+            redAmount = Math.round(redInput.value);
+            greenAmount = Math.round(greenInput.value);
+            blueAmount = Math.round((150) - redAmount - greenAmount);
+            if (150 - greenInput.value - blueInput.value > 99) {
+                redInput.value = 150 - greenInput.value - blueInput.value;
+            }
+            if (redAmount + greenAmount + blueAmount == 150) {
+                show();
+            } else {
+                blueInput.value -= 1;
+                show();
+            }
+        }
 
-            </script>
+    </script>
 </body>
 </html>
