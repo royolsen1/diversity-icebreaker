@@ -157,23 +157,22 @@ function hexagonMath(red, green, blue) {
             function (event) {
                 circleE.attr({ cx: event.detail.p.x });
                 circleE.attr({ cy: event.detail.p.y });
-                var deltaYA = event.detail.p.y - circleB.cy();
-                var deltaXA = circleB.cx() - event.detail.p.x;
-                var angleA = Math.atan2(deltaYA, deltaXA);
-                lineB.attr({ x1: radius * Math.cos(angleA) + event.detail.p.x });
-                lineB.attr({ y1: -radius * Math.sin(angleA) + event.detail.p.y });
-                var deltaYB = event.detail.p.y - circleC.cy();
-                var deltaXB = circleC.cx() - event.detail.p.x;
-                var angleB = Math.atan2(deltaYB, deltaXB);
-                lineC.attr({ x1: radius * Math.cos(angleB) + event.detail.p.x });
-                lineC.attr({ y1: -radius * Math.sin(angleB) + event.detail.p.y });
-                var deltaYC = event.detail.p.y - circleD.cy();
-                var deltaXC = circleD.cx() - event.detail.p.x;
-                var angleC = Math.atan2(deltaYC, deltaXC);
-                lineD.attr({ x1: radius * Math.cos(angleC) + event.detail.p.x });
-                lineD.attr({ y1: -radius * Math.sin(angleC) + event.detail.p.y });
-
-            });
+                var deltaYAB = event.detail.p.y - circleB.cy();
+                var deltaXAB = circleB.cx() - event.detail.p.x;
+                var angleAB = Math.atan2(deltaYAB, deltaXAB);
+                lineB.attr({ x1: radius * Math.cos(angleAB) + event.detail.p.x });
+                lineB.attr({ y1: -radius * Math.sin(angleAB) + event.detail.p.y });
+                var deltaYAC = event.detail.p.y - circleC.cy();
+                var deltaXAC = circleC.cx() - event.detail.p.x;
+                var angleAC = Math.atan2(deltaYAC, deltaXAC);
+                lineC.attr({ x1: radius * Math.cos(angleAC) + event.detail.p.x });
+                lineC.attr({ y1: -radius * Math.sin(angleAC) + event.detail.p.y });
+                var deltaYAD = event.detail.p.y - circleD.cy();
+                var deltaXAD = circleD.cx() - event.detail.p.x;
+                var angleAD = Math.atan2(deltaYAD, deltaXAD);
+                lineD.attr({ x1: radius * Math.cos(angleAD) + event.detail.p.x });
+                lineD.attr({ y1: -radius * Math.sin(angleAD) + event.detail.p.y });
+        });
 
         circleB.on('dragmove',
             function (event) {
@@ -187,6 +186,11 @@ function hexagonMath(red, green, blue) {
                     lineB.attr({ x2: event.detail.p.x });
                     lineB.attr({ y2: event.detail.p.x * 1.74 - 179.76 });
                 }
+                var deltaYAB = circleA.cy() - event.detail.p.y;
+                var deltaXAB = event.detail.p.x - circleA.cx();
+                var angleAB = Math.atan2(deltaYAB, deltaXAB);
+                lineB.attr({ x1: radius * Math.cos(angleAB) + circleA.cx() });
+                lineB.attr({ y1: -radius * Math.sin(angleAB) + circleA.cy() });
             });
         circleC.on('dragmove',
             function (event) {
@@ -200,6 +204,11 @@ function hexagonMath(red, green, blue) {
                     lineC.attr({ x2: event.detail.p.x });
                     lineC.attr({ y2: event.detail.p.x * (-1.74) + 98.72 });
                 }
+                var deltaYAC = circleA.cy() - event.detail.p.y;
+                var deltaXAC = event.detail.p.x - circleA.cx();
+                var angleAC = Math.atan2(deltaYAC, deltaXAC);
+                lineC.attr({ x1: radius * Math.cos(angleAC) + circleA.cx() });
+                lineC.attr({ y1: -radius * Math.sin(angleAC) + circleA.cy() });
             });
         circleD.on('dragmove',
             function (event) {
@@ -210,6 +219,11 @@ function hexagonMath(red, green, blue) {
                 } else {
                     lineD.attr({ x2: event.detail.p.x });
                 }
+                var deltaYAD = circleA.cy() - event.detail.p.y;
+                var deltaXAD = event.detail.p.x - circleA.cx();
+                var angleAD = Math.atan2(deltaYAD, deltaXAD);
+                lineD.attr({ x1: radius * Math.cos(angleAD) + circleA.cx() });
+                lineD.attr({ y1: -radius * Math.sin(angleAD) + circleA.cy() });
             });
     }
 }
@@ -218,33 +232,33 @@ function circleSize() {
     document.getElementById('middleCircle').style.r = radius;
     //lineFix();
 }
-function lineFix() {
-    var circleAX = document.getElementById('circleA').getAttribute('cx');
-    var circleBX = document.getElementById('circleB').getAttribute('cx');
-    var circleCX = document.getElementById('circleC').getAttribute('cx');
-    var circleDX = document.getElementById('circleD').getAttribute('cx');
-    var circleAY = document.getElementById('circleA').getAttribute('cy');
-    var circleBY = document.getElementById('circleB').getAttribute('cy');
-    var circleCY = document.getElementById('circleC').getAttribute('cy');
-    var circleDY = document.getElementById('circleD').getAttribute('cy');
-    var lineB = document.getElementById('lineB');
-    var lineC = document.getElementById('lineC');
-    var lineD = document.getElementById('lineD');
-    var deltaYA = circleAY - circleBY;
-    var deltaXA = circleBX - circleAX;
-    var angleA = Math.atan2(deltaYA, deltaXA);
-    var lineBPointX = radius * Math.cos(angleA) + circleAX;
-    var lineBPointY = -radius * Math.sin(angleA) + circleAY;
-    lineB.setAttribute( 'x1', lineBPointX, 'y1', lineBPointY );
-    //lineB.setAttribute();
-    var deltaYB = circleAY - circleCY;
-    var deltaXB = circleCX - circleAX;
-    var angleB = Math.atan2(deltaYB, deltaXB);
-    //lineC.setAttribute('x1', radius * Math.cos(angleB) + circleAX);
-    //lineC.setAttribute('y1', (-radius * Math.sin(angleB) + circleAY));
-    var deltaYC = circleAY - circleDY;
-    var deltaXC = circleDX - circleAX;
-    var angleC = Math.atan2(deltaYC, deltaXC);
-//    lineD.setAttribute('x1', radius * Math.cos(angleC) + circleAX);
-//    lineD.setAttribute('y1', (-radius * Math.sin(angleC) + circleAY));
-}
+// function lineFix() {
+//     var circleAX = document.getElementById('circleA').getAttribute('cx');
+//     var circleBX = document.getElementById('circleB').getAttribute('cx');
+//     var circleCX = document.getElementById('circleC').getAttribute('cx');
+//     var circleDX = document.getElementById('circleD').getAttribute('cx');
+//     var circleAY = document.getElementById('circleA').getAttribute('cy');
+//     var circleBY = document.getElementById('circleB').getAttribute('cy');
+//     var circleCY = document.getElementById('circleC').getAttribute('cy');
+//     var circleDY = document.getElementById('circleD').getAttribute('cy');
+//     var lineB = document.getElementById('lineB');
+//     var lineC = document.getElementById('lineC');
+//     var lineD = document.getElementById('lineD');
+//     var deltaYA = circleAY - circleBY;
+//     var deltaXA = circleBX - circleAX;
+//     var angleA = Math.atan2(deltaYA, deltaXA);
+//     var lineBPointX = radius * Math.cos(angleA) + circleAX;
+//     var lineBPointY = -radius * Math.sin(angleA) + circleAY;
+//     lineB.setAttribute( 'x1', lineBPointX, 'y1', lineBPointY );
+//     lineB.setAttribute();
+//     var deltaYB = circleAY - circleCY;
+//     var deltaXB = circleCX - circleAX;
+//     var angleB = Math.atan2(deltaYB, deltaXB);
+//     lineC.setAttribute('x1', radius * Math.cos(angleB) + circleAX);
+//     lineC.setAttribute('y1', (-radius * Math.sin(angleB) + circleAY));
+//     var deltaYC = circleAY - circleDY;
+//     var deltaXC = circleDX - circleAX;
+//     var angleC = Math.atan2(deltaYC, deltaXC);
+//     lineD.setAttribute('x1', radius * Math.cos(angleC) + circleAX);
+//     lineD.setAttribute('y1', (-radius * Math.sin(angleC) + circleAY));
+// }
