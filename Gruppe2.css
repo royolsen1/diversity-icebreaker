@@ -336,3 +336,12 @@ body:hover .gauge-data3 {
     transition: all 1s ease-out;
     opacity: .8;
 }
+#textColorBlue {
+    color: royalblue;
+}
+#textColorRed {
+    color: red;
+}
+#textColorGreen {
+    color: limegreen;
+}
