@@ -30,7 +30,7 @@
             <div class="gauge-b1"></div>
             <div class="gauge-c1"></div>
             <div class="gauge-data1">
-                <h1 id="percent">75%</h1>
+                <h1 id="percent1">50%</h1>
             </div>
         </div>
         <div class="container2" style="background-color: antiquewhite; flex-grow: 1;">
@@ -38,7 +38,7 @@
             <div class="gauge-b2"></div>
             <div class="gauge-c2"></div>
             <div class="gauge-data2">
-                <h1 id="percent">25%</h1>
+                <h1 id="percent2">50%</h1>
             </div>
         </div>
         <div class="container3" style="background-color: antiquewhite; flex-grow: 1;">
@@ -46,7 +46,7 @@
             <div class="gauge-b3"></div>
             <div class="gauge-c3"></div>
             <div class="gauge-data3">
-                <h1 id="percent">50%</h1>
+                <h1 id="percent3">50%</h1>
             </div>
         </div>
 
@@ -57,7 +57,7 @@
         <div class="mainPart" style="background-color: antiquewhite; flex-grow: 2;">
             <div class="rowContainer">
                 <div class="part columnContainer">
-                    <div><input class="slider" id="blueInput" type="text" name="points" value="50" step="1" min="0" max="100" oninput="changeSize3(this)"><span id="Blue"></span></div>
+                    <div><input class="slider" id="blueInput" type="checkbox" name="points" value="50" step="1" min="0" max="100" oninput="changeSize1(this)"><span id="Blue"></span></div>
                     <div class="btn pri" id="blueSolution">Blue score = </div>
                 </div>
                 <div class="part columnContainer">
@@ -65,7 +65,7 @@
                     <div class="btn pri" id="redSolution">Red score = </div>
                 </div>
                 <div class="part columnContainer">
-                    <div><input class="slider" id="greenInput" type="text" name="points" value="50" step="1" min="0" max="100" oninput="changeSize1(this)"><span id="Green"></span></div>
+                    <div><input class="slider" id="greenInput" type="text" name="points" value="50" step="1" min="0" max="100" oninput="changeSize3(this)"><span id="Green"></span></div>
                     <div class="btn pri" id="greenSolution">Green score = </div>
                 </div>
                 <div>
@@ -113,21 +113,45 @@
             dataCollection.add(newScore);
         }
         function changeSize1(input) {
-            angleSizeGreen = parseInt(input.value) * 18 / 10;
-            labelGreen.innerText = input.value;
+            angleSizeBlue = parseInt(input.value) * 18 / 10;
+            labelBlue.innerText = input.value;
             document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
             document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
             document.getElementById("blueSolution").innerHTML = "Blue score = " + (150 - greenInput.value - redInput.value);
             redAmount = Math.round(redInput.value);
             greenAmount = Math.round(greenInput.value);
             blueAmount = Math.round((150) - redAmount - greenAmount);
-            if (150 - greenInput.value - redInput.value > 99) {
-                blueInput.value = 150 - greenInput.value - redInput.value;
+            if (blueAmount < 2) {
+                document.getElementsByClassName("gauge-c1")[0].style.transform = "rotate(.00" + blueAmount * 5 + "turn)";
+            } else if (blueAmount < 20) {
+                document.getElementsByClassName("gauge-c1")[0].style.transform = "rotate(.0" + blueAmount * 5 + "turn)";
+            } else {
+                document.getElementsByClassName("gauge-c1")[0].style.transform = "rotate(." + blueAmount * 5 + "turn)";
+            }
+            if (redAmount < 2) {
+                document.getElementsByClassName("gauge-c2")[0].style.transform = "rotate(.00" + redAmount * 5 + "turn)";
+            } else if (redAmount < 20) {
+                document.getElementsByClassName("gauge-c2")[0].style.transform = "rotate(.0" + redAmount * 5 + "turn)";
+            } else {
+                document.getElementsByClassName("gauge-c2")[0].style.transform = "rotate(." + redAmount * 5 + "turn)";
+            }
+            if (greenAmount < 2) {
+                document.getElementsByClassName("gauge-c3")[0].style.transform = "rotate(.00" + greenAmount * 5 + "turn)";
+            } else if (greenAmount < 20) {
+                document.getElementsByClassName("gauge-c3")[0].style.transform = "rotate(.0" + greenAmount * 5 + "turn)";
+            } else {
+                document.getElementsByClassName("gauge-c3")[0].style.transform = "rotate(." + greenAmount * 5 + "turn)";
+            }
+            document.getElementById("percent1").innerHTML = blueAmount + "%";
+            document.getElementById("percent2").innerHTML = redAmount + "%";
+            document.getElementById("percent3").innerHTML = greenAmount + "%";
+            if (150 - greenInput.value - blueInput.value > 99) {
+                redInput.value = 150 - greenInput.value - blueInput.value;
             }
             if (redAmount + greenAmount + blueAmount == 150) {
                 show();
             } else {
-                redInput.value -= 1;
+                blueInput.value -= 1;
                 show();
             }
         }
@@ -140,6 +164,30 @@
             redAmount = Math.round(redInput.value);
             greenAmount = Math.round(greenInput.value);
             blueAmount = Math.round((150) - redAmount - greenAmount);
+            if (blueAmount < 2) {
+                document.getElementsByClassName("gauge-c1")[0].style.transform = "rotate(.00" + blueAmount * 5 + "turn)";
+            } else if (blueAmount < 20) {
+                document.getElementsByClassName("gauge-c1")[0].style.transform = "rotate(.0" + blueAmount * 5 + "turn)";
+            } else {
+                document.getElementsByClassName("gauge-c1")[0].style.transform = "rotate(." + blueAmount * 5 + "turn)";
+            }
+            if (redAmount < 2) {
+                document.getElementsByClassName("gauge-c2")[0].style.transform = "rotate(.00" + redAmount * 5 + "turn)";
+            } else if (redAmount < 20) {
+                document.getElementsByClassName("gauge-c2")[0].style.transform = "rotate(.0" + redAmount * 5 + "turn)";
+            } else {
+                document.getElementsByClassName("gauge-c2")[0].style.transform = "rotate(." + redAmount * 5 + "turn)";
+            }
+            if (greenAmount < 2) {
+                document.getElementsByClassName("gauge-c3")[0].style.transform = "rotate(.00" + greenAmount * 5 + "turn)";
+            } else if (greenAmount < 20) {
+                document.getElementsByClassName("gauge-c3")[0].style.transform = "rotate(.0" + greenAmount * 5 + "turn)";
+            } else {
+                document.getElementsByClassName("gauge-c3")[0].style.transform = "rotate(." + greenAmount * 5 + "turn)";
+            }
+            document.getElementById("percent1").innerHTML = blueAmount + "%";
+            document.getElementById("percent2").innerHTML = redAmount + "%";
+            document.getElementById("percent3").innerHTML = greenAmount + "%";
             if (150 - blueInput.value - redInput.value > 99) {
                 greenInput.value = 150 - redInput.value - blueInput.value;
             }
@@ -151,25 +199,48 @@
             }
         }
         function changeSize3(input) {
-            angleSizeBlue = parseInt(input.value) * 18 / 10;
-            labelBlue.innerText = input.value;
+            angleSizeGreen = parseInt(input.value) * 18 / 10;
+            labelGreen.innerText = input.value;
             document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
             document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
             document.getElementById("blueSolution").innerHTML = "Blue score = " + (150 - greenInput.value - redInput.value);
             redAmount = Math.round(redInput.value);
             greenAmount = Math.round(greenInput.value);
             blueAmount = Math.round((150) - redAmount - greenAmount);
-            if (150 - greenInput.value - blueInput.value > 99) {
-                redInput.value = 150 - greenInput.value - blueInput.value;
+            if (blueAmount < 2) {
+                document.getElementsByClassName("gauge-c1")[0].style.transform = "rotate(.00" + blueAmount * 5 + "turn)";
+            } else if (blueAmount < 20) {
+                document.getElementsByClassName("gauge-c1")[0].style.transform = "rotate(.0" + blueAmount * 5 + "turn)";
+            } else {
+                document.getElementsByClassName("gauge-c1")[0].style.transform = "rotate(." + blueAmount * 5 + "turn)";
+            }
+            if (redAmount < 2) {
+                document.getElementsByClassName("gauge-c2")[0].style.transform = "rotate(.00" + redAmount * 5 + "turn)";
+            } else if (redAmount < 20) {
+                document.getElementsByClassName("gauge-c2")[0].style.transform = "rotate(.0" + redAmount * 5 + "turn)";
+            } else {
+                document.getElementsByClassName("gauge-c2")[0].style.transform = "rotate(." + redAmount * 5 + "turn)";
+            }
+            if (greenAmount < 2) {
+                document.getElementsByClassName("gauge-c3")[0].style.transform = "rotate(.00" + greenAmount * 5 + "turn)";
+            } else if (greenAmount < 20) {
+                document.getElementsByClassName("gauge-c3")[0].style.transform = "rotate(.0" + greenAmount * 5 + "turn)";
+            } else {
+                document.getElementsByClassName("gauge-c3")[0].style.transform = "rotate(." + greenAmount * 5 + "turn)";
+            }
+            document.getElementById("percent1").innerHTML = blueAmount + "%";
+            document.getElementById("percent2").innerHTML = redAmount + "%";
+            document.getElementById("percent3").innerHTML = greenAmount + "%";
+            if (150 - greenInput.value - redInput.value > 99) {
+                blueInput.value = 150 - greenInput.value - redInput.value;
             }
             if (redAmount + greenAmount + blueAmount == 150) {
                 show();
             } else {
-                blueInput.value -= 1;
+                redInput.value -= 1;
                 show();
             }
         }
-
     </script>
 </body>
 </html>

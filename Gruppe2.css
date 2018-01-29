@@ -285,24 +285,12 @@ YG {
     transition: all 1.3s ease-in-out;
 }
 
-body:hover .gauge-c1 {
-    transform: rotate(.375turn);
-}
-
 body:hover .gauge-data1 {
     color: royalblue;
 }
-body:hover .gauge-c2 {
-    transform: rotate(.125turn);
-}
-
 body:hover .gauge-data2 {
     color: red;
 }
-body:hover .gauge-c3 {
-    transform: rotate(.250turn);
-}
-
 body:hover .gauge-data3 {
     color: limegreen;
 }
