@@ -1,12 +1,12 @@
 var db = firebase.firestore();
 var dataCollection = db.collection('Data');
+var adminCollection = db.collection('Admin');
 hexagonBuild();
 var counter = 0;
 var totalRed = 0;
 var totalBlue = 0;
 var totalGreen = 0;
 var radius = 10;
-
 dataCollection.onSnapshot(
     function (collectionSnapshot) {
         hexagonBuild();
@@ -115,13 +115,18 @@ function hexagonMath(red, green, blue) {
         var dx = Math.sqrt(dy * dy / 3);
         var y = relRed + 10;
         var x = Math.round(redScore > rest / 2 ? gx - dx - 6.6025 : gx + dx - 6.6025);
+            groupFour(x, y);
+    }
+}
+
+function groupFour(x, y) {
         var draw = SVG('drawing');
         document.getElementById('radius').value = radius;
         var circleA = draw.circle(2).center(x, y).fill('green').id('circleA');
         var circleB = draw.circle(2).center(123.3, 35).fill('blue').id('circleB');
         var circleC = draw.circle(2).center(36.7, 35).fill('blue').id('circleC');
         var circleD = draw.circle(2).center(80, 110).fill('blue').id('circleD');
-        var circleE = draw.circle(radius).center(x, y).stroke({ width: 0.5 }).fill('none').id('middleCircle');
+        var circleE = draw.circle(radius * 2).center(x, y).stroke({ width: 0.5 }).fill('none').id('middleCircle');
         circleA.attr({ class: 'draggable' });
         circleB.attr({ class: 'draggable' });
         circleC.attr({ class: 'draggable' });
@@ -155,23 +160,23 @@ function hexagonMath(red, green, blue) {
         var lineD = draw.line(circleA.cx(), circleA.cy(), circleD.cx(), circleD.cy()).stroke({ width: 0.5 }).id('lineD');
         circleA.on('dragmove',
             function (event) {
-                circleE.attr({ cx: event.detail.p.x });
-                circleE.attr({ cy: event.detail.p.y });
-                var deltaYAB = event.detail.p.y - circleB.cy();
-                var deltaXAB = circleB.cx() - event.detail.p.x;
+                circleE.attr({ cx: circleA.cx() });
+                circleE.attr({ cy: circleA.cy() });
+                var deltaYAB = circleA.cy() - circleB.cy();
+                var deltaXAB = circleB.cx() - circleA.cx();
                 var angleAB = Math.atan2(deltaYAB, deltaXAB);
-                lineB.attr({ x1: radius * Math.cos(angleAB) + event.detail.p.x });
-                lineB.attr({ y1: -radius * Math.sin(angleAB) + event.detail.p.y });
-                var deltaYAC = event.detail.p.y - circleC.cy();
-                var deltaXAC = circleC.cx() - event.detail.p.x;
+                lineB.attr({ x1: radius * Math.cos(angleAB) + circleA.cx() });
+                lineB.attr({ y1: -radius * Math.sin(angleAB) + circleA.cy() });
+                var deltaYAC = circleA.cy() - circleC.cy();
+                var deltaXAC = circleC.cx() - circleA.cx();
                 var angleAC = Math.atan2(deltaYAC, deltaXAC);
-                lineC.attr({ x1: radius * Math.cos(angleAC) + event.detail.p.x });
-                lineC.attr({ y1: -radius * Math.sin(angleAC) + event.detail.p.y });
-                var deltaYAD = event.detail.p.y - circleD.cy();
-                var deltaXAD = circleD.cx() - event.detail.p.x;
+                lineC.attr({ x1: radius * Math.cos(angleAC) + circleA.cx() });
+                lineC.attr({ y1: -radius * Math.sin(angleAC) + circleA.cy() });
+                var deltaYAD = circleA.cy() - circleD.cy();
+                var deltaXAD = circleD.cx() - circleA.cx();
                 var angleAD = Math.atan2(deltaYAD, deltaXAD);
-                lineD.attr({ x1: radius * Math.cos(angleAD) + event.detail.p.x });
-                lineD.attr({ y1: -radius * Math.sin(angleAD) + event.detail.p.y });
+                lineD.attr({ x1: radius * Math.cos(angleAD) + circleA.cx() });
+                lineD.attr({ y1: -radius * Math.sin(angleAD) + circleA.cy() });
         });
 
         circleB.on('dragmove',
@@ -186,8 +191,8 @@ function hexagonMath(red, green, blue) {
                     lineB.attr({ x2: event.detail.p.x });
                     lineB.attr({ y2: event.detail.p.x * 1.74 - 179.76 });
                 }
-                var deltaYAB = circleA.cy() - event.detail.p.y;
-                var deltaXAB = event.detail.p.x - circleA.cx();
+                var deltaYAB = circleA.cy() - document.getElementById('lineB').getAttribute('y2');
+                var deltaXAB = document.getElementById('lineB').getAttribute('x2') - circleA.cx();
                 var angleAB = Math.atan2(deltaYAB, deltaXAB);
                 lineB.attr({ x1: radius * Math.cos(angleAB) + circleA.cx() });
                 lineB.attr({ y1: -radius * Math.sin(angleAB) + circleA.cy() });
@@ -204,8 +209,8 @@ function hexagonMath(red, green, blue) {
                     lineC.attr({ x2: event.detail.p.x });
                     lineC.attr({ y2: event.detail.p.x * (-1.74) + 98.72 });
                 }
-                var deltaYAC = circleA.cy() - event.detail.p.y;
-                var deltaXAC = event.detail.p.x - circleA.cx();
+                var deltaYAC = circleA.cy() - document.getElementById('lineC').getAttribute('y2');
+                var deltaXAC = document.getElementById('lineC').getAttribute('x2') - circleA.cx();
                 var angleAC = Math.atan2(deltaYAC, deltaXAC);
                 lineC.attr({ x1: radius * Math.cos(angleAC) + circleA.cx() });
                 lineC.attr({ y1: -radius * Math.sin(angleAC) + circleA.cy() });
@@ -219,13 +224,12 @@ function hexagonMath(red, green, blue) {
                 } else {
                     lineD.attr({ x2: event.detail.p.x });
                 }
-                var deltaYAD = circleA.cy() - event.detail.p.y;
-                var deltaXAD = event.detail.p.x - circleA.cx();
+                var deltaYAD = circleA.cy() - document.getElementById('lineD').getAttribute('y2');
+                var deltaXAD = document.getElementById('lineD').getAttribute('x2') - circleA.cx();
                 var angleAD = Math.atan2(deltaYAD, deltaXAD);
                 lineD.attr({ x1: radius * Math.cos(angleAD) + circleA.cx() });
                 lineD.attr({ y1: -radius * Math.sin(angleAD) + circleA.cy() });
             });
-    }
 }
 function circleSize() {
     radius = document.getElementById('radius').value;
