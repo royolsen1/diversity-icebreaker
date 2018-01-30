@@ -134,10 +134,17 @@ toggle between hiding and showing the dropdown content */
             var number = Math.floor((Math.random() * 2));
             newScore.sex = number == 0 ? 'Male' : 'Female';
             newScore.name = newScore.sex + newScore.age;
-            var number2 = Math.floor((Math.random() * 3));
-            if (number2 == 0) { newScore.group = 'Red' }
-            else if (number2 == 1) { newScore.group = 'Blue' }
-            else if (number2 == 2) { newScore.group = 'Green' }
+            if (newScore.red > newScore.blue && newScore.red > newScore.green) {
+                newScore.group = 'Red';
+            } else if (newScore.green > newScore.blue && newScore.green > newScore.red) {
+                newScore.group = 'Green';
+            } else if (newScore.blue > newScore.red && newScore.blue > newScore.green) {
+                newScore.group = 'Blue';
+            }
+            //var number2 = Math.floor((Math.random() * 3));
+            //if (number2 == 0) { newScore.group = 'Red' }
+            //else if (number2 == 1) { newScore.group = 'Blue' }
+            //else if (number2 == 2) { newScore.group = 'Green' }
             if (newScore.green < 0 || newScore.green > 100) {
                 randomScore();
             }
