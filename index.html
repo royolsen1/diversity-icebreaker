@@ -54,6 +54,13 @@
         </div>
     </div>
 
+    <div class="container" id="nrGroupSelect">
+        <div class="list">
+            <div class="rbgBox">number of groups:<input type="text" id="groupNrSelect" /></div>
+            <button onclick="chooseGroups()">Set group</button>
+        </div>
+    </div>
+
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
@@ -71,15 +78,16 @@
     </script>
 
     <script>
-        var usersScores = [];
         var db = firebase.firestore();
         var dataCollection = db.collection('Data');
+        var adminCollection = db.collection('Admin');
         var redAmount = document.getElementById('redInput');
         var blueAmount = document.getElementById('blueInput');
         var greenAmount = document.getElementById('greenInput');
         var ageAmount = document.getElementById('ageInput');
         var sexAmount;
         var nameAmount = document.getElementById('nameInput');
+        var groupAmount = document.getElementById('groupNrSelect')
 
         /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
@@ -126,6 +134,10 @@ toggle between hiding and showing the dropdown content */
             var number = Math.floor((Math.random() * 2));
             newScore.sex = number == 0 ? 'Male' : 'Female';
             newScore.name = newScore.sex + newScore.age;
+            var number2 = Math.floor((Math.random() * 3));
+            if (number2 == 0) { newScore.group = 'Red' }
+            else if (number2 == 1) { newScore.group = 'Blue' }
+            else if (number2 == 2) { newScore.group = 'Green' }
             if (newScore.green < 0 || newScore.green > 100) {
                 randomScore();
             }
@@ -183,6 +195,12 @@ toggle between hiding and showing the dropdown content */
         }
 
         document.getElementById('editableDiv').addEventListener('paste', handlePaste);
+
+        function chooseGroups() {
+            adminCollection.doc('group').update({
+                nr: groupAmount.value
+            });
+        }
     </script>
 </body>
 </html>
