@@ -81,6 +81,13 @@ gruppe {
     top: 55%;
     font-size: 20px;
 }
+#modeSwitch {
+    display: block;
+    position: absolute;
+    left: 45%;
+    top: 58%;
+    font-size: 22px;
+}
 
 YG {
     position: absolute;

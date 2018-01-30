@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="Gruppe2.css">
-    <title></title>
+    <title>Graphical Visualization</title>
 
 </head>
 <body>
@@ -30,7 +30,7 @@
             <div class="gauge-b1"></div>
             <div class="gauge-c1"></div>
             <div class="gauge-data1">
-                <h1 id="percent1">50%</h1>
+                <h1 id="percent1">0</h1>
             </div>
         </div>
         <div class="container2" style="background-color: antiquewhite; flex-grow: 1;">
@@ -38,7 +38,7 @@
             <div class="gauge-b2"></div>
             <div class="gauge-c2"></div>
             <div class="gauge-data2">
-                <h1 id="percent2">50%</h1>
+                <h1 id="percent2">0</h1>
             </div>
         </div>
         <div class="container3" style="background-color: antiquewhite; flex-grow: 1;">
@@ -46,13 +46,16 @@
             <div class="gauge-b3"></div>
             <div class="gauge-c3"></div>
             <div class="gauge-data3">
-                <h1 id="percent3">50%</h1>
+                <h1 id="percent3">0</h1>
             </div>
         </div>
 
         <div class="mainPart" style="background-color: antiquewhite;">
-            <div class="btn pri rowContainer" id="groupAllocation">You are: <div id="textColorBlue">Blue </div><div id="textColorRed">Red</div><div id="textColorGreen">Green</div>-Group</div>
-            <div></div>
+            <div class="btn pri rowContainer" id="groupAllocation">You are:<div id="textColorBlue">Blue</div><div id="textColorRed">Red</div><div id="textColorGreen">Green</div>-Group</div>
+            <div id="modeSwitch">
+                <input id="fancyInput" type="checkbox" style="width:30px; height:30px" onclick="modeSwitch()" />
+                Switch to paper-format
+            </div>
         </div>
         <div class="mainPart" style="background-color: antiquewhite; flex-grow: 2;">
             <div class="rowContainer">
@@ -75,7 +78,7 @@
         </div>
     </div>
 
-
+    <script src="Gruppe2.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
@@ -100,7 +103,8 @@
         var redAmount;
         var blueAmount;
         var greenAmount;
-       var alias = prompt("Please enter your nickname");
+        var checkbox = false;
+        var alias = prompt("Please enter your nickname");
         if (alias != null) {
             document.getElementById("nickName").innerHTML = "Nickname: " + alias;
         }
@@ -121,6 +125,9 @@
             redAmount = Math.round(redInput.value);
             greenAmount = Math.round(greenInput.value);
             blueAmount = Math.round((150) - redAmount - greenAmount);
+            if (checkbox) {
+                // paper-format
+            }
             if (blueAmount < 2) {
                 document.getElementsByClassName("gauge-c1")[0].style.transform = "rotate(.00" + blueAmount * 5 + "turn)";
             } else if (blueAmount < 20) {
@@ -142,9 +149,9 @@
             } else {
                 document.getElementsByClassName("gauge-c3")[0].style.transform = "rotate(." + greenAmount * 5 + "turn)";
             }
-            document.getElementById("percent1").innerHTML = blueAmount + "%";
-            document.getElementById("percent2").innerHTML = redAmount + "%";
-            document.getElementById("percent3").innerHTML = greenAmount + "%";
+            document.getElementById("percent1").innerHTML = blueAmount;
+            document.getElementById("percent2").innerHTML = redAmount;
+            document.getElementById("percent3").innerHTML = greenAmount;
             if (150 - greenInput.value - blueInput.value > 99) {
                 redInput.value = 150 - greenInput.value - blueInput.value;
             }
@@ -164,6 +171,9 @@
             redAmount = Math.round(redInput.value);
             greenAmount = Math.round(greenInput.value);
             blueAmount = Math.round((150) - redAmount - greenAmount);
+            if (checkbox) {
+                // paper-format
+            }
             if (blueAmount < 2) {
                 document.getElementsByClassName("gauge-c1")[0].style.transform = "rotate(.00" + blueAmount * 5 + "turn)";
             } else if (blueAmount < 20) {
@@ -185,9 +195,9 @@
             } else {
                 document.getElementsByClassName("gauge-c3")[0].style.transform = "rotate(." + greenAmount * 5 + "turn)";
             }
-            document.getElementById("percent1").innerHTML = blueAmount + "%";
-            document.getElementById("percent2").innerHTML = redAmount + "%";
-            document.getElementById("percent3").innerHTML = greenAmount + "%";
+            document.getElementById("percent1").innerHTML = blueAmount;
+            document.getElementById("percent2").innerHTML = redAmount;
+            document.getElementById("percent3").innerHTML = greenAmount;
             if (150 - blueInput.value - redInput.value > 99) {
                 greenInput.value = 150 - redInput.value - blueInput.value;
             }
@@ -207,6 +217,9 @@
             redAmount = Math.round(redInput.value);
             greenAmount = Math.round(greenInput.value);
             blueAmount = Math.round((150) - redAmount - greenAmount);
+            if (checkbox) {
+                // paper-format
+            }
             if (blueAmount < 2) {
                 document.getElementsByClassName("gauge-c1")[0].style.transform = "rotate(.00" + blueAmount * 5 + "turn)";
             } else if (blueAmount < 20) {
@@ -228,9 +241,9 @@
             } else {
                 document.getElementsByClassName("gauge-c3")[0].style.transform = "rotate(." + greenAmount * 5 + "turn)";
             }
-            document.getElementById("percent1").innerHTML = blueAmount + "%";
-            document.getElementById("percent2").innerHTML = redAmount + "%";
-            document.getElementById("percent3").innerHTML = greenAmount + "%";
+            document.getElementById("percent1").innerHTML = blueAmount;
+            document.getElementById("percent2").innerHTML = redAmount;
+            document.getElementById("percent3").innerHTML = greenAmount;
             if (150 - greenInput.value - redInput.value > 99) {
                 blueInput.value = 150 - greenInput.value - redInput.value;
             }
@@ -239,6 +252,16 @@
             } else {
                 redInput.value -= 1;
                 show();
+            }
+        }
+        function modeSwitch() {
+            if (checkbox) {
+                checkbox = false;
+                document.getElementById("modeSwitch").innerHTML = '<input id="fancyInput" type="checkbox" style="width: 30px; height: 30px" onclick="modeSwitch()" /> Switch to paper-format';
+
+            } else if (!checkbox) {
+                checkbox = true;
+                document.getElementById("modeSwitch").innerHTML = '<input id="fancyInput" type="checkbox" checked style="width: 30px; height: 30px" onclick="modeSwitch()" /> Switch to online-format';
             }
         }
     </script>
