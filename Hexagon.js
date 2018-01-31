@@ -31,7 +31,7 @@ dataCollection.onSnapshot(
                 }
             }
         )
-        hexagonMath();
+        hexagonMath(true);
     }
 );
 
@@ -43,7 +43,7 @@ adminCollection.onSnapshot(
                 numberOfGroups = data.nr;
             }
         )
-        hexagonMath();
+        hexagonMath(true);
     }
 );
 
@@ -99,9 +99,10 @@ function hexagonBuild() {
 
 
 }
-function hexagonMath() {
+function hexagonMath(condition, mx, my) {
     hexagonBuild();
     var dots = document.getElementById('drawing');
+    var calculate = condition;
     counter = 0;
     totalRed = 0;
     totalBlue = 0;
@@ -130,23 +131,25 @@ function hexagonMath() {
         counter++;
     }
     if (counter > 2) {
-        totalRed = totalRed / counter;
-        totalGreen = totalGreen / counter;
-        totalBlue = totalBlue / counter;
-        var redScore = totalRed;
-        var greenScore = totalGreen;
-        var relGreen = 150 - greenScore;
-        var rest = 150 - greenScore;
-        var relRed = 100 - redScore;
-        var gx = Math.sqrt(relGreen * relGreen * 3 / 4)
-        var dy = rest / 2 - redScore;
-        var dx = Math.sqrt(dy * dy / 3);
-        var y = relRed + 10;
-        var x = Math.round(redScore > rest / 2 ? gx - dx - 6.6025 : gx + dx - 6.6025);
+        if (calculate) {
+            totalRed = totalRed / counter;
+            totalGreen = totalGreen / counter;
+            totalBlue = totalBlue / counter;
+            var redScore = totalRed;
+            var greenScore = totalGreen;
+            var relGreen = 150 - greenScore;
+            var rest = 150 - greenScore;
+            var relRed = 100 - redScore;
+            var gx = Math.sqrt(relGreen * relGreen * 3 / 4)
+            var dy = rest / 2 - redScore;
+            var dx = Math.sqrt(dy * dy / 3);
+            var my = relRed + 10;
+            var mx = Math.round(redScore > rest / 2 ? gx - dx - 6.6025 : gx + dx - 6.6025);
+        }
         if (numberOfGroups == 3) {
-            groupThree(x, y);
+            groupThree(mx, my);
         } else if (numberOfGroups == 4) {
-            groupFour(x, y);
+            groupFour(mx, my);
         }
     }
 }
@@ -278,7 +281,7 @@ function groupFour(x, y) {
     var angleAB = Math.atan2(deltaYAB, deltaXAB);
     var lineB = draw.line(radius * Math.cos(angleAB) + circleA.cx(),
         (-radius) * Math.sin(angleAB) + circleA.cy(),
-        circleB.cx(),circleB.cy()).stroke({ width: 0.5 }).id('lineB');
+        circleB.cx(), circleB.cy()).stroke({ width: 0.5 }).id('lineB');
 
     var deltaYAC = circleA.cy() - circleC.cy();
     var deltaXAC = circleC.cx() - circleA.cx();
@@ -369,5 +372,7 @@ function groupFour(x, y) {
 function circleSize() {
     radius = document.getElementById('radius').value;
     document.getElementById('middleCircle').setAttribute('r', radius);
-    hexagonMath();
+    var circleAX = document.getElementById('circleA').getAttribute('cx');
+    var circleAY = document.getElementById('circleA').getAttribute('cy');
+    hexagonMath(false, circleAX, circleAY);
 }
