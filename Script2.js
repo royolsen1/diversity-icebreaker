@@ -1,237 +1,89 @@
 ﻿﻿"use strict";
 
+ var redGroup = [];
+ var greenGroup = [];
+ var blueGroup = [];
+
+ if (data.group == 'red') {
+     redGroup.push(data);
+ } else if (data.group == 'blue') {
+     blueGroup.push(data);
+ } else if (data.group == 'green') {
+     greenGroup.push(data);
+ }
+
 //var LayoutModel = [
-//    [   // Index 0 = Blue
+
+//    [   // Index 0 = 3 groups
 //        {
 //            title1: 'Blue',
 //            color1: 'Blue',
 //            text1: 'Red: 25, Blue: 71 Green: 54',
 //        },
-//    ],
-//    [   // Index 1 = Red
 //        {
 //            title1: 'Red',
 //            color1: 'Red',
-//            text1: 'Red: 25, Blue: 71 Green: 54',
+//            text1: 'Red: 24, Blue: 49, Green: 71',
 //        },
-//    ],
-//    [   // Index 2 = Green
 //        {
 //            title1: 'Green',
 //            color1: 'Green',
-//            text1: 'Red: 25, Blue: 71, Green: 54',
+//            text1: 'Red: 24, Blue: 49, Green: 71',
 //        },
 //    ],
-//    [   // Index 3 = Average
+//    [   // Index 4 = 10 groups
+//        {
+//            title1: 'Blue',
+//            color1: 'Blue',
+//            text1: '|🌑| R: 25, G: 54, B: 71 ',
+//        },
+//        {
+//            title1: 'Blue/Red',
+//            color1: 'DodgerBlue',
+//            text1: '|🍗| R: 25, G: 54, B: 71',
+//        },
+//        {
+//            title1: 'Blue/Green',
+//            color1: 'Green',
+//            text1: '|🎮| R: 25, G: 54, B: 71',
+//        },
+//        {
+//            title1: 'Green',
+//            color1: 'Green',
+//            text1: '|🌏| R: 20, G: 80, B: 50',
+//        },
+//        {
+//            title1: 'Green/Red',
+//            color1: 'Red',
+//            text1: '|🎲| R: 25, G: 54, B: 71',
+//        },
+//        {
+//            title1: 'Green/Blue',
+//            color1: 'DodgerBlue',
+//            text1: '|🐢| R: 30, G: 60, B: 60',
+//        },
+//        {
+//            title1: 'Red',
+//            color1: 'Red',
+//            text1: '|🍉| R: 80, G: 20, B: 50',
+//        },
+//        {
+//            title1: 'Red/Blue',
+//            color1: 'Green',
+//            text1: '|🍓| R: 60, G: 30, B: 60',
+//        },
+//        {
+//            title1: 'Red/Green',
+//            color1: 'Red',
+//            text1: '|🐼| R: 60, G: 70, B: 20',
+//        },
 //        {
 //            title1: 'Average',
-//            color1: 'Purple',
-//            text1: 'Red: 25, Blue: 71 Green: 54',
+//            color1: 'Pink',
+//            text1: '|🔥| R: 50, G: 51, B: 49',
 //        },
 //    ],
-//];
-
-var LayoutModel = [
-    [   // Index 0 = 3 groups
-        {
-            title1: 'Blue',
-            color1: 'Blue',
-            text1: 'Red: 25, Blue: 71 Green: 54',
-        },
-        {
-            title1: 'Red',
-            color1: 'Red',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-        {
-            title1: 'Green',
-            color1: 'Green',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-    ],
-    [   // Index 1 = 6 groups
-        {
-            title1: 'Blue/Red',
-            color1: 'Purple',
-            text1: 'Red: 25, Blue: 71 Green: 54',
-        },
-        {
-            title1: 'Blue/Green',
-            color1: 'Green',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-        {
-            title1: 'Green/Red',
-            color1: 'Red',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-        {
-            title1: 'Green/Blue',
-            color1: 'DodgerBlue',
-            text1: 'Red: 25, Blue: 71 Green: 54',
-        },
-        {
-            title1: 'Red/Blue',
-            color1: 'Green',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-        {
-            title1: 'Red/Green',
-            color1: 'Red',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-    ],
-    [   // Index 2 = 7 groups
-        {
-            title1: 'Blue/Red',
-            color1: 'DodgerBlue',
-            text1: 'Red: 25, Blue: 71, Green: 54',
-        },
-        {
-            title1: 'Blue/Green',
-            color1: 'Green',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-        {
-            title1: 'Green/Red',
-            color1: 'Red',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-        {
-            title1: 'Green/Blue',
-            color1: 'DodgerBlue',
-            text1: 'Red: 25, Blue: 71 Green: 54',
-        },
-        {
-            title1: 'Red/Blue',
-            color1: 'Green',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-        {
-            title1: 'Red/Green',
-            color1: 'Red',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-        {
-            title1: 'Average',
-            color1: 'Pink',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-    ],
-    [   // Index 3 = 9 groups
-        {
-            title1: 'Blue',
-            color1: 'Blue',
-            text1: 'Red: 25, Blue: 71 Green: 54',
-        },
-        {
-            title1: 'Blue/Red',
-            color1: 'DodgerBlue',
-            text1: 'Red: 25, Blue:71 Green: 54',
-        },
-        {
-            title1: 'Blue/Green',
-            color1: 'Green',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-        {
-            title1: 'Green',
-            color1: 'Green',
-            text1: 'Red: 25, Blue:71 Green: 54',
-        },
-        {
-            title1: 'Green/Red',
-            color1: 'Red',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-        {
-            title1: 'Green/Blue',
-            color1: 'DodgerBlue',
-            text1: 'Red: 25, Blue: 71 Green: 54',
-        },
-        {
-            title1: 'Red',
-            color1: 'Red',
-            text1: 'Red: 25, Blue: 71 Green: 54',
-        },
-        {
-            title1: 'Red/Blue',
-            color1: 'Green',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-        {
-            title1: 'Red/Green',
-            color1: 'Red',
-            text1: 'Red: 24, Blue: 49, Green: 71',
-        },
-    ],
-    [   // Index 4 = 10 groups
-        {
-            title1: 'Blue',
-            color1: 'Blue',
-            text1: '|🌑| R: 25, G: 54, B: 71 ',
-        },
-        {
-            title1: 'Blue/Red',
-            color1: 'DodgerBlue',
-            text1: '|🍗| R: 25, G: 54, B: 71',
-        },
-        {
-            title1: 'Blue/Green',
-            color1: 'Green',
-            text1: '|🎮| R: 25, G: 54, B: 71',
-        },
-        {
-            title1: 'Green',
-            color1: 'Green',
-            text1: '|🌏| R: 20, G: 80, B: 50',
-        },
-        {
-            title1: 'Green/Red',
-            color1: 'Red',
-            text1: '|🎲| R: 25, G: 54, B: 71',
-        },
-        {
-            title1: 'Green/Blue',
-            color1: 'DodgerBlue',
-            text1: '|🐢| R: 30, G: 60, B: 60',
-        },
-        {
-            title1: 'Red',
-            color1: 'Red',
-            text1: '|🍉| R: 80, G: 20, B: 50',
-        },
-        {
-            title1: 'Red/Blue',
-            color1: 'Green',
-            text1: '|🍓| R: 60, G: 30, B: 60',
-        },
-        {
-            title1: 'Red/Green',
-            color1: 'Red',
-            text1: '|🐼| R: 60, G: 70, B: 20',
-        },
-        {
-            title1: 'Average',
-            color1: 'Pink',
-            text1: '|🔥| R: 50, G: 51, B: 49',
-        },
-    ],
- ];
-
-function check01() {
-    // Get the checkbox
-    var checkBox01 = document.getElementById("c1");
-    // Get the output text
-    var Text01 = document.getElementById("Text01");
-
-    // If the checkbox is checked, display the output text
-    if (checkBox01.checked == true) {
-        Text01.style.display = "block";
-    } else {
-        Text01.style.display = "none";
-    }
-}
+// ];
 
 function showView(showIndex) {
     var html =
@@ -256,7 +108,32 @@ function showView(showIndex) {
         var tmp = '<td>&gt;' + group.limit1
     }
     document.getElementById('show').innerHTML = html;
-}
+ }
+
+//function showView(showIndex) {
+//    var html =
+//        '<table id="t01" style="width:40%;">' + '<tr>';
+//    var i;
+//    var group;
+//    var groups = LayoutModel[showIndex];
+//    for (i in groups) {
+//        group = groups[i];
+//        html += '<th style="color:'
+//            + group.color1 + '">'
+//            + group.title1 + '</th>';
+//    }
+//    html += '</tr><tr>';
+//    for (i in groups) {
+//        group = groups[i];
+//        html += '<td>' + group.text1 + '</td>';
+//    }
+//    html += '</tr><tr>';
+//    for (i in groups) {
+//        group = groups[i];
+//        var tmp = '<td>&gt;' + group.limit1
+//    }
+//    document.getElementById('show').innerHTML = html;
+//}
 
 function changelimit1(inputElement, showIndex, groupIndex) {
     var groups = LayoutModel[showIndex];
@@ -266,24 +143,140 @@ function changelimit1(inputElement, showIndex, groupIndex) {
     console.log(group);
 }
 
-var t01 = document.getElementById("t01");
+//var t01 = document.getElementById("t01");
 
-function groupdisp() {
-    var value = document.getElementById('grouplist').value;
+//function groupdisp() {
+//    var value = document.getElementById('grouplist').value;
 
-    if (value == "t01") {
-        showView(0);
-    }
-    if (value == "t02") {
-        showView(1);
-    }
-    if (value == "t03") {
-        showView(2);
-    }
-    if (value == "t04") {
-        showView(3);
-    }
-    if (value == "t05") {
-        showView(4);
+//    if (value == "t01") {
+//        showView(0);
+//    }
+//    if (value == "t02") {
+//        showView(1);
+//    }
+//    if (value == "t03") {
+//        showView(2);
+//    }
+//    if (value == "t04") {
+//        showView(3);
+//    }
+//    if (value == "t05") {
+//        showView(4);
+//    }
+//}
+
+
+// Group Checkboxes
+
+function check01() {
+    // Get the checkbox
+    var checkBox01 = document.getElementById("c1");
+    // Get the output text
+    var Text01 = document.getElementById("Text01");
+
+    // If the checkbox is checked, display the output text
+    if (checkBox01.checked == true) {
+        Text01.style.display = "block";
+    } else {
+        Text01.style.display = "none";
     }
 }
+
+function check02() {
+    // Get the checkbox
+    var checkBox02 = document.getElementById("c2");
+    // Get the output text
+    var Text02 = document.getElementById("Text02");
+
+    // If the checkbox is checked, display the output text
+    if (checkBox02.checked == true) {
+        Text02.style.display = "block";
+    } else {
+        Text02.style.display = "none";
+    }
+}
+
+function check03() {
+    // Get the checkbox
+    var checkBox03 = document.getElementById("c3");
+    // Get the output text
+    var Text03 = document.getElementById("Text03");
+
+    // If the checkbox is checked, display the output text
+    if (checkBox03.checked == true) {
+        Text03.style.display = "block";
+    } else {
+        Text03.style.display = "none";
+    }
+}
+
+function check04() {
+    // Get the checkbox
+    var checkBox04 = document.getElementById("c4");
+    // Get the output text
+    var Text04 = document.getElementById("Text04");
+
+    // If the checkbox is checked, display the output text
+    if (checkBox04.checked == true) {
+        Text04.style.display = "block";
+    } else {
+        Text04.style.display = "none";
+    }
+}
+
+function check05() {
+    // Get the checkbox
+    var checkBox05 = document.getElementById("c5");
+    // Get the output text
+    var Text05 = document.getElementById("Text05");
+
+    // If the checkbox is checked, display the output text
+    if (checkBox05.checked == true) {
+        Text05.style.display = "block";
+    } else {
+        Text05.style.display = "none";
+    }
+}
+
+function check06() {
+    // Get the checkbox
+    var checkBox06 = document.getElementById("c6");
+    // Get the output text
+    var Text06 = document.getElementById("Text06");
+
+    // If the checkbox is checked, display the output text
+    if (checkBox06.checked == true) {
+        Text06.style.display = "block";
+    } else {
+        Text06.style.display = "none";
+    }
+}
+
+function check07() {
+    // Get the checkbox
+    var checkBox07 = document.getElementById("c7");
+    // Get the output text
+    var Text07 = document.getElementById("Text07");
+
+    // If the checkbox is checked, display the output text
+    if (checkBox07.checked == true) {
+        Text07.style.display = "block";
+    } else {
+        Text07.style.display = "none";
+    }
+}
+
+function check08() {
+    // Get the checkbox
+    var checkBox08 = document.getElementById("c8");
+    // Get the output text
+    var Text08 = document.getElementById("Text08");
+
+    // If the checkbox is checked, display the output text
+    if (checkBox08.checked == true) {
+        Text08.style.display = "block";
+    } else {
+        Text08.style.display = "none";
+    }
+}
+

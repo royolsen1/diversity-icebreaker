@@ -141,3 +141,8 @@ table#t01 th, #t02 th, #t03 th, #t04 th, #t05 th {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
+div3 {
+    display: flex;
+    flex-wrap: wrap;
+}
