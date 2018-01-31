@@ -99,10 +99,20 @@ function hexagonBuild() {
 
 
 }
-function hexagonMath(condition, mx, my) {
+function hexagonMath(condition) {
+    var calculate = condition;
+    if (!calculate) {
+        var cAX = document.getElementById('circleA').getAttribute('cx');
+        var cAY = document.getElementById('circleA').getAttribute('cy');
+        var cBX = document.getElementById('circleB').getAttribute('cx');
+        var cBY = document.getElementById('circleB').getAttribute('cy');
+        var cCX = document.getElementById('circleC').getAttribute('cx');
+        var cCY = document.getElementById('circleC').getAttribute('cy');
+        var cDX = document.getElementById('circleD').getAttribute('cx');
+        var cDY = document.getElementById('circleD').getAttribute('cy');
+    }
     hexagonBuild();
     var dots = document.getElementById('drawing');
-    var calculate = condition;
     counter = 0;
     totalRed = 0;
     totalBlue = 0;
@@ -143,24 +153,30 @@ function hexagonMath(condition, mx, my) {
             var gx = Math.sqrt(relGreen * relGreen * 3 / 4)
             var dy = rest / 2 - redScore;
             var dx = Math.sqrt(dy * dy / 3);
-            var my = relRed + 10;
-            var mx = Math.round(redScore > rest / 2 ? gx - dx - 6.6025 : gx + dx - 6.6025);
+            var cAY = relRed + 10;
+            var cAX = Math.round(redScore > rest / 2 ? gx - dx - 6.6025 : gx + dx - 6.6025);
+            var cBX = 123.3
+            var cBY = 35
+            var cCX = 36.7
+            var cCY = 35
+            var cDX = 80
+            var cDY = 110
         }
         if (numberOfGroups == 3) {
-            groupThree(mx, my);
+            groupThree(cAX, cAY, cBX, cBY, cCX, cCY, cDX, cDY);
         } else if (numberOfGroups == 4) {
-            groupFour(mx, my);
+            groupFour(cAX, cAY, cBX, cBY, cCX, cCY, cDX, cDY);
         }
     }
 }
 
-function groupThree(x, y) {
+function groupThree(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
     var draw = SVG('drawing');
     document.getElementById('radius').value = radius;
     var circleA = draw.circle(2).center(x, y).fill('green').id('circleA');
-    var circleB = draw.circle(2).center(123.3, 35).fill('blue').id('circleB');
-    var circleC = draw.circle(2).center(36.7, 35).fill('blue').id('circleC');
-    var circleD = draw.circle(2).center(80, 110).fill('blue').id('circleD');
+    var circleB = draw.circle(2).center(cBX, cBY).fill('blue').id('circleB');
+    var circleC = draw.circle(2).center(cCX, cCY).fill('blue').id('circleC');
+    var circleD = draw.circle(2).center(cDX, cDY).fill('blue').id('circleD');
     circleB.attr({ class: 'draggable' });
     circleC.attr({ class: 'draggable' });
     circleD.attr({ class: 'draggable' });
@@ -239,13 +255,13 @@ function groupThree(x, y) {
         });
 }
 
-function groupFour(x, y) {
+function groupFour(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
     var draw = SVG('drawing');
     document.getElementById('radius').value = radius;
     var circleA = draw.circle(2).center(x, y).fill('green').id('circleA');
-    var circleB = draw.circle(2).center(123.3, 35).fill('blue').id('circleB');
-    var circleC = draw.circle(2).center(36.7, 35).fill('blue').id('circleC');
-    var circleD = draw.circle(2).center(80, 110).fill('blue').id('circleD');
+    var circleB = draw.circle(2).center(cBX, cBY).fill('blue').id('circleB');
+    var circleC = draw.circle(2).center(cCX, cCY).fill('blue').id('circleC');
+    var circleD = draw.circle(2).center(cDX, cDY).fill('blue').id('circleD');
     var circleE = draw.circle(radius * 2).center(x, y).stroke({ width: 0.5 }).fill('none').id('middleCircle');
     circleA.attr({ class: 'draggable' });
     circleB.attr({ class: 'draggable' });
@@ -372,7 +388,5 @@ function groupFour(x, y) {
 function circleSize() {
     radius = document.getElementById('radius').value;
     document.getElementById('middleCircle').setAttribute('r', radius);
-    var circleAX = document.getElementById('circleA').getAttribute('cx');
-    var circleAY = document.getElementById('circleA').getAttribute('cy');
-    hexagonMath(false, circleAX, circleAY);
+    hexagonMath(false);
 }
