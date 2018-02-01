@@ -27,6 +27,7 @@ dataCollection.onSnapshot(
                     person.age = data.age;
                     person.sex = data.sex;
                     person.name = data.name;
+                    person.id = dataSnapshot.id;
                     participants.push(person);
                 }
             }
@@ -173,6 +174,9 @@ function hexagonMath(condition) {
 function groupThree(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
     var draw = SVG('drawing');
     document.getElementById('radius').value = radius;
+    var lineB = draw.line(x, y, cBX, cBY).stroke({ width: 0.5 }).id('lineB');
+    var lineC = draw.line(x, y, cCX, cCY).stroke({ width: 0.5 }).id('lineC');
+    var lineD = draw.line(x, y, cDX, cDY).stroke({ width: 0.5 }).id('lineD');
     var circleA = draw.circle(2).center(x, y).fill('green').id('circleA');
     var circleB = draw.circle(2).center(cBX, cBY).fill('blue').id('circleB');
     var circleC = draw.circle(2).center(cCX, cCY).fill('blue').id('circleC');
@@ -204,9 +208,7 @@ function groupThree(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
         maxX: 109.9,
         maxY: 111
     });
-    var lineB = draw.line(circleA.cx(), circleA.cy(), circleB.cx(), circleB.cy()).stroke({ width: 0.5 }).id('lineB');
-    var lineC = draw.line(circleA.cx(), circleA.cy(), circleC.cx(), circleC.cy()).stroke({ width: 0.5 }).id('lineC');
-    var lineD = draw.line(circleA.cx(), circleA.cy(), circleD.cx(), circleD.cy()).stroke({ width: 0.5 }).id('lineD');
+ 
     circleA.on('dragmove',
         function (event) {
             lineB.attr({ x1: event.detail.p.x });
@@ -253,11 +255,32 @@ function groupThree(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
                 lineD.attr({ x2: event.detail.p.x });
             }
         });
+    //groupingThree();
 }
 
 function groupFour(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
     var draw = SVG('drawing');
     document.getElementById('radius').value = radius;
+    var deltaYAB = y - cBY;
+    var deltaXAB = cBX - x;
+    var angleAB = Math.atan2(deltaYAB, deltaXAB);
+    var lineB = draw.line(radius * Math.cos(angleAB) + x,
+        (-radius) * Math.sin(angleAB) + y,
+        cBX, cBY).stroke({ width: 0.5 }).id('lineB');
+
+    var deltaYAC = y - cCY;
+    var deltaXAC = cCX - x;
+    var angleAC = Math.atan2(deltaYAC, deltaXAC);
+    var lineC = draw.line(radius * Math.cos(angleAC) + x,
+        (-radius) * Math.sin(angleAC) + y,
+        cCX, cCY).stroke({ width: 0.5 }).id('lineC');
+
+    var deltaYAD = y - cDY;
+    var deltaXAD = cDX - x;
+    var angleAD = Math.atan2(deltaYAD, deltaXAD);
+    var lineD = draw.line(radius * Math.cos(angleAD) + x,
+        -radius * Math.sin(angleAD) + y,
+        cDX, cDY).stroke({ width: 0.5 }).id('lineD');
     var circleA = draw.circle(2).center(x, y).fill('green').id('circleA');
     var circleB = draw.circle(2).center(cBX, cBY).fill('blue').id('circleB');
     var circleC = draw.circle(2).center(cCX, cCY).fill('blue').id('circleC');
@@ -292,26 +315,7 @@ function groupFour(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
         maxY: 111
     });
 
-    var deltaYAB = circleA.cy() - circleB.cy();
-    var deltaXAB = circleB.cx() - circleA.cx();
-    var angleAB = Math.atan2(deltaYAB, deltaXAB);
-    var lineB = draw.line(radius * Math.cos(angleAB) + circleA.cx(),
-        (-radius) * Math.sin(angleAB) + circleA.cy(),
-        circleB.cx(), circleB.cy()).stroke({ width: 0.5 }).id('lineB');
 
-    var deltaYAC = circleA.cy() - circleC.cy();
-    var deltaXAC = circleC.cx() - circleA.cx();
-    var angleAC = Math.atan2(deltaYAC, deltaXAC);
-    var lineC = draw.line(radius * Math.cos(angleAC) + circleA.cx(),
-        (-radius) * Math.sin(angleAC) + circleA.cy(),
-        circleC.cx(), circleC.cy()).stroke({ width: 0.5 }).id('lineC');
-
-    var deltaYAD = circleA.cy() - circleD.cy();
-    var deltaXAD = circleD.cx() - circleA.cx();
-    var angleAD = Math.atan2(deltaYAD, deltaXAD);
-    var lineD = draw.line(radius * Math.cos(angleAD) + circleA.cx(),
-        -radius * Math.sin(angleAD) + circleA.cy(),
-        circleD.cx(), circleD.cy()).stroke({ width: 0.5 }).id('lineD');
     circleA.on('dragmove',
         function (event) {
             circleE.attr({ cx: circleA.cx() });
@@ -390,3 +394,17 @@ function circleSize() {
     document.getElementById('middleCircle').setAttribute('r', radius);
     hexagonMath(false);
 }
+
+//function groupingThree() {
+//    var draw = SVG('drawing');
+//    var cAX = document.getElementById('circleA').getAttribute('cx');
+//    var cAY = document.getElementById('circleA').getAttribute('cy');
+//    var cBX = document.getElementById('circleB').getAttribute('cx');
+//    var cBY = document.getElementById('circleB').getAttribute('cy');
+//    var cCX = document.getElementById('circleC').getAttribute('cx');
+//    var cCY = document.getElementById('circleC').getAttribute('cy');
+//    var cDX = document.getElementById('circleD').getAttribute('cx');
+//    var cDY = document.getElementById('circleD').getAttribute('cy');
+
+//    var pathGreen = draw.path(22.3, 60, cCX, cCY, cAX, cAY, cDX, cDY, 57.7, 110);
+//}
