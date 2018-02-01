@@ -100,17 +100,18 @@ function hexagonBuild() {
 
 
 }
+
 function hexagonMath(condition) {
     var calculate = condition;
     if (!calculate) {
-        var cAX = document.getElementById('circleA').getAttribute('cx');
-        var cAY = document.getElementById('circleA').getAttribute('cy');
-        var cBX = document.getElementById('circleB').getAttribute('cx');
-        var cBY = document.getElementById('circleB').getAttribute('cy');
-        var cCX = document.getElementById('circleC').getAttribute('cx');
-        var cCY = document.getElementById('circleC').getAttribute('cy');
-        var cDX = document.getElementById('circleD').getAttribute('cx');
-        var cDY = document.getElementById('circleD').getAttribute('cy');
+        var cAX = parseFloat(document.getElementById('circleA').getAttribute('cx'));
+        var cAY = parseFloat(document.getElementById('circleA').getAttribute('cy'));
+        var cBX = parseFloat(document.getElementById('circleB').getAttribute('cx'));
+        var cBY = parseFloat(document.getElementById('circleB').getAttribute('cy'));
+        var cCX = parseFloat(document.getElementById('circleC').getAttribute('cx'));
+        var cCY = parseFloat(document.getElementById('circleC').getAttribute('cy'));
+        var cDX = parseFloat(document.getElementById('circleD').getAttribute('cx'));
+        var cDY = parseFloat(document.getElementById('circleD').getAttribute('cy'));
     }
     hexagonBuild();
     var dots = document.getElementById('drawing');
@@ -156,12 +157,12 @@ function hexagonMath(condition) {
             var dx = Math.sqrt(dy * dy / 3);
             var cAY = relRed + 10;
             var cAX = Math.round(redScore > rest / 2 ? gx - dx - 6.6025 : gx + dx - 6.6025);
-            var cBX = 123.3
-            var cBY = 35
-            var cCX = 36.7
-            var cCY = 35
-            var cDX = 80
-            var cDY = 110
+            var cBX = 123.3;
+            var cBY = 35;
+            var cCX = 36.7;
+            var cCY = 35;
+            var cDX = 80;
+            var cDY = 110;
         }
         if (numberOfGroups == 3) {
             groupThree(cAX, cAY, cBX, cBY, cCX, cCY, cDX, cDY);
@@ -208,7 +209,7 @@ function groupThree(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
         maxX: 109.9,
         maxY: 111
     });
- 
+
     circleA.on('dragmove',
         function (event) {
             lineB.attr({ x1: event.detail.p.x });
@@ -261,18 +262,19 @@ function groupThree(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
 function groupFour(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
     var draw = SVG('drawing');
     document.getElementById('radius').value = radius;
+
     var deltaYAB = y - cBY;
     var deltaXAB = cBX - x;
     var angleAB = Math.atan2(deltaYAB, deltaXAB);
     var lineB = draw.line(radius * Math.cos(angleAB) + x,
-        (-radius) * Math.sin(angleAB) + y,
+        -radius * Math.sin(angleAB) + y,
         cBX, cBY).stroke({ width: 0.5 }).id('lineB');
 
     var deltaYAC = y - cCY;
     var deltaXAC = cCX - x;
     var angleAC = Math.atan2(deltaYAC, deltaXAC);
     var lineC = draw.line(radius * Math.cos(angleAC) + x,
-        (-radius) * Math.sin(angleAC) + y,
+        -radius * Math.sin(angleAC) + y,
         cCX, cCY).stroke({ width: 0.5 }).id('lineC');
 
     var deltaYAD = y - cDY;
@@ -281,6 +283,7 @@ function groupFour(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
     var lineD = draw.line(radius * Math.cos(angleAD) + x,
         -radius * Math.sin(angleAD) + y,
         cDX, cDY).stroke({ width: 0.5 }).id('lineD');
+
     var circleA = draw.circle(2).center(x, y).fill('green').id('circleA');
     var circleB = draw.circle(2).center(cBX, cBY).fill('blue').id('circleB');
     var circleC = draw.circle(2).center(cCX, cCY).fill('blue').id('circleC');
@@ -391,8 +394,11 @@ function groupFour(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
 }
 function circleSize() {
     radius = document.getElementById('radius').value;
-    document.getElementById('middleCircle').setAttribute('r', radius);
-    hexagonMath(false);
+    if (numberOfGroups != 3) {
+        document.getElementById('middleCircle').setAttribute('r', radius);
+        hexagonMath(false);
+    }
+
 }
 
 //function groupingThree() {
