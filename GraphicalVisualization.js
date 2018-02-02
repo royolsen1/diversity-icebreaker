@@ -5,9 +5,9 @@ function convertPaperScore(paperScore) {
 
     const paperScoreSumAbsolute = paperScoreBlueAbsolute + paperScoreRedAbsolute + paperScoreGreenAbsolute;
 
-    let paperScoreBlue = paperScoreBlue / paperScoreSum;
-    let paperScoreRed = paperScoreRed / paperScoreSum;
-    let paperScoreGreen = paperScoreGreen / paperScoreSum;
+    let paperScoreBlue = paperScoreBlueAbsolute / paperScoreSumAbsolute;
+    let paperScoreRed = paperScoreRedAbsolute / paperScoreSumAbsolute;
+    let paperScoreGreen = paperScoreGreenAbsolute / paperScoreSumAbsolute;
 
     const paperScoreBlueAverage = 31 / 84;
     const paperScoreRedAverage = 28 / 84;
@@ -22,10 +22,10 @@ function convertPaperScore(paperScore) {
     let paperScoreGreenStandardized = cutScore(50 + (paperScoreGreen - paperScoreGreenAverage) / paperScoreGreenSD15);
 
     let standardizedSum = paperScoreBlueStandardized + paperScoreRedStandardized + paperScoreGreenStandardized;
-
-    paperScore.blue = 150 * paperScoreBlueStandardized / standardizedSum;
-    paperScore.red = 150 * paperScoreRedStandardized / standardizedSum;
-    paperScore.green = 150 * paperScoreGreenStandardized / standardizedSum;
+    console.log(paperScoreBlueStandardized, paperScoreRedStandardized, paperScoreGreenStandardized, standardizedSum);
+    paperScore.blue = Math.round(150 * paperScoreBlueStandardized / standardizedSum);
+    paperScore.red = Math.round(150 * paperScoreRedStandardized / standardizedSum);
+    paperScore.green = Math.round(150 * paperScoreGreenStandardized / standardizedSum);
     //return { red: finalScoreRed, blue: finalScoreBlue, green: finalScoreGreen };
 
     function cutScore(score) {
