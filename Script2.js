@@ -1,139 +1,84 @@
 ﻿﻿"use strict";
 
- var redGroup = [];
- var greenGroup = [];
- var blueGroup = [];
 
- if (data.group == 'red') {
-     redGroup.push(data);
- } else if (data.group == 'blue') {
-     blueGroup.push(data);
- } else if (data.group == 'green') {
-     greenGroup.push(data);
+        // Initialize Firebase
+        var config = {
+     apiKey: "AIzaSyDIMCz-H4Qa6yzO8cOEDDO-_-TNgKRwz40",
+     authDomain: "diversity-icebreaker.firebaseapp.com",
+     databaseURL: "https://diversity-icebreaker.firebaseio.com",
+     projectId: "diversity-icebreaker",
+     storageBucket: "diversity-icebreaker.appspot.com",
+     messagingSenderId: "829693602828"
+ };
+ firebase.initializeApp(config);
+ var db = firebase.firestore();
+ var dataCollection = db.collection('Data');
+ var participants = [];
+ dataCollection.onSnapshot(
+     function (collectionSnapshot) {
+         participants = [];
+         collectionSnapshot.forEach(
+             function (dataSnapshot) {
+                 let data = dataSnapshot.data();
+                 if ((data.red >= 0 && data.red <= 100) ||
+                     (data.green >= 0 && data.green <= 100) ||
+                     (data.blue >= 0 && data.blue <= 100)) {
+                     var person = {};
+                     person.red = data.red;
+                     person.blue = data.blue;
+                     person.green = data.green;
+                     person.age = data.age;
+                     person.sex = data.sex;
+                     person.name = data.name;
+                     person.id = dataSnapshot.id;
+                     person.group = data.group;
+                     participants.push(person);
+                 }
+             }
+         );
+         grouping();
+     }
+ );
+ function grouping() {
+     // Lage grupper
+     var groups = {};
+     for (var i = 0; i < participants.length; i++) {
+         let singleScore = participants[i];
+         let groupName = singleScore.group;
+         if (!groups[groupName]) {
+             groups[groupName] = [];
+         }
+         groups[groupName].push(singleScore);
+     }
+
+     // Vise grupper
+     var html =
+         '<table id="t01" style="width:40%;">' + '<tr>';
+     for (var groupName in groups) {
+         var groupScores = groups[groupName];
+         html += '<th id="' + groupName +'"> ' + groupName + '</th > ';
+     }
+     html += '</tr><tr>';
+     for (var groupName in groups) {
+         var groupScores = groups[groupName];
+         html += '<td id="' + groupName + 'ppl">';
+         for (var j = 0; j < groupScores.length; j++) {
+             var score = groupScores[j];
+             html += score.name + ' Red=' + score.red + ' Blue=' + score.blue + ' Green=' + score.green + ' ' + '<br/>';
+         }
+         html += '</td>';
+     }
+     html += '</tr></table>';
+     document.getElementById('test').innerHTML = html;
+     check01()
+     check02()
+     check03()
+     check04()
+     check05()
+     check06()
+     check07()
+     check08()
  }
-
-//var LayoutModel = [
-
-//    [   // Index 0 = 3 groups
-//        {
-//            title1: 'Blue',
-//            color1: 'Blue',
-//            text1: 'Red: 25, Blue: 71 Green: 54',
-//        },
-//        {
-//            title1: 'Red',
-//            color1: 'Red',
-//            text1: 'Red: 24, Blue: 49, Green: 71',
-//        },
-//        {
-//            title1: 'Green',
-//            color1: 'Green',
-//            text1: 'Red: 24, Blue: 49, Green: 71',
-//        },
-//    ],
-//    [   // Index 4 = 10 groups
-//        {
-//            title1: 'Blue',
-//            color1: 'Blue',
-//            text1: '|🌑| R: 25, G: 54, B: 71 ',
-//        },
-//        {
-//            title1: 'Blue/Red',
-//            color1: 'DodgerBlue',
-//            text1: '|🍗| R: 25, G: 54, B: 71',
-//        },
-//        {
-//            title1: 'Blue/Green',
-//            color1: 'Green',
-//            text1: '|🎮| R: 25, G: 54, B: 71',
-//        },
-//        {
-//            title1: 'Green',
-//            color1: 'Green',
-//            text1: '|🌏| R: 20, G: 80, B: 50',
-//        },
-//        {
-//            title1: 'Green/Red',
-//            color1: 'Red',
-//            text1: '|🎲| R: 25, G: 54, B: 71',
-//        },
-//        {
-//            title1: 'Green/Blue',
-//            color1: 'DodgerBlue',
-//            text1: '|🐢| R: 30, G: 60, B: 60',
-//        },
-//        {
-//            title1: 'Red',
-//            color1: 'Red',
-//            text1: '|🍉| R: 80, G: 20, B: 50',
-//        },
-//        {
-//            title1: 'Red/Blue',
-//            color1: 'Green',
-//            text1: '|🍓| R: 60, G: 30, B: 60',
-//        },
-//        {
-//            title1: 'Red/Green',
-//            color1: 'Red',
-//            text1: '|🐼| R: 60, G: 70, B: 20',
-//        },
-//        {
-//            title1: 'Average',
-//            color1: 'Pink',
-//            text1: '|🔥| R: 50, G: 51, B: 49',
-//        },
-//    ],
-// ];
-
-function showView(showIndex) {
-    var html =
-        '<table id="t01" style="width:40%;">' + '<tr>';
-    var i;
-    var group;
-    var groups = LayoutModel[showIndex];
-    for (i in groups) {
-        group = groups[i];
-        html += '<th style="color:'
-            + group.color1 + '">'
-            + group.title1 + '</th>';
-    }
-    html += '</tr><tr>';
-    for (i in groups) {
-        group = groups[i];
-        html += '<td>' + group.text1 + '</td>';
-    }
-    html += '</tr><tr>';
-    for (i in groups) {
-        group = groups[i];
-        var tmp = '<td>&gt;' + group.limit1
-    }
-    document.getElementById('show').innerHTML = html;
- }
-
-//function showView(showIndex) {
-//    var html =
-//        '<table id="t01" style="width:40%;">' + '<tr>';
-//    var i;
-//    var group;
-//    var groups = LayoutModel[showIndex];
-//    for (i in groups) {
-//        group = groups[i];
-//        html += '<th style="color:'
-//            + group.color1 + '">'
-//            + group.title1 + '</th>';
-//    }
-//    html += '</tr><tr>';
-//    for (i in groups) {
-//        group = groups[i];
-//        html += '<td>' + group.text1 + '</td>';
-//    }
-//    html += '</tr><tr>';
-//    for (i in groups) {
-//        group = groups[i];
-//        var tmp = '<td>&gt;' + group.limit1
-//    }
-//    document.getElementById('show').innerHTML = html;
-//}
 
 function changelimit1(inputElement, showIndex, groupIndex) {
     var groups = LayoutModel[showIndex];
@@ -177,8 +122,20 @@ function check01() {
     // If the checkbox is checked, display the output text
     if (checkBox01.checked == true) {
         Text01.style.display = "block";
+        Red.style.display = 'table-cell';
+        Redppl.style.display = 'table-cell';
+        Green.style.display = 'table-cell';
+        Greenppl.style.display = 'table-cell';
+        Blue.style.display = 'table-cell';
+        Blueppl.style.display = 'table-cell';
     } else {
         Text01.style.display = "none";
+        Red.style.display = 'none';
+        Redppl.style.display = 'none';
+        Green.style.display = 'none';
+        Greenppl.style.display = 'none';
+        Blue.style.display = 'none';
+        Blueppl.style.display = 'none';
     }
 }
 
@@ -191,8 +148,12 @@ function check02() {
     // If the checkbox is checked, display the output text
     if (checkBox02.checked == true) {
         Text02.style.display = "block";
+        Average.style.display = 'table-cell';
+        Averageppl.style.display = 'table-cell';
     } else {
         Text02.style.display = "none";
+        Average.style.display = 'none';
+        Averageppl.style.display = 'none';
     }
 }
 
