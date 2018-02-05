@@ -50,7 +50,7 @@
          }
          groups[groupName].push(singleScore);
      }
-
+     document.getElementById('candicount').innerHTML = 'Number of candidates: <b>' + participants.length + '</b>';
      // Vise grupper
      var html =
          '<table id="t01" style="width:40%;">' + '<tr>';
