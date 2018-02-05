@@ -65,8 +65,8 @@ gruppe {
 
 #nickName {
     position: absolute;
-    left: 45%;
-    top: 20%;
+    left: 40%;
+    top: 12%;
     font-family: Sylfaen;
     font-size: 25px;
     background: 5px;
@@ -220,6 +220,7 @@ YG {
     border-radius: 0px 0px 200px 200px;
     transform-origin: center top;
     transition: all 1.3s ease-in-out;
+    transform: rotate(.250turn);
 }
 .gauge-a2 {
     z-index: 1;
@@ -255,6 +256,7 @@ YG {
     border-radius: 0px 0px 200px 200px;
     transform-origin: center top;
     transition: all 1.3s ease-in-out;
+    transform: rotate(.250turn);
 }
 .gauge-a3 {
     z-index: 1;
@@ -290,21 +292,11 @@ YG {
     border-radius: 0px 0px 200px 200px;
     transform-origin: center top;
     transition: all 1.3s ease-in-out;
+    transform: rotate(.250turn);
 }
-
-body:hover .gauge-data1 {
-    color: royalblue;
-}
-body:hover .gauge-data2 {
-    color: red;
-}
-body:hover .gauge-data3 {
-    color: limegreen;
-}
-
 .gauge-data1 {
     z-index: 4;
-    color: #222;
+    color: royalblue;
     font-size: 1.5em;
     line-height: 25px;
     position: absolute;
@@ -317,7 +309,7 @@ body:hover .gauge-data3 {
 }
 .gauge-data2 {
     z-index: 4;
-    color: #222;
+    color: red;
     font-size: 1.5em;
     line-height: 25px;
     position: absolute;
@@ -331,7 +323,7 @@ body:hover .gauge-data3 {
 }
 .gauge-data3 {
     z-index: 4;
-    color: #222;
+    color: limegreen;
     font-size: 1.5em;
     line-height: 25px;
     position: absolute;
@@ -351,4 +343,10 @@ body:hover .gauge-data3 {
 }
 #textColorGreen {
     color: limegreen;
+}
+#paperScoreInfo {
+    position: absolute;
+    font-size: 25px;
+    top: 17%;
+    left: 40%;
 }

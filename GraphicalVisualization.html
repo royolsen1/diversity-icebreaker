@@ -23,14 +23,15 @@
             </div>
         </div>
         <div class="mainPart rowContainer" style="background-color: antiquewhite">
-            <div id="nickName">Nickname</div>
+            <div id="nickName">Nickname: <input id="nickNameInput" type="text" oninput="getName(this)" /></div>
+            <div id="paperScoreInfo"></div>
         </div>
         <div class="container1" style="background-color: antiquewhite; flex-grow: 1;">
             <div class="gauge-a1"></div>
             <div class="gauge-b1"></div>
             <div class="gauge-c1"></div>
             <div class="gauge-data1">
-                <h1 id="percent1">0</h1>
+                <h1 id="percent1">50</h1>
             </div>
         </div>
         <div class="container2" style="background-color: antiquewhite; flex-grow: 1;">
@@ -38,7 +39,7 @@
             <div class="gauge-b2"></div>
             <div class="gauge-c2"></div>
             <div class="gauge-data2">
-                <h1 id="percent2">0</h1>
+                <h1 id="percent2">50</h1>
             </div>
         </div>
         <div class="container3" style="background-color: antiquewhite; flex-grow: 1;">
@@ -46,7 +47,7 @@
             <div class="gauge-b3"></div>
             <div class="gauge-c3"></div>
             <div class="gauge-data3">
-                <h1 id="percent3">0</h1>
+                <h1 id="percent3">50</h1>
             </div>
         </div>
 
@@ -56,16 +57,16 @@
         <div class="mainPart" style="background-color: antiquewhite; flex-grow: 2;">
             <div class="rowContainer">
                 <div class="part columnContainer">
-                    <div><input class="slider" id="blueInput" type="text" name="points" value="50" step="1" min="0" max="100" oninput="changeSize1(this)"><span id="Blue"></span></div>
-                    <div class="btn pri" id="blueSolution">Blue score = </div>
+                    <div><input class="slider" id="blueInput" type="number" name="points" value="50" step="1" min="0" max="MyVar" oninput="changeSize(this)"><span id="Blue"></span></div>
+                    <div class="btn pri" id="blueSolution">Blue score = 50</div>
                 </div>
                 <div class="part columnContainer">
-                    <div><input class="slider" id="redInput" type="text" name="points" value="50" step="1" min="0" max="100" oninput="changeSize1(this)"><span id="Red"></span></div>
-                    <div class="btn pri" id="redSolution">Red score = </div>
+                    <div><input class="slider" id="redInput" type="number" name="points" value="50" step="1" min="0" max="MyVar" oninput="changeSize(this)"><span id="Red"></span></div>
+                    <div class="btn pri" id="redSolution">Red score = 50</div>
                 </div>
                 <div class="part columnContainer">
-                    <div><input class="slider" id="greenInput" type="text" name="points" value="50" step="1" min="0" max="100" oninput="changeSize1(this)"><span id="Green"></span></div>
-                    <div class="btn pri" id="greenSolution">Green score = </div>
+                    <div><input class="slider" id="greenInput" type="number" name="points" value="50" step="1" min="0" max="MyVar" oninput="changeSize(this)"><span id="Green"></span></div>
+                    <div class="btn pri" id="greenSolution">Green score = 50</div>
                 </div>
                 <div>
                     <button class="addScore" onclick="addScore()">Add score</button>
@@ -94,11 +95,13 @@
         var redAmount;
         var blueAmount;
         var greenAmount;
+        var blueMaxInput = document.getElementById("blueInput");
+        blueMaxInput.setAttribute("max", 100);
+        var redMaxInput = document.getElementById("redInput");
+        redMaxInput.setAttribute("max", 100);
+        var greenMaxInput = document.getElementById("greenInput");
+        greenMaxInput.setAttribute("max", 100);
         var checkbox = false;
-        var alias = prompt("Please enter your nickname"); // forandre til å ikke være prompt
-        if (alias != null) {
-            document.getElementById("nickName").innerHTML = "Nickname: " + alias;
-        }
         function addScore() {
             var newScore = {};
             newScore.red = redAmount;
@@ -107,7 +110,11 @@
             newScore.name = alias;
             dataCollection.add(newScore);
         }
-        function changeSize1(input) {
+        function getName(input) {
+            var alias = document.getElementById("nickNameInput").innerHTML; //ikke helt riktig
+        }
+
+        function changeSize(input) {
 
             document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
             document.getElementById("blueSolution").innerHTML = "Blue score = " + blueInput.value;
@@ -117,14 +124,15 @@
             blueAmount = Math.round(blueInput.value);
             var sum = redAmount + greenAmount + blueAmount;
             if (sum > 80 && sum < 88) {
-                // skriv tekst som sier at du bruker feil skjema, og fåreslår at du bruker det andre
+                document.getElementById("paperScoreInfo").innerHTML = "You have entered a paper-score value.";
                 let score = { red: redAmount, blue: blueAmount, green: greenAmount };
                 convertPaperScore(score);
                 redAmount = score.red;
                 greenAmount = score.green;
                 blueAmount = score.blue;
+            } else {
+                document.getElementById("paperScoreInfo").innerHTML = "";
             }
-
             if (blueAmount < 2) {
                 document.getElementsByClassName("gauge-c1")[0].style.transform = "rotate(.00" + blueAmount * 5 + "turn)";
             } else if (blueAmount < 20) {
