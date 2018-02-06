@@ -449,7 +449,7 @@ function groupingThree() {
     var bC = slopeC * (0 - cAX) + cAY;
     var bD = slopeD * (0 - cAY) + cAX;
     // console.log(bB);
-    document.getElementById('groups').innerHTML = '';
+   // document.getElementById('groups').innerHTML = '';
 
     for (var i = 0; i < participants.length; i++) {
         let oldGroup = participants[i].group;
