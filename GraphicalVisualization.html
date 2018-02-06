@@ -16,6 +16,7 @@
                     <img src="https://i.imgur.com/PAKp0aQ.png" alt="Logo">
                 </div>
                 <div class="part rowContainer" style="justify-content: flex-end">
+                    <a href="index.html" class="button" id="group3"><b><i>Back to Index</i></b></a>
                     <a href="adminpanel.html" class="button" id="group1"><b><i> Admin panel</i></b></a>
                     <a href="ResultPage.html" class="button" id="group3"><b><i>Hexagon</i></b></a>
                 </div>
@@ -57,15 +58,15 @@
         <div class="mainPart" style="background-color: antiquewhite; flex-grow: 2;">
             <div class="rowContainer">
                 <div class="part columnContainer">
-                    <div><input class="slider" id="blueInput" type="number" name="points" value="50" step="1" min="0" max="MyVar" oninput="changeSize(this)"><span id="Blue"></span></div>
+                    <div><input class="slider" id="blueInput" type="number" name="points" value="50" step="1" min="0" max="100" oninput="changeSize(this)"><span id="Blue"></span></div>
                     <div class="btn pri" id="blueSolution">Blue score = 50</div>
                 </div>
                 <div class="part columnContainer">
-                    <div><input class="slider" id="redInput" type="number" name="points" value="50" step="1" min="0" max="MyVar" oninput="changeSize(this)"><span id="Red"></span></div>
+                    <div><input class="slider" id="redInput" type="number" name="points" value="50" step="1" min="0" max="100" oninput="changeSize(this)"><span id="Red"></span></div>
                     <div class="btn pri" id="redSolution">Red score = 50</div>
                 </div>
                 <div class="part columnContainer">
-                    <div><input class="slider" id="greenInput" type="number" name="points" value="50" step="1" min="0" max="MyVar" oninput="changeSize(this)"><span id="Green"></span></div>
+                    <div><input class="slider" id="greenInput" type="number" name="points" value="50" step="1" min="0" max="100" oninput="changeSize(this)"><span id="Green"></span></div>
                     <div class="btn pri" id="greenSolution">Green score = 50</div>
                 </div>
                 <div>
@@ -92,15 +93,10 @@
         var db = firebase.firestore();
         var dataCollection = db.collection('Data');
         var radius = 100;
+        var alias;
         var redAmount;
         var blueAmount;
         var greenAmount;
-        var blueMaxInput = document.getElementById("blueInput");
-        blueMaxInput.setAttribute("max", 100);
-        var redMaxInput = document.getElementById("redInput");
-        redMaxInput.setAttribute("max", 100);
-        var greenMaxInput = document.getElementById("greenInput");
-        greenMaxInput.setAttribute("max", 100);
         var checkbox = false;
         function addScore() {
             var newScore = {};
@@ -111,11 +107,23 @@
             dataCollection.add(newScore);
         }
         function getName(input) {
-            var alias = document.getElementById("nickNameInput").innerHTML; //ikke helt riktig
+            alias = input.value;
         }
 
         function changeSize(input) {
 
+            if (blueInput.value > 100) {
+                blueInput.value = blueInput.value.substr(0, blueInput.value.length - 1);
+                return;
+            }
+            if (redInput.value > 100) {
+                redInput.value = redInput.value.substr(0, redInput.value.length - 1);
+                return;
+            }
+            if (greenInput.value > 100) {
+                greenInput.value = greenInput.value.substr(0, greenInput.value.length - 1);
+                return;
+            }
             document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
             document.getElementById("blueSolution").innerHTML = "Blue score = " + blueInput.value;
             document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
