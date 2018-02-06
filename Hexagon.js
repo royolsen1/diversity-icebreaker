@@ -2,6 +2,7 @@ var db = firebase.firestore();
 var dataCollection = db.collection('Data');
 var adminCollection = db.collection('Admin');
 var participants = [];
+var participantsCheck = [];
 hexagonBuild();
 var counter = 0;
 var totalRed = 0;
@@ -10,16 +11,17 @@ var totalGreen = 0;
 var radius = 10;
 var numberOfGroups;
 
+
 dataCollection.onSnapshot(
     function (collectionSnapshot) {
-        hexagonBuild();
+        //       hexagonBuild();
         participants = [];
         collectionSnapshot.forEach(
             function (dataSnapshot) {
                 let data = dataSnapshot.data();
-                if (data.red >= 0 || data.red <= 100 ||
-                    data.green >= 0 || data.green <= 100 ||
-                    data.blue >= 0 || data.blue <= 100) {
+                if ((data.red >= 0 && data.red <= 100) ||
+                    (data.green >= 0 && data.green <= 100) ||
+                    (data.blue >= 0 && data.blue <= 100)) {
                     var person = {};
                     person.red = data.red;
                     person.blue = data.blue;
@@ -28,11 +30,15 @@ dataCollection.onSnapshot(
                     person.sex = data.sex;
                     person.name = data.name;
                     person.id = dataSnapshot.id;
+                    person.x = data.x;
+                    person.y = data.y;
                     participants.push(person);
                 }
             }
-        )
-        hexagonMath(true);
+        );
+        if (participantsCheck != participants.length) {
+            hexagonMath(true);
+        }
     }
 );
 
@@ -120,8 +126,8 @@ function hexagonMath(condition) {
     totalBlue = 0;
     totalGreen = 0;
     for (var i = 0; i < participants.length; i++) {
-        var redScore = parseInt(participants[i].red);
-        var greenScore = parseInt(participants[i].green);
+        var redScore = parseFloat(participants[i].red);
+        var greenScore = parseFloat(participants[i].green);
         var relGreen = 150 - greenScore;
         var rest = 150 - greenScore;
         var relRed = 100 - redScore;
@@ -130,6 +136,8 @@ function hexagonMath(condition) {
         var dx = Math.sqrt(dy * dy / 3);
         var y = relRed + 10;
         var x = Math.round(redScore > rest / 2 ? gx - dx - 6.6025 : gx + dx - 6.6025);
+        participants[i].x = x;
+        participants[i].y = y;
         dots.innerHTML += '<circle class="tooltip" cx="' +
             x +
             '" cy="' +
@@ -137,10 +145,14 @@ function hexagonMath(condition) {
             '" r="1" stroke= "black" fill="black"><title>Name: ' + participants[i].name +
             '<br/>Blue: ' + participants[i].blue + '<br/>Red: ' + participants[i].red + '<br/>Green: ' +
             participants[i].green + '</title ></circle > ';
-        totalRed += parseInt(participants[i].red);
-        totalBlue += parseInt(participants[i].blue);
-        totalGreen += parseInt(participants[i].green);
+        totalRed += parseFloat(participants[i].red);
+        totalBlue += parseFloat(participants[i].blue);
+        totalGreen += parseFloat(participants[i].green);
         counter++;
+        dataCollection.doc(participants[i].id).update({
+            x: x,
+            y: y
+        })
     }
     if (counter > 2) {
         if (calculate) {
@@ -218,6 +230,7 @@ function groupThree(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
             lineC.attr({ y1: event.detail.p.y });
             lineD.attr({ x1: event.detail.p.x });
             lineD.attr({ y1: event.detail.p.y });
+            groupingThree();
         });
 
     circleB.on('dragmove',
@@ -232,6 +245,7 @@ function groupThree(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
                 lineB.attr({ x2: event.detail.p.x });
                 lineB.attr({ y2: event.detail.p.x * 1.74 - 179.76 });
             }
+            groupingThree();
         });
     circleC.on('dragmove',
         function (event) {
@@ -245,6 +259,7 @@ function groupThree(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
                 lineC.attr({ x2: event.detail.p.x });
                 lineC.attr({ y2: event.detail.p.x * (-1.74) + 98.72 });
             }
+            groupingThree();
         });
     circleD.on('dragmove',
         function (event) {
@@ -255,8 +270,9 @@ function groupThree(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
             } else {
                 lineD.attr({ x2: event.detail.p.x });
             }
+            groupingThree();
         });
-    //groupingThree();
+    groupingThree();
 }
 
 function groupFour(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
@@ -392,6 +408,7 @@ function groupFour(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
             lineD.attr({ y1: -radius * Math.sin(angleAD) + circleA.cy() });
         });
 }
+
 function circleSize() {
     radius = document.getElementById('radius').value;
     if (numberOfGroups != 3) {
@@ -401,16 +418,78 @@ function circleSize() {
 
 }
 
-//function groupingThree() {
-//    var draw = SVG('drawing');
-//    var cAX = document.getElementById('circleA').getAttribute('cx');
-//    var cAY = document.getElementById('circleA').getAttribute('cy');
-//    var cBX = document.getElementById('circleB').getAttribute('cx');
-//    var cBY = document.getElementById('circleB').getAttribute('cy');
-//    var cCX = document.getElementById('circleC').getAttribute('cx');
-//    var cCY = document.getElementById('circleC').getAttribute('cy');
-//    var cDX = document.getElementById('circleD').getAttribute('cx');
-//    var cDY = document.getElementById('circleD').getAttribute('cy');
+function groupingThree() {
+    var cAX = parseFloat(document.getElementById('circleA').getAttribute('cx'));
+    var cAY = parseFloat(document.getElementById('circleA').getAttribute('cy'));
+    var cBX = parseFloat(document.getElementById('lineB').getAttribute('x2'));
+    var cBY = parseFloat(document.getElementById('lineB').getAttribute('y2'));
+    var cCX = parseFloat(document.getElementById('lineC').getAttribute('x2'));
+    var cCY = parseFloat(document.getElementById('lineC').getAttribute('y2'));
+    var cDX = parseFloat(document.getElementById('circleD').getAttribute('cx'));
+    var cDY = parseFloat(document.getElementById('circleD').getAttribute('cy'));
+    participantsCheck = participants.length;
 
-//    var pathGreen = draw.path(22.3, 60, cCX, cCY, cAX, cAY, cDX, cDY, 57.7, 110);
-//}
+    // Korrigerer til matematisk Y
+    //cAY = cDY - cAY;
+    //cBY = cDY - cBY;
+    //cCY = cDY - cCY;
+    //cDY = 0;
+
+    //console.log(cAX, cAY, cBX, cBY);
+    var slopeB = (cBY - cAY) / (cBX - cAX);
+    var slopeC = (cCY - cAY) / (cCX - cAX);
+    var slopeD = (cDX - cAX) / (cDY - cAY);
+    //console.log(slopeB);
+
+    // Vi har slopeB og cAX og cAY
+    // cAY = slopeB * cAX + bB
+    // bB = cAY - slopeB * cAX
+
+    var bB = slopeB * (0 - cAX) + cAY;
+    var bC = slopeC * (0 - cAX) + cAY;
+    var bD = slopeD * (0 - cAY) + cAX;
+    // console.log(bB);
+    document.getElementById('groups').innerHTML = '';
+
+    for (var i = 0; i < participants.length; i++) {
+        let oldGroup = participants[i].group;
+        let x = participants[i].x;
+        let y = participants[i].y;
+        let functionB = slopeB * x + bB;
+        let functionC = slopeC * x + bC;
+        let functionD = slopeD * y + bD;
+        let aboveLineB = y < functionB;
+        let aboveLineC = y < functionC;
+        let aboveLineD = x > functionD;
+
+        if (x > cAX && aboveLineB) {
+            participants[i].group = 'Red';
+        } else if (x < cAX && aboveLineC) {
+            participants[i].group = 'Red';
+        } else if (aboveLineD) {
+            participants[i].group = 'Blue';
+        } else {
+            participants[i].group = 'Green';
+        }
+
+
+        //participants[i].group =
+        //    aboveLineC && aboveLineB ? 'Red' :
+        //        aboveLineD ? 'Blue' : 'Green';
+
+        //console.log(participants[i].group, participants[i].name);
+        //document.getElementById('groups').innerHTML =
+        //    '<br/>' + participants[i].group + ' - ' + participants[i].name
+        //    + ' aboveLineB=' + aboveLineB
+        //    + ' aboveLineC=' + aboveLineC
+        //    + ' aboveLineD=' + aboveLineD;
+        if (oldGroup != participants[i].group) {
+            dataCollection.doc(participants[i].id).update({
+                group: participants[i].group
+            })
+        }
+    }
+
+    //console.log(slopeB, slopeC, slopeD);
+    // hexagonMath(false);
+}
