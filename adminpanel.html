@@ -5,7 +5,6 @@
     <meta charset="utf-8" />
     <title>Prosjekt</title>
     <link rel="stylesheet" type="text/css" href="Style1.css" />
-
 </head>
 <body>
     <br />
@@ -14,21 +13,27 @@
     </div1>
     <img src="https://i.imgur.com/PAKp0aQ.png" alt="Logo">
     <h1>Admin panel</h1>
-    
+
     <br />
     <br />
     <input type="button" value="Refresh page" onClick="history.go(0)"> <br />
     <br />
+    <div2 id="checkBoxes2">
+        <label class="container">
+            Read mode
+            <input type="checkbox" id="readmode" onclick="readmode()">
+            <span class="checkmark"></span>
+        </label>
+    </div2>
+    <br />
     <div id="candicount">Number of candidates</div>
     <br />
-    <div id="nrGroupSelect">
+
+    <!--<div id="nrGroupSelect">
         <div class="list">
             <div class="rbgBox">Number of groups:<input type="text" id="groupNrSelect" /></div>
             <button onclick="chooseGroups()">Set group</button>
-        </div>
-    </div>
-    <br />
-
+        </div>-->
     <!--<select id="grouplist" onchange="groupdisp()">
         <option>Number of groups</option>
         <option title="Blue, Red, Green." value="t01">3</option>
@@ -44,7 +49,6 @@
     <div>
         <br />
     </div>
-
     <div id="checkBoxes">
         <label class="container">
             Blue, Red, Green
@@ -56,36 +60,38 @@
             <input type="checkbox" id="c2" onclick="check02()">
             <span class="checkmark"></span>
         </label>
-        <!--<label class="container">
-            Blue-Red
-            <input type="checkbox" id="c3" onclick="check03()">
-            <span class="checkmark"></span>
-        </label>
-        <label class="container">
-            Blue-Green
-            <input type="checkbox" id="c4" onclick="check04()">
-            <span class="checkmark"></span>
-        </label>
-        <label class="container">
-            Green-Red
-            <input type="checkbox" id="c5" onclick="check05()">
-            <span class="checkmark"></span>
-        </label>
-        <label class="container">
-            Green-Blue
-            <input type="checkbox" id="c6" onclick="check06()">
-            <span class="checkmark"></span>
-        </label>
-        <label class="container">
-            Red-Blue
-            <input type="checkbox" id="c7" onclick="check07()">
-            <span class="checkmark"></span>
-        </label>
-        <label class="container">
-            Red-Green
-            <input type="checkbox" id="c8" onclick="check08()">
-            <span class="checkmark"></span>
-        </label>-->
+    </div>
+
+    <!--<label class="container">
+        Blue-Red
+        <input type="checkbox" id="c3" onclick="check03()">
+        <span class="checkmark"></span>
+    </label>
+    <label class="container">
+        Blue-Green
+        <input type="checkbox" id="c4" onclick="check04()">
+        <span class="checkmark"></span>
+    </label>
+    <label class="container">
+        Green-Red
+        <input type="checkbox" id="c5" onclick="check05()">
+        <span class="checkmark"></span>
+    </label>
+    <label class="container">
+        Green-Blue
+        <input type="checkbox" id="c6" onclick="check06()">
+        <span class="checkmark"></span>
+    </label>
+    <label class="container">
+        Red-Blue
+        <input type="checkbox" id="c7" onclick="check07()">
+        <span class="checkmark"></span>
+    </label>
+    <label class="container">
+        Red-Green
+        <input type="checkbox" id="c8" onclick="check08()">
+        <span class="checkmark"></span>
+    </label>-->
     </div>
     <div>
         <br />
@@ -100,11 +106,11 @@
         <p id="Text07" style="display:none">, Red-Blue</p>
         <p id="Text08" style="display:none">, Red-Green</p>-->
     </div3>
-
-    <div4 id="test">
+    <br />
+    <div4 id="showresults">
         Loading data...
     </div4>
-    
+
     </pre>
     <div id="show"></div>
     <a></a>
@@ -116,14 +122,14 @@
     <script>
 
 
-    var adminCollection = db.collection('Admin');
-    var groupAmount = document.getElementById('groupNrSelect')
+        //var adminCollection = db.collection('Admin');
+        //var groupAmount = document.getElementById('groupNrSelect')
 
-    function chooseGroups() {
-        adminCollection.doc('group').update({
-            nr: groupAmount.value
-        });
-    }
+        //function chooseGroups() {
+        //    adminCollection.doc('group').update({
+        //        nr: groupAmount.value
+        //    });
+        //}
 
     </script>
 </body>
