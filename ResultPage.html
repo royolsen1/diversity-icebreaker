@@ -7,12 +7,15 @@
     <link rel="stylesheet" href="ResultPage.css" />
 </head>
 <body>
+    <!--<div class="header">Resultat</div>-->
+    <div id="groups"></div>
+
     <div class="hexagon">
         <svg id="drawing" viewBox="20 5 120 110">
 
         </svg>
     </div>
-    <input id="radius" oninput="circleSize()" type="range" min="1" max="50" />
+    <input id="radius" oninput="circleSize()" onchange="updateRadius()" type="range" min="1" max="50" />
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>

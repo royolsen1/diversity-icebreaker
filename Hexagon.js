@@ -10,11 +10,18 @@ var totalBlue = 0;
 var totalGreen = 0;
 var radius = 10;
 var numberOfGroups;
+var savedAX = 0;
+var savedAY = 0;
+var savedBX = 0;
+var savedBY = 0;
+var savedCX = 0;
+var savedCY = 0;
+var savedDX = 0;
+var savedDY = 0;
 
 
 dataCollection.onSnapshot(
     function (collectionSnapshot) {
-        //       hexagonBuild();
         participants = [];
         collectionSnapshot.forEach(
             function (dataSnapshot) {
@@ -48,9 +55,22 @@ adminCollection.onSnapshot(
             function (dataSnapshot) {
                 let data = dataSnapshot.data();
                 numberOfGroups = data.nr;
+                savedAX = data.savedAX;
+                savedAY = data.savedAY;
+                savedBX = data.savedBX;
+                savedBY = data.savedBY;
+                savedCX = data.savedCX;
+                savedCY = data.savedCY;
+                savedDX = data.savedDX;
+                savedDY = data.savedDY;
+                radius = data.savedRadius;
             }
-        )
-        hexagonMath(true);
+        );
+        if (savedAX == 0) {
+            hexagonMath(true)
+        } else {
+            hexagonMath(false);
+        }
     }
 );
 
@@ -110,14 +130,14 @@ function hexagonBuild() {
 function hexagonMath(condition) {
     var calculate = condition;
     if (!calculate) {
-        var cAX = parseFloat(document.getElementById('circleA').getAttribute('cx'));
-        var cAY = parseFloat(document.getElementById('circleA').getAttribute('cy'));
-        var cBX = parseFloat(document.getElementById('circleB').getAttribute('cx'));
-        var cBY = parseFloat(document.getElementById('circleB').getAttribute('cy'));
-        var cCX = parseFloat(document.getElementById('circleC').getAttribute('cx'));
-        var cCY = parseFloat(document.getElementById('circleC').getAttribute('cy'));
-        var cDX = parseFloat(document.getElementById('circleD').getAttribute('cx'));
-        var cDY = parseFloat(document.getElementById('circleD').getAttribute('cy'));
+        var cAX = savedAX;
+        var cAY = savedAY;
+        var cBX = savedBX;
+        var cBY = savedBY;
+        var cCX = savedCX;
+        var cCY = savedCY;
+        var cDX = savedDX;
+        var cDY = savedDY;
     }
     hexagonBuild();
     var dots = document.getElementById('drawing');
@@ -230,7 +250,7 @@ function groupThree(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
             lineC.attr({ y1: event.detail.p.y });
             lineD.attr({ x1: event.detail.p.x });
             lineD.attr({ y1: event.detail.p.y });
-            groupingThree();
+            grouping();
         });
 
     circleB.on('dragmove',
@@ -245,7 +265,7 @@ function groupThree(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
                 lineB.attr({ x2: event.detail.p.x });
                 lineB.attr({ y2: event.detail.p.x * 1.74 - 179.76 });
             }
-            groupingThree();
+            grouping();
         });
     circleC.on('dragmove',
         function (event) {
@@ -259,7 +279,7 @@ function groupThree(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
                 lineC.attr({ x2: event.detail.p.x });
                 lineC.attr({ y2: event.detail.p.x * (-1.74) + 98.72 });
             }
-            groupingThree();
+            grouping();
         });
     circleD.on('dragmove',
         function (event) {
@@ -270,9 +290,38 @@ function groupThree(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
             } else {
                 lineD.attr({ x2: event.detail.p.x });
             }
-            groupingThree();
+            grouping();
         });
-    groupingThree();
+    circleA.on('dragend',
+        function (event) {
+            adminCollection.doc('group').update({
+                savedAX: circleA.cx(),
+                savedAY: circleA.cy()
+            });
+        });
+    circleB.on('dragend',
+        function (event) {
+            adminCollection.doc('group').update({
+                savedBX: parseFloat(document.getElementById('lineB').getAttribute('x2')),
+                savedBY: parseFloat(document.getElementById('lineB').getAttribute('y2'))
+            });
+        });
+    circleC.on('dragend',
+        function (event) {
+            adminCollection.doc('group').update({
+                savedCX: parseFloat(document.getElementById('lineC').getAttribute('x2')),
+                savedCY: parseFloat(document.getElementById('lineC').getAttribute('y2'))
+            });
+        });
+    circleD.on('dragend',
+        function (event) {
+            adminCollection.doc('group').update({
+                savedDX: circleD.cx(),
+                savedDY: circleD.cy()
+            });
+        });
+
+    grouping();
 }
 
 function groupFour(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
@@ -354,6 +403,7 @@ function groupFour(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
             var angleAD = Math.atan2(deltaYAD, deltaXAD);
             lineD.attr({ x1: radius * Math.cos(angleAD) + circleA.cx() });
             lineD.attr({ y1: -radius * Math.sin(angleAD) + circleA.cy() });
+            grouping();
         });
 
     circleB.on('dragmove',
@@ -373,6 +423,7 @@ function groupFour(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
             var angleAB = Math.atan2(deltaYAB, deltaXAB);
             lineB.attr({ x1: radius * Math.cos(angleAB) + circleA.cx() });
             lineB.attr({ y1: -radius * Math.sin(angleAB) + circleA.cy() });
+            grouping();
         });
     circleC.on('dragmove',
         function (event) {
@@ -391,6 +442,7 @@ function groupFour(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
             var angleAC = Math.atan2(deltaYAC, deltaXAC);
             lineC.attr({ x1: radius * Math.cos(angleAC) + circleA.cx() });
             lineC.attr({ y1: -radius * Math.sin(angleAC) + circleA.cy() });
+            grouping();
         });
     circleD.on('dragmove',
         function (event) {
@@ -406,7 +458,37 @@ function groupFour(x, y, cBX, cBY, cCX, cCY, cDX, cDY) {
             var angleAD = Math.atan2(deltaYAD, deltaXAD);
             lineD.attr({ x1: radius * Math.cos(angleAD) + circleA.cx() });
             lineD.attr({ y1: -radius * Math.sin(angleAD) + circleA.cy() });
+            grouping();
         });
+    circleA.on('dragend',
+        function (event) {
+            adminCollection.doc('group').update({
+                savedAX: circleA.cx(),
+                savedAY: circleA.cy()
+            });
+        });
+    circleB.on('dragend',
+        function (event) {
+            adminCollection.doc('group').update({
+                savedBX: parseFloat(document.getElementById('lineB').getAttribute('x2')),
+                savedBY: parseFloat(document.getElementById('lineB').getAttribute('y2'))
+            });
+        });
+    circleC.on('dragend',
+        function (event) {
+            adminCollection.doc('group').update({
+                savedCX: parseFloat(document.getElementById('lineC').getAttribute('x2')),
+                savedCY: parseFloat(document.getElementById('lineC').getAttribute('y2'))
+            });
+        });
+    circleD.on('dragend',
+        function (event) {
+            adminCollection.doc('group').update({
+                savedDX: circleD.cx(),
+                savedDY: circleD.cy()
+            });
+        });
+    grouping();
 }
 
 function circleSize() {
@@ -417,8 +499,13 @@ function circleSize() {
     }
 
 }
+function updateRadius() {
+        adminCollection.doc('group').update({
+            savedRadius: radius
+        });
+}
 
-function groupingThree() {
+function grouping() {
     var cAX = parseFloat(document.getElementById('circleA').getAttribute('cx'));
     var cAY = parseFloat(document.getElementById('circleA').getAttribute('cy'));
     var cBX = parseFloat(document.getElementById('lineB').getAttribute('x2'));
@@ -429,40 +516,36 @@ function groupingThree() {
     var cDY = parseFloat(document.getElementById('circleD').getAttribute('cy'));
     participantsCheck = participants.length;
 
-    // Korrigerer til matematisk Y
-    //cAY = cDY - cAY;
-    //cBY = cDY - cBY;
-    //cCY = cDY - cCY;
-    //cDY = 0;
 
-    //console.log(cAX, cAY, cBX, cBY);
     var slopeB = (cBY - cAY) / (cBX - cAX);
     var slopeC = (cCY - cAY) / (cCX - cAX);
     var slopeD = (cDX - cAX) / (cDY - cAY);
-    //console.log(slopeB);
 
-    // Vi har slopeB og cAX og cAY
-    // cAY = slopeB * cAX + bB
-    // bB = cAY - slopeB * cAX
 
     var bB = slopeB * (0 - cAX) + cAY;
     var bC = slopeC * (0 - cAX) + cAY;
     var bD = slopeD * (0 - cAY) + cAX;
-    // console.log(bB);
-   // document.getElementById('groups').innerHTML = '';
 
     for (var i = 0; i < participants.length; i++) {
         let oldGroup = participants[i].group;
         let x = participants[i].x;
         let y = participants[i].y;
+        if (numberOfGroups == 4) {
+            var distance = Math.sqrt(Math.pow(x - cAX, 2) + Math.pow(y - cAY, 2));
+        } else {
+            var distance = radius + 1;
+        }
         let functionB = slopeB * x + bB;
         let functionC = slopeC * x + bC;
         let functionD = slopeD * y + bD;
         let aboveLineB = y < functionB;
         let aboveLineC = y < functionC;
         let aboveLineD = x > functionD;
+        let withinAverage = distance < radius;
 
-        if (x > cAX && aboveLineB) {
+        if (withinAverage) {
+            participants[i].group = 'Average';
+        } else if (x > cAX && aboveLineB) {
             participants[i].group = 'Red';
         } else if (x < cAX && aboveLineC) {
             participants[i].group = 'Red';
@@ -473,16 +556,6 @@ function groupingThree() {
         }
 
 
-        //participants[i].group =
-        //    aboveLineC && aboveLineB ? 'Red' :
-        //        aboveLineD ? 'Blue' : 'Green';
-
-        //console.log(participants[i].group, participants[i].name);
-        //document.getElementById('groups').innerHTML =
-        //    '<br/>' + participants[i].group + ' - ' + participants[i].name
-        //    + ' aboveLineB=' + aboveLineB
-        //    + ' aboveLineC=' + aboveLineC
-        //    + ' aboveLineD=' + aboveLineD;
         if (oldGroup != participants[i].group) {
             dataCollection.doc(participants[i].id).update({
                 group: participants[i].group
@@ -490,6 +563,4 @@ function groupingThree() {
         }
     }
 
-    //console.log(slopeB, slopeC, slopeD);
-    // hexagonMath(false);
 }
