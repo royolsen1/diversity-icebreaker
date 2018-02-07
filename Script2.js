@@ -64,7 +64,7 @@ function grouping() {
         html += '<td id="' + groupName + 'ppl">';
         for (var j = 0; j < groupScores.length; j++) {
             var score = groupScores[j];
-            html += '<b>' + score.name + '</b>' + ' B=' + score.blue + ' R=' + score.red + ' G=' + score.green + ' ' + '<br/>';
+            html += '<b>' + score.name + '</b>' + ' B:' + score.blue + ' R:' + score.red + ' G:' + score.green + ' ' + '<br/>' + '<br/>';
         }
         html += '</td>';
     }
