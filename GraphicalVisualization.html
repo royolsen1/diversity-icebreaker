@@ -7,7 +7,7 @@
     <title>Graphical Visualization</title>
 
 </head>
-<body>
+<body style="background-color: antiquewhite">
     <div class="mainContainer">
         <div class="mainPart" style="background-color: antiquewhite;">
             <div class="rowContainer"
@@ -24,10 +24,10 @@
             </div>
         </div>
         <div class="mainPart rowContainer" style="background-color: antiquewhite">
-            <div id="nickName">Nickname: <input id="nickNameInput" type="text" oninput="getName(this)" /></div>
+            <div id="nickName">Nickname: <br /> <input id="nickNameInput" type="text" style="font-size: 24px; font-family: sylfaen; width: 200px;" oninput="getName(this)" /></div>
             <div id="paperScoreInfo"></div>
         </div>
-        <div class="container1" style="background-color: antiquewhite; flex-grow: 1;">
+        <div class="container1" style="background-color: rgba(0, 0, 0, 0); flex-grow: 1;">
             <div class="gauge-a1"></div>
             <div class="gauge-b1"></div>
             <div class="gauge-c1"></div>
@@ -35,7 +35,7 @@
                 <h1 id="percent1">50</h1>
             </div>
         </div>
-        <div class="container2" style="background-color: antiquewhite; flex-grow: 1;">
+        <div class="container2" style="background-color: rgba(0, 0, 0, 0); flex-grow: 1;">
             <div class="gauge-a2"></div>
             <div class="gauge-b2"></div>
             <div class="gauge-c2"></div>
@@ -43,7 +43,7 @@
                 <h1 id="percent2">50</h1>
             </div>
         </div>
-        <div class="container3" style="background-color: antiquewhite; flex-grow: 1;">
+        <div class="container3" style="background-color: rgba(0, 0, 0, 0); flex-grow: 1;">
             <div class="gauge-a3"></div>
             <div class="gauge-b3"></div>
             <div class="gauge-c3"></div>
@@ -55,6 +55,8 @@
         <div class="mainPart" style="background-color: antiquewhite;">
             <div class="btn pri rowContainer" id="groupAllocation">You are:<div id="textColorBlue">Blue</div><div id="textColorRed">Red</div><div id="textColorGreen">Green</div>-Group</div>
         </div>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br /><br /><br />
         <div class="mainPart" style="background-color: antiquewhite; flex-grow: 2;">
             <div class="rowContainer">
                 <div class="part columnContainer">
@@ -98,6 +100,7 @@
         var blueAmount;
         var greenAmount;
         var checkbox = false;
+        var modifyAddScore = document.getElementsByClassName("addScore");
         function addScore() {
             var newScore = {};
             newScore.red = redAmount;
@@ -105,7 +108,21 @@
             newScore.green = greenAmount;
             newScore.name = alias;
             dataCollection.add(newScore);
+
         }
+
+        db.collection("Admin").doc("Settings")
+            .onSnapshot(function (doc) {
+                //checkboxread.checked = doc.data().ReadOnly;
+                if (blueInput = 50) {
+                    modifyAddScore.innerHTML = "Read score";
+                }
+                else if (doc.data().ReadOnly) {
+
+                    modifyAddScore.innerHTML = "Add score";
+                }
+            });
+
         function getName(input) {
             alias = input.value;
         }
