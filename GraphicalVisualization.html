@@ -53,7 +53,13 @@
         </div>
 
         <div class="mainPart" style="background-color: antiquewhite;">
-            <div class="btn pri rowContainer" id="groupAllocation">You are:<div id="textColorBlue">Blue</div><div id="textColorRed">Red</div><div id="textColorGreen">Green</div>-Group</div>
+            <div class="btn pri rowContainer" id="groupAllocation">
+                You are:
+                <div id="textColorBlue">Blue</div>
+                <!--<div id="textColorRed">Red</div>
+                <div id="textColorGreen">Green</div>-->
+                -Group
+            </div>
         </div>
         <br /><br /><br /><br /><br /><br /><br /><br /><br />
         <br /><br /><br /><br /><br /><br /><br /><br /><br />
@@ -105,28 +111,56 @@
         var redAmount;
         var blueAmount;
         var greenAmount;
+        var ReadOnly = true;
         var checkbox = false;
         var modifyAddScore = document.getElementsByClassName("addScore");
         function addScore() {
-            var newScore = {};
-            newScore.red = redAmount;
-            newScore.blue = blueAmount;
-            newScore.green = greenAmount;
-            newScore.name = alias;
-            dataCollection.add(newScore);
+            if (!ReadOnly) {
+                var newScore = {};
+                newScore.red = redAmount;
+                newScore.blue = blueAmount;
+                newScore.green = greenAmount;
+                newScore.name = alias;
+                dataCollection.add(newScore);
+            } else if (ReadOnly) {
+                dataCollection.get().then(
+                    function (collectionGet) {
+                        collectionGet.forEach(
+                            function (dataSnapshot) {
+                                let data = dataSnapshot.data();
+                                if ((data.red == redAmount) &&
+                                    (data.green == greenAmount) &&
+                                    (data.blue == blueAmount)) {
+                                    group = data.group;
+                                    alias = data.name;
+                                } else if (alias == data.name) {
+                                    group = data.group;
+                                    document.getElementById("redInput").value = data.red;
+                                    document.getElementById("greenInput").value = data.green;
+                                    document.getElementById("blueInput").value = data.blue;
+                                    document.getElementById("textColorBlue").innerHTML = data.group;
+                                    changeSize();
+                                }
+                            }
+                        )
+                    }
+                )
+            }
         }
-
-        //db.collection("Admin").doc("Settings")
-            //.onSnapshot(function (doc) {
-                if (redInput > 50) {
-                    //modifyAddScore.innerHTML = "Read score";
-                    console.log("Hello");
+        db.collection("Admin").doc("Settings")
+            .onSnapshot(function (doc) {
+                var data = doc.data();
+                console.log(data);
+                ReadOnly = data.ReadOnly;
+                if (ReadOnly) {
+                    console.log("Read");
+                    modifyAddScore[0].innerHTML = "Read score";
                 }
-                else if (redInput < 50) {
-                    //modifyAddScore.innerHTML = "Add score";
-                    console.log("Hade bra");
+                else if (!ReadOnly) {
+                    console.log("Write");
+                    modifyAddScore[0].innerHTML = "Add score";
                 }
-            //});
+            });
 
         function getName(input) {
             alias = input.value;

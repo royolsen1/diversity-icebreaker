@@ -4,7 +4,6 @@
 
 body {
 	overflow: hidden;
-    cursor: crosshair;
 }
 .btn {
     display: inline-block;
@@ -79,7 +78,7 @@ gruppe {
 #groupAllocation {
     position: absolute;
     left: 34.25%;
-    top: 80%;
+    top: 72%;
     font-size: 20px;
 }
 
