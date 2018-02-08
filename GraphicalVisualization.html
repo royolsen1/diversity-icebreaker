@@ -23,7 +23,7 @@
 
             </div>
         </div>
-        <div class="mainPart rowContainer" style="background-color: antiquewhite">
+        <div class="mainPart columnContainer" style="background-color: antiquewhite">
             <div id="nickName">Nickname: <br /> <input id="nickNameInput" type="text" style="font-size: 24px; font-family: sylfaen; width: 200px;" oninput="getName(this)" /></div>
             <div id="paperScoreInfo"></div>
         </div>
@@ -72,7 +72,7 @@
                     <div class="btn pri" id="greenSolution">Green score = 50</div>
                 </div>
                 <div>
-                    <button class="addScore" onclick="addScore()">Add score</button>
+                    <button class="addScore" onclick="addScore(), this.disabled = true" value="Save">Add score</button>
                 </div>
             </div>
         </div>
@@ -84,12 +84,18 @@
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
     <script>
         var config = {
-            apiKey: "AIzaSyDIMCz-H4Qa6yzO8cOEDDO-_-TNgKRwz40",
+            /*apiKey: "AIzaSyDIMCz-H4Qa6yzO8cOEDDO-_-TNgKRwz40",
             authDomain: "diversity-icebreaker.firebaseapp.com",
             databaseURL: "https://diversity-icebreaker.firebaseio.com/",
             projectId: "diversity-icebreaker",
             storageBucket: "diversity-icebreaker.appspot.com",
-            messagingSenderId: "829693602828"
+            messagingSenderId: "829693602828"*/
+            apiKey: "AIzaSyA9zNgSFLM98L3axXTNmHQHeVoo7VQ33T4",
+            authDomain: "icebreakerbackup.firebaseapp.com",
+            databaseURL: "https://icebreakerbackup.firebaseio.com/",
+            projectId: "icebreakerbackup",
+            storageBucket: "",
+            messagingSenderId: "348303687230"
         };
         firebase.initializeApp(config);
         var db = firebase.firestore();
@@ -108,20 +114,19 @@
             newScore.green = greenAmount;
             newScore.name = alias;
             dataCollection.add(newScore);
-
         }
 
-        /*db.collection("Admin").doc("Settings")
-            .onSnapshot(function (doc) {
-                //checkboxread.checked = doc.data().ReadOnly;
-                if (blueInput = 50) {
-                    modifyAddScore.innerHTML = "Read score";
+        //db.collection("Admin").doc("Settings")
+            //.onSnapshot(function (doc) {
+                if (redInput > 50) {
+                    //modifyAddScore.innerHTML = "Read score";
+                    console.log("Hello");
                 }
-                else if (doc.data().ReadOnly) {
-
-                    modifyAddScore.innerHTML = "Add score";
+                else if (redInput < 50) {
+                    //modifyAddScore.innerHTML = "Add score";
+                    console.log("Hade bra");
                 }
-            });*/
+            //});
 
         function getName(input) {
             alias = input.value;

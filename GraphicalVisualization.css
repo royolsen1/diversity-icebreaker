@@ -4,7 +4,7 @@
 
 body {
 	overflow: hidden;
-    cursor: no-drop;
+    cursor: crosshair;
 }
 .btn {
     display: inline-block;
@@ -79,7 +79,7 @@ gruppe {
 #groupAllocation {
     position: absolute;
     left: 34.25%;
-    top: 75%;
+    top: 80%;
     font-size: 20px;
 }
 
@@ -341,6 +341,6 @@ YG {
 #paperScoreInfo {
     position: absolute;
     font-size: 25px;
-    top: 17%;
+    top: 20%;
     left: 40%;
 }
