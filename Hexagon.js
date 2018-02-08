@@ -39,6 +39,7 @@ dataCollection.onSnapshot(
                     person.id = dataSnapshot.id;
                     person.x = data.x;
                     person.y = data.y;
+                    person.group = data.group;
                     participants.push(person);
                 }
             }
@@ -500,9 +501,9 @@ function circleSize() {
 
 }
 function updateRadius() {
-        adminCollection.doc('group').update({
-            savedRadius: radius
-        });
+    adminCollection.doc('group').update({
+        savedRadius: radius
+    });
 }
 
 function grouping() {
@@ -527,7 +528,7 @@ function grouping() {
     var bD = slopeD * (0 - cAY) + cAX;
 
     for (var i = 0; i < participants.length; i++) {
-        let oldGroup = participants[i].group;
+
         let x = participants[i].x;
         let y = participants[i].y;
         if (numberOfGroups == 4) {
@@ -542,7 +543,7 @@ function grouping() {
         let aboveLineC = y < functionC;
         let aboveLineD = x > functionD;
         let withinAverage = distance < radius;
-
+        var oldGroup = participants[i].group;
         if (withinAverage) {
             participants[i].group = 'Average';
         } else if (x > cAX && aboveLineB) {
@@ -559,7 +560,7 @@ function grouping() {
         if (oldGroup != participants[i].group) {
             dataCollection.doc(participants[i].id).update({
                 group: participants[i].group
-            })
+            });
         }
     }
 
