@@ -2,6 +2,8 @@
 
 
 // Initialize Firebase
+
+//Database 1
 var config = {
     apiKey: "AIzaSyDIMCz-H4Qa6yzO8cOEDDO-_-TNgKRwz40",
     authDomain: "diversity-icebreaker.firebaseapp.com",
@@ -9,6 +11,14 @@ var config = {
     projectId: "diversity-icebreaker",
     storageBucket: "diversity-icebreaker.appspot.com",
     messagingSenderId: "829693602828"
+//Database 2
+//var config = {
+//    apiKey: "AIzaSyA9zNgSFLM98L3axXTNmHQHeVoo7VQ33T4",
+//    authDomain: "icebreakerbackup.firebaseapp.com",
+//    databaseURL: "https://icebreakerbackup.firebaseio.com/",
+//    projectId: "icebreakerbackup",
+//    storageBucket: "",
+//    messagingSenderId: "348303687230"
 };
 firebase.initializeApp(config);
 var db = firebase.firestore();
