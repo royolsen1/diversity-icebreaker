@@ -25,7 +25,10 @@
         </div>
         <div class="mainPart columnContainer" style="background-color: antiquewhite">
             <div id="nickName">Nickname: <br /> <input id="nickNameInput" type="text" style="font-size: 24px; font-family: sylfaen; width: 200px;" oninput="getName(this)" /></div>
+            <div id="ageInfo">Age: <br /> <input id="ageInput" type="text" style="font-size: 24px; font-family: sylfaen; width: 200px;" oninput="getAge(this)" /></div>
+            <div id="sexInfo">Sex: <br /> <input id="sexInput" type="text" style="font-size: 24px; font-family: sylfaen; width: 200px;" oninput="getSex(this)" /></div>     
             <div id="paperScoreInfo"></div>
+
         </div>
         <div class="container1" style="background-color: rgba(0, 0, 0, 0); flex-grow: 1;">
             <div class="gauge-a1"></div>
@@ -55,16 +58,15 @@
         <div class="mainPart" style="background-color: antiquewhite;">
             <div class="btn pri rowContainer" id="groupAllocation">
                 You are:
-                <div id="textColorBlue">Blue</div>
-                <!--<div id="textColorRed">Red</div>
+                <div id="textColorNone" style="padding-left: 7px;">Not in any</div>
+                <!--<div id="textColorBlue">Blue</div>
+                <div id="textColorRed">Red</div>
                 <div id="textColorGreen">Green</div>-->
                 -Group
             </div>
         </div>
-        <br /><br /><br /><br /><br /><br /><br /><br /><br />
-        <br /><br /><br /><br /><br /><br /><br /><br /><br />
         <div class="mainPart" style="background-color: antiquewhite; flex-grow: 2;">
-            <div class="rowContainer">
+            <div class="rowContainer" style="padding-top: 300px;">
                 <div class="part columnContainer">
                     <div><input class="slider" id="blueInput" type="number" name="points" value="50" step="1" min="0" max="100" oninput="changeSize(this)"><span id="Blue"></span></div>
                     <div class="btn pri" id="blueSolution">Blue score = 50</div>
@@ -106,8 +108,9 @@
         firebase.initializeApp(config);
         var db = firebase.firestore();
         var dataCollection = db.collection('Data');
-        var radius = 100;
         var alias;
+        var age;
+        var sex;
         var redAmount;
         var blueAmount;
         var greenAmount;
@@ -121,6 +124,8 @@
                 newScore.blue = blueAmount;
                 newScore.green = greenAmount;
                 newScore.name = alias;
+                newScore.age = age;
+                newScore.sex = sex;
                 dataCollection.add(newScore);
             } else if (ReadOnly) {
                 dataCollection.get().then(
@@ -133,12 +138,14 @@
                                     (data.blue == blueAmount)) {
                                     group = data.group;
                                     alias = data.name;
+                                    age = data.age;
+                                    sex = data.sex;
                                 } else if (alias == data.name) {
                                     group = data.group;
                                     document.getElementById("redInput").value = data.red;
                                     document.getElementById("greenInput").value = data.green;
                                     document.getElementById("blueInput").value = data.blue;
-                                    document.getElementById("textColorBlue").innerHTML = data.group;
+                                    document.getElementById("textColorNone").innerHTML = data.group;
                                     changeSize();
                                 }
                             }
@@ -164,6 +171,14 @@
 
         function getName(input) {
             alias = input.value;
+        }
+
+        function getAge(input) {
+            age = input.value;
+        }
+
+        function getSex(input) {
+            sex = input.value;
         }
 
         function changeSize(input) {
