@@ -13,10 +13,19 @@
     </div1>
     <img src="https://i.imgur.com/PAKp0aQ.png" alt="Logo">
     <h1>Admin panel</h1>
-
     <br />
     <br />
     <input type="button" value="Refresh page" onClick="history.go(0)"> <br />
+    <br />
+    <button onclick="deleteAll()" id="deleteButton">Delete all</button><a> !Deletes all participant data!</a>
+    <br />
+    <br />
+    <div class="container2" id="exelPaste">
+        <div class="list">
+            <div><b>Excelpaste: blue, red, green, age, sex, name.</b></div>
+            <div id='editableDiv' contenteditable='true'></div>
+        </div>
+    </div>
     <br />
     <div2 id="checkBoxes2">
         <label class="container">
@@ -28,23 +37,6 @@
     <br />
     <div id="candicount">Number of candidates</div>
     <br />
-
-    <!--<div id="nrGroupSelect">
-        <div class="list">
-            <div class="rbgBox">Number of groups:<input type="text" id="groupNrSelect" /></div>
-            <button onclick="chooseGroups()">Set group</button>
-        </div>-->
-    <!--<select id="grouplist" onchange="groupdisp()">
-        <option>Number of groups</option>
-        <option title="Blue, Red, Green." value="t01">3</option>
-        <option title="Blue, Blue-Red, Blue-Green, Green, Green-Red, Green-Blue, Red, Red-Blue, Red-Green, Average." value="t05">10</option>
-    </select> <div>
-        3 groups: Blue, Red, Green.
-        <br />
-        4 groups: Blue, Red, Green, Average.
-        <br />
-        10 groups: Blue, Blue-Red, Blue-Green, Green, Green-Red, Green-Blue, Red, Red-Blue, Red-Green, Average.
-    </div>-->
 
     <div>
         <br />
@@ -61,57 +53,18 @@
             <span class="checkmark"></span>
         </label>
     </div>
-
-    <!--<label class="container">
-        Blue-Red
-        <input type="checkbox" id="c3" onclick="check03()">
-        <span class="checkmark"></span>
-    </label>
-    <label class="container">
-        Blue-Green
-        <input type="checkbox" id="c4" onclick="check04()">
-        <span class="checkmark"></span>
-    </label>
-    <label class="container">
-        Green-Red
-        <input type="checkbox" id="c5" onclick="check05()">
-        <span class="checkmark"></span>
-    </label>
-    <label class="container">
-        Green-Blue
-        <input type="checkbox" id="c6" onclick="check06()">
-        <span class="checkmark"></span>
-    </label>
-    <label class="container">
-        Red-Blue
-        <input type="checkbox" id="c7" onclick="check07()">
-        <span class="checkmark"></span>
-    </label>
-    <label class="container">
-        Red-Green
-        <input type="checkbox" id="c8" onclick="check08()">
-        <span class="checkmark"></span>
-    </label>-->
-    </div>
     <div>
         <br />
     </div>
     <div3>
         <p>You have chosen: Blue, Red, Green</p><p id="Text01" style="display:none"> </p>
         <p id="Text02" style="display:none">, Average</p>
-        <!--<p id="Text03" style="display:none">, Blue-Red</p>
-        <p id="Text04" style="display:none">, Blue-Green</p>
-        <p id="Text05" style="display:none">, Green-Red</p>
-        <p id="Text06" style="display:none">, Green-Blue</p>
-        <p id="Text07" style="display:none">, Red-Blue</p>
-        <p id="Text08" style="display:none">, Red-Green</p>-->
     </div3>
     <br />
     <div4 id="showresults">
         Loading data...
     </div4>
 
-    </pre>
     <div id="show"></div>
     <a></a>
 

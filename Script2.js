@@ -1,6 +1,5 @@
 ﻿﻿"use strict";
 
-
 // Initialize Firebase
 
 //Database 1
@@ -82,12 +81,6 @@ function grouping() {
     document.getElementById('showresults').innerHTML = html;
     check01()
     check02()
-    //check03()
-    //check04()
-    //check05()
-    //check06()
-    //check07()
-    //check08()
 }
 
 var RMode = db.collection("Admin").doc("Settings");
@@ -103,12 +96,21 @@ RMode.get().then(function (doc) {
     console.log("Error getting document:", error);
     });
 
-
-//function checkreadmode() {
-//    if (db.collection("Admin").doc("Settings").ReadOnly)true; {
-//        checkboxread.checked = true;
-//    }
-//}
+function deleteAll() {
+    dataCollection.get().then(
+        function (collectionSnapshot) {
+            collectionSnapshot.forEach(
+                function (dataSnapshot) {
+                    dataSnapshot.data();
+                    var ID = dataSnapshot.id;
+                    dataCollection.doc(ID).delete().then(function () {
+                        console.log("Document successfully deleted!");
+                    }).catch(function (error) {
+                        console.error("Error removing document: ", error);
+                    });
+                });
+        });
+}
 
 var checkboxread = document.getElementById("readmode");
 db.collection("Admin").doc("Settings")
@@ -121,6 +123,30 @@ function readmode() {
             ReadOnly: checkboxread.checked
         });
 }
+
+function handlePaste(e) {
+    var clipboardData, pastedData;
+    // Stop data actually being pasted into div
+    e.stopPropagation();
+    e.preventDefault();
+    // Get pasted data via clipboard API
+    clipboardData = e.clipboardData || window.clipboardData;
+    pastedData = clipboardData.getData('Text');
+    var lines = pastedData.split('\r\n');
+    for (var i in lines) {
+        let line = lines[i];
+        let parts = line.split('\t');
+        dataCollection.add({
+            blue: parts[0],
+            red: parts[1],
+            green: parts[2],
+            age: parts[3],
+            sex: parts[4],
+            name: parts[5]
+        });
+    }
+}
+document.getElementById('editableDiv').addEventListener('paste', handlePaste);
 
 // Group Checkboxes
 
@@ -167,88 +193,3 @@ function check02() {
         Averageppl.style.display = 'none';
     }
 }
-
-//function check03() {
-//    // Get the checkbox
-//    var checkBox03 = document.getElementById("c3");
-//    // Get the output text
-//    var Text03 = document.getElementById("Text03");
-
-//    // If the checkbox is checked, display the output text
-//    if (checkBox03.checked == true) {
-//        Text03.style.display = "block";
-//    } else {
-//        Text03.style.display = "none";
-//    }
-//}
-
-//function check04() {
-//    // Get the checkbox
-//    var checkBox04 = document.getElementById("c4");
-//    // Get the output text
-//    var Text04 = document.getElementById("Text04");
-
-//    // If the checkbox is checked, display the output text
-//    if (checkBox04.checked == true) {
-//        Text04.style.display = "block";
-//    } else {
-//        Text04.style.display = "none";
-//    }
-//}
-
-//function check05() {
-//    // Get the checkbox
-//    var checkBox05 = document.getElementById("c5");
-//    // Get the output text
-//    var Text05 = document.getElementById("Text05");
-
-//    // If the checkbox is checked, display the output text
-//    if (checkBox05.checked == true) {
-//        Text05.style.display = "block";
-//    } else {
-//        Text05.style.display = "none";
-//    }
-//}
-
-//function check06() {
-//    // Get the checkbox
-//    var checkBox06 = document.getElementById("c6");
-//    // Get the output text
-//    var Text06 = document.getElementById("Text06");
-
-//    // If the checkbox is checked, display the output text
-//    if (checkBox06.checked == true) {
-//        Text06.style.display = "block";
-//    } else {
-//        Text06.style.display = "none";
-//    }
-//}
-
-//function check07() {
-//    // Get the checkbox
-//    var checkBox07 = document.getElementById("c7");
-//    // Get the output text
-//    var Text07 = document.getElementById("Text07");
-
-//    // If the checkbox is checked, display the output text
-//    if (checkBox07.checked == true) {
-//        Text07.style.display = "block";
-//    } else {
-//        Text07.style.display = "none";
-//    }
-//}
-
-//function check08() {
-//    // Get the checkbox
-//    var checkBox08 = document.getElementById("c8");
-//    // Get the output text
-//    var Text08 = document.getElementById("Text08");
-
-//    // If the checkbox is checked, display the output text
-//    if (checkBox08.checked == true) {
-//        Text08.style.display = "block";
-//    } else {
-//        Text08.style.display = "none";
-//    }
-//}
-

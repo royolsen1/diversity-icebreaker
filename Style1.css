@@ -25,12 +25,49 @@ img {
     text-align: center;
     font-size: 16px;
 }
-#checkBoxes{
-    display: flex;   
+
+#checkBoxes {
+    display: flex;
     flex-wrap: wrap;
     padding-left: 10px;
 }
-label{
+
+#checkBoxes2 {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 10px;
+}
+
+#deleteButton {
+    background-color: #ff8080;
+}
+
+.container2 {
+    justify-content: center;
+    margin: 10px;
+}
+
+.list {
+    border: solid black 2px;
+    display: inline-block;
+    white-space: nowrap;
+    padding: 2px;
+    width: 300px;
+    display: table;
+}
+
+    .list input {
+        box-sizing: border-box;
+        outline: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+#editableDiv {
+    height: 50px;
+}
+
+label {
     padding-left: 5px;
     margin: 10px;
 }
@@ -51,9 +88,8 @@ table {
 }
 
 table, th, td {
-    
     border-collapse: separate;
-    background-color: #e6e6e6;    
+    background-color: #e6e6e6;
     margin: 4px;
     border-spacing: 3px 0px;
     padding-left: 10px;
@@ -63,17 +99,15 @@ table, th, td {
 
 th, td {
     border: #000 solid 4px;
-    padding: 10px;   
+    padding: 10px;
     text-align: center;
     white-space: nowrap;
     /*padding-right: 10px;*/
-   
 }
 
 table#t01 th, #t02 th, #t03 th, #t04 th, #t05 th {
     background-color: #737373;
     color: white;
-    
 }
 
 /* The container */
