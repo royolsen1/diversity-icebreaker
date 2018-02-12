@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="GraphicalVisualization2.css">
+    <title>Graphical Visualization</title>
+
+</head>
+<body style="background-color: antiquewhite">
+    <div class="mainContainer">
+        <div class="mainPart" style="background-color: antiquewhite;">
+            <div class="rowContainer"
+                 style="align-items: center;">
+                <div class="part" style="padding-top: 5px;">
+                    <img src="https://i.imgur.com/PAKp0aQ.png" alt="Logo">
+                </div>
+                <div class="part rowContainer" style="justify-content: flex-end">
+                    <a href="index.html" class="button" id="group3"><b><i>Back to Index</i></b></a>
+                </div>
+
+            </div>
+        </div>
+        <div class="mainPart columnContainer" style="background-color: antiquewhite">
+            <div id="nickName">Nickname: <br /> <input id="nickNameInput" type="text" style="font-size: 24px; font-family: sylfaen; width: 200px;" oninput="getName(this)" /></div>
+            <div id="ageInfo">Age: <br /> <input id="ageInput" type="text" style="font-size: 24px; font-family: sylfaen; width: 200px;" /></div>
+            <div id="sexInfo">Sex: <br /> <input id="sexInput" type="text" style="font-size: 24px; font-family: sylfaen; width: 200px;" /></div>     
+            <div id="paperScoreInfo"></div>
+
+        </div>
+        <div class="container1" style="background-color: rgba(0, 0, 0, 0); flex-grow: 1;">
+            <div class="gauge-a1"></div>
+            <div class="gauge-b1"></div>
+            <div class="gauge-c1"></div>
+            <div class="gauge-data1">
+                <h1 id="percent1">50</h1>
+            </div>
+        </div>
+        <div class="container2" style="background-color: rgba(0, 0, 0, 0); flex-grow: 1;">
+            <div class="gauge-a2"></div>
+            <div class="gauge-b2"></div>
+            <div class="gauge-c2"></div>
+            <div class="gauge-data2">
+                <h1 id="percent2">50</h1>
+            </div>
+        </div>
+        <div class="container3" style="background-color: rgba(0, 0, 0, 0); flex-grow: 1;">
+            <div class="gauge-a3"></div>
+            <div class="gauge-b3"></div>
+            <div class="gauge-c3"></div>
+            <div class="gauge-data3">
+                <h1 id="percent3">50</h1>
+            </div>
+        </div>
+
+        <div class="mainPart" style="background-color: antiquewhite;">
+            <div class="btn pri rowContainer" id="groupAllocation" style="width: 300px;">
+                You are:
+                <div id="textColorNone" style="padding-left: 7px;">Not in any</div>
+                <!--<div id="textColorBlue">Blue</div>
+                <div id="textColorRed">Red</div>
+                <div id="textColorGreen">Green</div>-->
+                -Group
+            </div>
+        </div>
+        <div class="mainPart" style="background-color: antiquewhite; flex-grow: 2;">
+            <div class="rowContainer" style="padding-top: 300px;">
+                <div class="part columnContainer">
+                    <div style="padding-right: 7px;"><input class="slider" id="blueInput" type="number" name="points" value="50" step="1" min="0" max="100" oninput="changeSize(this)"><span id="Blue"></span></div>
+                    <div class="btn pri" id="blueSolution">Blue score = 50</div>
+                </div>
+                <div class="part columnContainer">
+                    <div style="padding-right: 7px;"><input class="slider" id="redInput" type="number" name="points" value="50" step="1" min="0" max="100" oninput="changeSize(this)"><span id="Red"></span></div>
+                    <div class="btn pri" id="redSolution">Red score = 50</div>
+                </div>
+                <div class="part columnContainer">
+                    <div style="padding-right: 7px;"><input class="slider" id="greenInput" type="number" name="points" value="50" step="1" min="0" max="100" oninput="changeSize(this)"><span id="Green"></span></div>
+                    <div class="btn pri" id="greenSolution">Green score = 50</div>
+                </div>
+                <div>
+                    <button class="addScore" onclick="addScore(), this.disabled = true" value="Save">Add score</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="GraphicalVisualization2.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
+    <script>
+        var config = {
+            apiKey: "AIzaSyDIMCz-H4Qa6yzO8cOEDDO-_-TNgKRwz40",
+            authDomain: "diversity-icebreaker.firebaseapp.com",
+            databaseURL: "https://diversity-icebreaker.firebaseio.com/",
+            projectId: "diversity-icebreaker",
+            storageBucket: "diversity-icebreaker.appspot.com",
+            messagingSenderId: "829693602828"
+            /*apiKey: "AIzaSyA9zNgSFLM98L3axXTNmHQHeVoo7VQ33T4",
+            authDomain: "icebreakerbackup.firebaseapp.com",
+            databaseURL: "https://icebreakerbackup.firebaseio.com/",
+            projectId: "icebreakerbackup",
+            storageBucket: "",
+            messagingSenderId: "348303687230"*/
+        };
+        firebase.initializeApp(config);
+        var db = firebase.firestore();
+        var dataCollection = db.collection('Data');
+        var alias;
+        var ageAmount;
+        var sex;
+        var redAmount;
+        var blueAmount;
+        var greenAmount;
+        var ReadOnly = true;
+        var checkbox = false;
+        var modifyAddScore = document.getElementsByClassName("addScore");
+        function addScore() {
+            if (!ReadOnly) {
+                ageAmount = document.getElementById('ageInput').value;
+                sex = document.getElementById('sexInput').value;
+                var newScore = {};
+                newScore.red = redAmount;
+                newScore.blue = blueAmount;
+                newScore.green = greenAmount;
+                newScore.name = alias;
+                newScore.age = ageAmount;
+                newScore.sex = sex;
+                dataCollection.add(newScore);
+            } else if (ReadOnly) {
+                dataCollection.get().then(
+                    function (collectionGet) {
+                        collectionGet.forEach(
+                            function (dataSnapshot) {
+                                let data = dataSnapshot.data();
+                                if ((data.red == redAmount) &&
+                                    (data.green == greenAmount) &&
+                                    (data.blue == blueAmount)) {
+                                    group = data.group;
+                                    alias = data.name;
+                                    age = data.age;
+                                    sex = data.sex;
+                                } else if (alias == data.name) {
+                                    group = data.group;
+                                    document.getElementById("redInput").value = data.red;
+                                    document.getElementById("greenInput").value = data.green;
+                                    document.getElementById("blueInput").value = data.blue;
+                                    document.getElementById("textColorNone").innerHTML = data.group;
+                                    document.getElementById('ageInput').value = data.age;
+                                    document.getElementById('sexInput').value = data.sex;
+                                    changeSize();
+                                }
+                            }
+                        )
+                    }
+                )
+            }
+        }
+        db.collection("Admin").doc("Settings")
+            .onSnapshot(function (doc) {
+                var data = doc.data();
+                console.log(data);
+                ReadOnly = data.ReadOnly;
+                if (ReadOnly) {
+                    console.log("Read");
+                    modifyAddScore[0].innerHTML = "Read score";
+                }
+                else if (!ReadOnly) {
+                    console.log("Write");
+                    modifyAddScore[0].innerHTML = "Add score";
+                }
+            });
+
+        function getName(input) {
+            alias = input.value;
+        }
+
+        function changeSize(input) {
+
+            if (blueInput.value > 100) {
+                blueInput.value = blueInput.value.substr(0, blueInput.value.length - 1);
+                return;
+            }
+            if (redInput.value > 100) {
+                redInput.value = redInput.value.substr(0, redInput.value.length - 1);
+                return;
+            }
+            if (greenInput.value > 100) {
+                greenInput.value = greenInput.value.substr(0, greenInput.value.length - 1);
+                return;
+            }
+            document.getElementById("redSolution").innerHTML = "Red score = " + redInput.value;
+            document.getElementById("blueSolution").innerHTML = "Blue score = " + blueInput.value;
+            document.getElementById("greenSolution").innerHTML = "Green score = " + greenInput.value;
+            redAmount = Math.round(redInput.value);
+            greenAmount = Math.round(greenInput.value);
+            blueAmount = Math.round(blueInput.value);
+            var sum = redAmount + greenAmount + blueAmount;
+            if (sum > 80 && sum < 88) {
+                document.getElementById("paperScoreInfo").innerHTML = "You have entered a paper-score value.";
+                let score = { red: redAmount, blue: blueAmount, green: greenAmount };
+                convertPaperScore(score);
+                redAmount = score.red;
+                greenAmount = score.green;
+                blueAmount = score.blue;
+            } else {
+                document.getElementById("paperScoreInfo").innerHTML = "";
+            }
+            if (blueAmount < 2) {
+                document.getElementsByClassName("gauge-c1")[0].style.transform = "rotate(.00" + blueAmount * 5 + "turn)";
+            } else if (blueAmount < 20) {
+                document.getElementsByClassName("gauge-c1")[0].style.transform = "rotate(.0" + blueAmount * 5 + "turn)";
+            } else {
+                document.getElementsByClassName("gauge-c1")[0].style.transform = "rotate(." + blueAmount * 5 + "turn)";
+            }
+            if (redAmount < 2) {
+                document.getElementsByClassName("gauge-c2")[0].style.transform = "rotate(.00" + redAmount * 5 + "turn)";
+            } else if (redAmount < 20) {
+                document.getElementsByClassName("gauge-c2")[0].style.transform = "rotate(.0" + redAmount * 5 + "turn)";
+            } else {
+                document.getElementsByClassName("gauge-c2")[0].style.transform = "rotate(." + redAmount * 5 + "turn)";
+            }
+            if (greenAmount < 2) {
+                document.getElementsByClassName("gauge-c3")[0].style.transform = "rotate(.00" + greenAmount * 5 + "turn)";
+            } else if (greenAmount < 20) {
+                document.getElementsByClassName("gauge-c3")[0].style.transform = "rotate(.0" + greenAmount * 5 + "turn)";
+            } else {
+                document.getElementsByClassName("gauge-c3")[0].style.transform = "rotate(." + greenAmount * 5 + "turn)";
+
+            }
+            document.getElementById("percent1").innerHTML = blueAmount;
+            document.getElementById("percent2").innerHTML = redAmount;
+            document.getElementById("percent3").innerHTML = greenAmount;
+        }
+    </script>
+</body>
+</html>
