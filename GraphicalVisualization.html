@@ -138,10 +138,10 @@
                                 if ((data.red == redAmount) &&
                                     (data.green == greenAmount) &&
                                     (data.blue == blueAmount)) {
-                                    group = data.group;
-                                    alias = data.name;
-                                    age = data.age;
-                                    sex = data.sex;
+                                    document.getElementById('nickNameInput').value = data.name;
+                                    document.getElementById("textColorNone").innerHTML = data.group;
+                                    document.getElementById('ageInput').value = data.age;
+                                    document.getElementById('sexInput').value = data.sex;
                                 } else if (alias == data.name) {
                                     group = data.group;
                                     document.getElementById("redInput").value = data.red;
