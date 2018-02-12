@@ -72,7 +72,7 @@ label {
     margin: 10px;
 }
 
-div1 {
+div6, div7 {
     float: left;
 }
 
@@ -93,8 +93,6 @@ table, th, td {
     margin: 4px;
     border-spacing: 3px 0px;
     padding-left: 10px;
-    /*display: flex;
-    flex-wrap: nowrap;*/
 }
 
 th, td {
@@ -102,7 +100,6 @@ th, td {
     padding: 10px;
     text-align: center;
     white-space: nowrap;
-    /*padding-right: 10px;*/
 }
 
 table#t01 th, #t02 th, #t03 th, #t04 th, #t05 th {
