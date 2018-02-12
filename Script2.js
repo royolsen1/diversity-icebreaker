@@ -65,7 +65,8 @@ function grouping() {
         html += '<td id="' + groupName + 'ppl">';
         for (var j = 0; j < groupScores.length; j++) {
             var score = groupScores[j];
-            html += '<b>' + score.name + '</b>' + ' B:' + score.blue + ' R:' + score.red + ' G:' + score.green + ' ' + '<br/>' + '<br/>';
+            html += '<b>' + score.name + '</b>' + ' B:' + score.blue + ' R:' + score.red + ' G:' + score.green + ' <a href="javascript:deleteUser(\''
+                + score.id + '\')"style="text-decoration:none;">❌</a>' + '<br/>' + '<br/>';
         }
         html += '</td>';
     }
@@ -73,6 +74,14 @@ function grouping() {
     document.getElementById('showresults').innerHTML = html;
     check01()
     check02()
+}
+
+function deleteUser(index) {
+    dataCollection.doc(index).delete().then(function () {
+        console.log("Document successfully deleted!");
+    }).catch(function (error) {
+        console.error("Error removing document: ", error);
+    });
 }
 
 var RMode = db.collection("Admin").doc("Settings");
