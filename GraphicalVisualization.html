@@ -23,8 +23,8 @@
         </div>
         <div class="mainPart columnContainer" style="background-color: antiquewhite">
             <div id="nickName">Nickname: <br /> <input id="nickNameInput" type="text" style="font-size: 24px; font-family: sylfaen; width: 200px;" oninput="getName(this)" /></div>
-            <div id="ageInfo">Age: <br /> <input id="ageInput" type="text" style="font-size: 24px; font-family: sylfaen; width: 200px;" oninput="getAge(this)" /></div>
-            <div id="sexInfo">Sex: <br /> <input id="sexInput" type="text" style="font-size: 24px; font-family: sylfaen; width: 200px;" oninput="getSex(this)" /></div>     
+            <div id="ageInfo">Age: <br /> <input id="ageInput" type="text" style="font-size: 24px; font-family: sylfaen; width: 200px;" /></div>
+            <div id="sexInfo">Sex: <br /> <input id="sexInput" type="text" style="font-size: 24px; font-family: sylfaen; width: 200px;" /></div>     
             <div id="paperScoreInfo"></div>
 
         </div>
@@ -54,7 +54,7 @@
         </div>
 
         <div class="mainPart" style="background-color: antiquewhite;">
-            <div class="btn pri rowContainer" id="groupAllocation">
+            <div class="btn pri rowContainer" id="groupAllocation" style="width: 300px;">
                 You are:
                 <div id="textColorNone" style="padding-left: 7px;">Not in any</div>
                 <!--<div id="textColorBlue">Blue</div>
@@ -107,7 +107,7 @@
         var db = firebase.firestore();
         var dataCollection = db.collection('Data');
         var alias;
-        var age;
+        var ageAmount;
         var sex;
         var redAmount;
         var blueAmount;
@@ -117,12 +117,14 @@
         var modifyAddScore = document.getElementsByClassName("addScore");
         function addScore() {
             if (!ReadOnly) {
+                ageAmount = document.getElementById('ageInput').value;
+                sex = document.getElementById('sexInput').value;
                 var newScore = {};
                 newScore.red = redAmount;
                 newScore.blue = blueAmount;
                 newScore.green = greenAmount;
                 newScore.name = alias;
-                newScore.age = age;
+                newScore.age = ageAmount;
                 newScore.sex = sex;
                 dataCollection.add(newScore);
             } else if (ReadOnly) {
@@ -144,6 +146,8 @@
                                     document.getElementById("greenInput").value = data.green;
                                     document.getElementById("blueInput").value = data.blue;
                                     document.getElementById("textColorNone").innerHTML = data.group;
+                                    document.getElementById('ageInput').value = data.age;
+                                    document.getElementById('sexInput').value = data.sex;
                                     changeSize();
                                 }
                             }
@@ -169,14 +173,6 @@
 
         function getName(input) {
             alias = input.value;
-        }
-
-        function getAge(input) {
-            age = input.value;
-        }
-
-        function getSex(input) {
-            sex = input.value;
         }
 
         function changeSize(input) {

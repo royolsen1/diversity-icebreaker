@@ -66,7 +66,7 @@ gruppe {
 
 #nickName {
     position: absolute;
-    left: 5%;
+    left: 7.5%;
     top: 15%;
     font-family: Sylfaen;
     font-size: 35px;
@@ -79,7 +79,7 @@ gruppe {
 
 #ageInfo {
     position: absolute;
-    left: 38.5%;
+    left: 42.5%;
     top: 15%;
     font-family: Sylfaen;
     font-size: 35px;
@@ -92,7 +92,7 @@ gruppe {
 
 #sexInfo {
     position: absolute;
-    left: 72%;
+    left: 77.5%;
     top: 15%;
     font-family: Sylfaen;
     font-size: 35px;
@@ -105,7 +105,7 @@ gruppe {
 
 #groupAllocation {
     position: absolute;
-    left: 39%;
+    left: 39.5%;
     top: 72%;
     font-size: 20px;
 }
@@ -146,7 +146,7 @@ YG {
     flex-wrap: nowrap;
     position: absolute;
     top: 90%;
-    left: 42%;
+    left: 45%;
 }
 
 .mainContainer {
