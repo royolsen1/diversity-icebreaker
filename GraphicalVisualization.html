@@ -127,6 +127,23 @@
                 });
         }
 
+        function getId() {
+            dataCollection.get().then(
+                function (collectionGet) {
+                    collectionGet.forEach(
+                        function (dataSnapshot) {
+                            let data = dataSnapshot.data();
+                            if ((data.red == redAmount) &&
+                                (data.green == greenAmount) &&
+                                (data.blue == blueAmount) &&
+                                (alias == data.name)) {
+                                id = dataSnapshot.id;
+                                participantFound();
+                            }
+                        });
+                });
+        }
+        
         function addScore() {
             if (!ReadOnly) {
                 ageAmount = document.getElementById('ageInput').value;
@@ -141,6 +158,7 @@
                 dataCollection.add(newScore);
                 ReadOnly = true;
                 modifyAddScore[0].innerHTML = "Score recorded";
+                getId();
             } else if (ReadOnly) {
                 dataCollection.get().then(
                     function (collectionGet) {
