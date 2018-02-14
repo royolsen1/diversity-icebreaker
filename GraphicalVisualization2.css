@@ -48,8 +48,10 @@ gruppe {
     color: white;
     font-size: 35px;
     font-family: inherit;
-    width: 40%;
+    width: 80%;
     border-radius: 30px;
+    left: 7.5%;
+    margin-left: 6%;
 }
 
 #redSolution {
@@ -57,8 +59,10 @@ gruppe {
     color: white;
     font-size: 35px;
     font-family: inherit;
-    width: 40%;
+    width: 80%;
     border-radius: 30px;
+    left: 38.5%;
+    margin-left: 7%;
 }
 
 #greenSolution {
@@ -66,8 +70,10 @@ gruppe {
     color: white;
     font-size: 35px;
     font-family: inherit;
-    width: 40%;
+    width: 80%;
     border-radius: 30px;
+    left: 69.69%;
+    margin-left: 5%;
 }
 
 #nickName {
@@ -112,7 +118,7 @@ gruppe {
 #groupAllocation {
     position: absolute;
     left: 33.5%;
-    top: 80%;
+    top: 85%;
     font-size: 20px;
 }
 
