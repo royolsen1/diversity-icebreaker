@@ -18,7 +18,7 @@ body {
 .slider {
     -webkit-appearance: none;
     padding-left: 7px;
-    width: 98.5%;
+    width: 35%;
     height: 15px;
     border-radius: 10px;
     background-color: antiquewhite;
@@ -106,7 +106,7 @@ gruppe {
 #groupAllocation {
     position: absolute;
     left: 33.5%;
-    top: 85%;
+    top: 80%;
     font-size: 20px;
 }
 
