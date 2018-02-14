@@ -13,6 +13,7 @@ var config = {
 };
 firebase.initializeApp(config);
 var db = firebase.firestore();
+var adminCollection = db.collection('Admin');
 var dataCollection = db.collection('Data');
 var participants = [];
 dataCollection.onSnapshot(
@@ -95,7 +96,7 @@ RMode.get().then(function (doc) {
     }
 }).catch(function (error) {
     console.log("Error getting document:", error);
-    });
+});
 
 function deleteAll() {
     dataCollection.get().then(
@@ -120,9 +121,9 @@ db.collection("Admin").doc("Settings")
     });
 
 function readmode() {
-        db.collection("Admin").doc("Settings").update({
-            ReadOnly: checkboxread.checked
-        });
+    db.collection("Admin").doc("Settings").update({
+        ReadOnly: checkboxread.checked
+    });
 }
 
 function handlePaste(e) {
@@ -185,6 +186,9 @@ function check02() {
 
     // If the checkbox is checked, display the output text
     if (checkBox02.checked == true) {
+        adminCollection.doc('group').update({
+            nr: 4
+        });
         Text02.style.display = "block";
         Average.style.display = 'table-cell';
         Averageppl.style.display = 'table-cell';
@@ -192,5 +196,8 @@ function check02() {
         Text02.style.display = "none";
         Average.style.display = 'none';
         Averageppl.style.display = 'none';
+        adminCollection.doc('group').update({
+            nr: 3
+        });
     }
 }
