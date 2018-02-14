@@ -66,16 +66,16 @@
         <div class="mainPart" style="background-color: antiquewhite; flex-grow: 2;">
             <div class="rowContainer" style="padding-top: 300px;">
                 <div class="part columnContainer">
-                    <div style="padding-left: 35%;"><input class="slider" id="blueInput" type="number" name="points" value="50" step="1" min="0" max="100" oninput="changeSize(this)"><span id="Blue"></span></div>
-                    <div class="btn pri" id="blueSolution" style="margin-left: 27%;">Blue score = 50</div>
+                    <div style="padding-right: 7px;"><input class="slider" id="blueInput" type="number" name="points" value="50" step="1" min="0" max="100" oninput="changeSize(this)"><span id="Blue"></span></div>
+                    <div class="btn pri" id="blueSolution">Blue score = 50</div>
                 </div>
                 <div class="part columnContainer">
-                    <div style="padding-left: 35%;"><input class="slider" id="redInput" type="number" name="points" value="50" step="1" min="0" max="100" oninput="changeSize(this)"><span id="Red"></span></div>
-                    <div class="btn pri" id="redSolution" style="margin-left: 27%;">Red score = 50</div>
+                    <div style="padding-right: 7px;"><input class="slider" id="redInput" type="number" name="points" value="50" step="1" min="0" max="100" oninput="changeSize(this)"><span id="Red"></span></div>
+                    <div class="btn pri" id="redSolution">Red score = 50</div>
                 </div>
                 <div class="part columnContainer">
-                    <div style="padding-left: 35%;"><input class="slider" id="greenInput" type="number" name="points" value="50" step="1" min="0" max="100" oninput="changeSize(this)"><span id="Green"></span></div>
-                    <div class="btn pri" id="greenSolution" style="margin-left: 26%;">Green score = 50</div>
+                    <div style="padding-right: 7px;"><input class="slider" id="greenInput" type="number" name="points" value="50" step="1" min="0" max="100" oninput="changeSize(this)"><span id="Green"></span></div>
+                    <div class="btn pri" id="greenSolution">Green score = 50</div>
                 </div>
                 <div>
                     <button class="addScore" onclick="addScore()">Add score</button>
@@ -115,6 +115,18 @@
         var ReadOnly = true;
         var checkbox = false;
         var modifyAddScore = document.getElementsByClassName("addScore");
+        var id;
+
+        function participantFound() {
+            dataCollection.doc(id).onSnapshot(
+                function (dataSnapshot) {
+
+                    let data = dataSnapshot.data();
+                    document.getElementById("textColorNone").innerHTML = data.group;
+
+                });
+        }
+
         function addScore() {
             if (!ReadOnly) {
                 ageAmount = document.getElementById('ageInput').value;
@@ -138,10 +150,12 @@
                                 if ((data.red == redAmount) &&
                                     (data.green == greenAmount) &&
                                     (data.blue == blueAmount)) {
-                                    group = data.group;
-                                    alias = data.name;
-                                    age = data.age;
-                                    sex = data.sex;
+                                    document.getElementById('nickNameInput') = data.name;
+                                    document.getElementById("textColorNone").innerHTML = data.group;
+                                    document.getElementById('ageInput').value = data.age;
+                                    document.getElementById('sexInput').value = data.sex;
+                                    id = dataSnapshot.id;
+                                    participantFound();
                                 } else if (alias == data.name) {
                                     group = data.group;
                                     document.getElementById("redInput").value = data.red;
@@ -150,6 +164,8 @@
                                     document.getElementById("textColorNone").innerHTML = data.group;
                                     document.getElementById('ageInput').value = data.age;
                                     document.getElementById('sexInput').value = data.sex;
+                                    id = dataSnapshot.id;
+                                    participantFound();
                                     changeSize();
                                 }
                             }

@@ -24,7 +24,7 @@
         <div class="mainPart columnContainer" style="background-color: antiquewhite">
             <div id="nickName">Nickname: <br /> <input id="nickNameInput" type="text" style="font-size: 24px; font-family: sylfaen; width: 200px;" oninput="getName(this)" /></div>
             <div id="ageInfo">Age: <br /> <input id="ageInput" type="text" style="font-size: 24px; font-family: sylfaen; width: 200px;" /></div>
-            <div id="sexInfo">Sex: <br /> <input id="sexInput" type="text" style="font-size: 24px; font-family: sylfaen; width: 200px;" /></div>     
+            <div id="sexInfo">Sex: <br /> <input id="sexInput" type="text" style="font-size: 24px; font-family: sylfaen; width: 200px;" /></div>
             <div id="paperScoreInfo"></div>
 
         </div>
@@ -115,6 +115,18 @@
         var ReadOnly = true;
         var checkbox = false;
         var modifyAddScore = document.getElementsByClassName("addScore");
+        var id;
+
+        function participantFound() {
+            dataCollection.doc(id).onSnapshot(
+                function (dataSnapshot) {
+
+                    let data = dataSnapshot.data();
+                    document.getElementById("textColorNone").innerHTML = data.group;
+
+                });
+        }
+
         function addScore() {
             if (!ReadOnly) {
                 ageAmount = document.getElementById('ageInput').value;
@@ -138,10 +150,12 @@
                                 if ((data.red == redAmount) &&
                                     (data.green == greenAmount) &&
                                     (data.blue == blueAmount)) {
-                                    group = data.group;
-                                    alias = data.name;
-                                    age = data.age;
-                                    sex = data.sex;
+                                    document.getElementById('nickNameInput') = data.name;
+                                    document.getElementById("textColorNone").innerHTML = data.group;
+                                    document.getElementById('ageInput').value = data.age;
+                                    document.getElementById('sexInput').value = data.sex;
+                                    id = dataSnapshot.id;
+                                    participantFound();
                                 } else if (alias == data.name) {
                                     group = data.group;
                                     document.getElementById("redInput").value = data.red;
@@ -150,6 +164,8 @@
                                     document.getElementById("textColorNone").innerHTML = data.group;
                                     document.getElementById('ageInput').value = data.age;
                                     document.getElementById('sexInput').value = data.sex;
+                                    id = dataSnapshot.id;
+                                    participantFound();
                                     changeSize();
                                 }
                             }
